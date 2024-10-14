@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 
+
 namespace Phexor.Scripts;
 
 public class Settingsfile
@@ -12,11 +13,14 @@ public class Settingsfile
     public static int Fields = 0;
     private static int settingCount = 0;
 
+    public static string AppdataFolder = Path.Combine((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)), "Phexor");
+    public static string SettingsDatei = Path.Combine(AppdataFolder, "Settings.txt");
+
     public static void GetSettings()
     {
         try
         {
-            string settings = File.ReadAllText(@"Settings\Settings.txt");
+            string settings = File.ReadAllText(SettingsDatei);
             string[] setting = settings.Split('@');
 
             if (setting.Length >= 1) ForegroundColor = setting[0];
@@ -34,17 +38,17 @@ public class Settingsfile
     {
         try
         {
-            if (!Directory.Exists(@"Settings\Settings.txt"))
+            if (!Directory.Exists(AppdataFolder))
             {
-                Directory.CreateDirectory("Settings");
+                Directory.CreateDirectory(AppdataFolder);
             }
 
-            if (File.Exists(@"Settings\Settings.txt"))
+            if (File.Exists(SettingsDatei))
             {
-                File.Delete(@"Settings\Settings.txt");
+                File.Delete(SettingsDatei);
             }
             
-            using (StreamWriter writer = new StreamWriter(@"Settings\Settings.txt", false, Encoding.UTF8))
+            using (StreamWriter writer = new StreamWriter(SettingsDatei, false, Encoding.UTF8))
             {
                 
                 string SettingsText = ( Foreground + "@" + Background + "@" + Optional + "@" + Fields);

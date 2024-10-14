@@ -414,7 +414,7 @@ namespace Phexor
 
         private void CheckForSettings()
         {
-            if (!File.Exists(@"Settings\Settings.txt"))
+            if (!File.Exists(Settingsfile.SettingsDatei))
             {
                 this.Hide();
                 Phexor.Tutorial tutorial = new Phexor.Tutorial();
