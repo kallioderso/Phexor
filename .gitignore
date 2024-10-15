@@ -1,0 +1,8 @@
+# Ignoriere .idea und .vs Verzeichnisse
+.idea/
+.vs/
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/

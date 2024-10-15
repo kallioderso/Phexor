@@ -7,6 +7,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Phexor.Scripts;
 using static Phexor.Scripts.Settingsfile;
+using Xceed.Wpf.Toolkit;
+
 
 namespace Phexor;
 
