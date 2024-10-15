@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
-            Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -35,42 +34,21 @@
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
+    <PropertyGroup>
+      <PostBuildEvent>
+</PostBuildEvent>
+    </PropertyGroup>
     <ItemGroup>
-        <Reference Include="System"/>
-        <Reference Include="System.Core"/>
-        <Reference Include="System.Data"/>
-        <Reference Include="System.Xml"/>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
         <Reference Include="System.Xaml">
             <RequiredTargetFramework>4.0</RequiredTargetFramework>
         </Reference>
-        <Reference Include="WindowsBase"/>
-        <Reference Include="PresentationCore"/>
-        <Reference Include="PresentationFramework"/>
-        <Reference Include="Xceed.Wpf.AvalonDock, Version=4.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-            <HintPath>packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
-        </Reference>
-        <Reference Include="Xceed.Wpf.Toolkit">
-            <HintPath>packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
-        </Reference>
-
-        <Reference Include="Xceed.Wpf.AvalonDock, Version=4.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-            <HintPath>packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
-        </Reference>
-        <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=4.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-            <HintPath>packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
-        </Reference>
-        <Reference Include="Xceed.Wpf.AvalonDock, Version=4.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-          <HintPath>packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
-        </Reference>
-        <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=4.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-          <HintPath>packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
-        </Reference>
-        <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=4.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-          <HintPath>packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
-        </Reference>
-        <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=4.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-          <HintPath>packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
-        </Reference>
+        <Reference Include="WindowsBase" />
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
         <Reference Include="Xceed.Wpf.Toolkit, Version=4.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
           <HintPath>packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
         </Reference>
@@ -113,8 +91,7 @@
         </EmbeddedResource>
     </ItemGroup>
     <ItemGroup>
-        <None Include="App.config"/>
-        <None Include="packages.config" />
+        <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
         <Resource Include="Grafiks\Icon.ico">
@@ -124,47 +101,5 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Resource>
     </ItemGroup>
-    <ItemGroup>
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\.signature.p7s" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\Extended.Wpf.Toolkit.4.6.1.nupkg" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\cs-CZ\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\de\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\es\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\fr\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\hu\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\it\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\ja-JP\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\nl-BE\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\pt-BR\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\ro\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\ru\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\sv\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\Xceed.Wpf.AvalonDock.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\Xceed.Wpf.Toolkit.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net40\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\cs-CZ\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\de\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\es\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\fr\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\hu\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\it\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\ja-JP\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\pt-BR\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\ro\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\ru\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\sv\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\Xceed.Wpf.AvalonDock.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\Xceed.Wpf.Toolkit.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\lib\net5.0\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\LICENSE.txt" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\tools\install.ps1" />
-      <Content Include="packages\Extended.Wpf.Toolkit.4.6.1\Xceed_Logo_Retina-400x400.png" />
-    </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
