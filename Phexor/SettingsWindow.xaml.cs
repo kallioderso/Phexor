@@ -36,9 +36,9 @@ public partial class SettingsWindow : Window
         BackgroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(BackgroundColor)!);
         OptionalBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(OptionalColor)!);
         FelderInput.Value = _fields;
-        colorPicker1.SelectedColor = (Color)ColorConverter.ConvertFromString(ForegroundColor);
-        colorPicker2.SelectedColor = (Color)ColorConverter.ConvertFromString(BackgroundColor);
-        colorPicker3.SelectedColor = (Color)ColorConverter.ConvertFromString(OptionalColor);
+        // colorPicker1.SelectedColor = (Color)ColorConverter.ConvertFromString(ForegroundColor);
+        // colorPicker2.SelectedColor = (Color)ColorConverter.ConvertFromString(BackgroundColor);
+        // colorPicker3.SelectedColor = (Color)ColorConverter.ConvertFromString(OptionalColor);
 
         foreach (var border in borders)
         {
@@ -59,7 +59,7 @@ public partial class SettingsWindow : Window
 
     private void Save(object sender, MouseButtonEventArgs mouseButtonEventArgs)
     {
-        SetSettings(colorPicker1.SelectedColor.ToString(), colorPicker2.SelectedColor.ToString(), colorPicker3.SelectedColor.ToString(), FelderInput.Value);
+        //SetSettings(colorPicker1.SelectedColor.ToString(), colorPicker2.SelectedColor.ToString(), colorPicker3.SelectedColor.ToString(), FelderInput.Value);
         this.Close();
     }
 }

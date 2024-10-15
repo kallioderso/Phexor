@@ -25,9 +25,9 @@
         <TextBlock Height="30" Width="170" Text="Zusätzliche Farbe:" FontSize="20" Foreground="Cornsilk" Margin="0,0,630,165" x:Name="TextBlock4"/>
         <TextBlock Height="25" Width="100" Text="Felder:" FontSize="20" Foreground="Cornsilk" Margin="0,0,700,430" x:Name="TextBlock5"/>
         
-        <xctk:ColorPicker Name="colorPicker1" Height="35" Width="120" Margin="0,0,315,340" Background="Transparent"/>
-        <xctk:ColorPicker Name="colorPicker2" Height="35" Width="120" Margin="0,0,315,250" Background="Transparent"/>
-        <xctk:ColorPicker Name="colorPicker3" Height="35" Width="120" Margin="0,0,315,160" Background="Transparent"/>
+        <!-- <xctk:ColorPicker Name="colorPicker1" Height="35" Width="120" Margin="0,0,315,340" Background="Transparent"/> -->
+        <!-- <xctk:ColorPicker Name="colorPicker2" Height="35" Width="120" Margin="0,0,315,250" Background="Transparent"/> -->
+        <!-- <xctk:ColorPicker Name="colorPicker3" Height="35" Width="120" Margin="0,0,315,160" Background="Transparent"/> -->
         
         <Slider x:Name="FelderInput" Width="670" Height="30" IsSnapToTickEnabled="True" Margin="128,0,0,430" Maximum="30" Minimum="5" AutoToolTipPlacement="BottomRight" AutoToolTipPrecision="1" TickPlacement="BottomRight"/>
     </Grid>
