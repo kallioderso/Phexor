@@ -51,10 +51,10 @@
             
         </StackPanel>
         
-        <TextBlock x:Name="InfoPage" Text="Page Count" Background="WhiteSmoke" Height="20" Width="85" Margin="600,0,0,390" Visibility="Hidden" />
-        <TextBlock x:Name="InfoPageUp" Text="previous Page" Background="WhiteSmoke" Height="20" Width="85" Margin="530,0,0,390" Visibility="Hidden"/>
-        <TextBlock x:Name="InfoPageDown" Text="Next Page" Background="WhiteSmoke" Height="20" Width="85" Margin="670,0,0,390" Visibility="Hidden"/>
-        <TextBlock x:Name="InfoSettings" Text="Settings" Background="WhiteSmoke" Height="20" Width="85" Margin="450,0,0,390" Visibility="Hidden"/>
+        <!-- <TextBlock x:Name="InfoPage" Text="Seiten Zahl" Background="WhiteSmoke" Height="20" Width="85" Margin="600,0,0,390" Visibility="Hidden" /> -->
+        <!-- <TextBlock x:Name="InfoPageUp" Text="Vorherige Seite" Background="WhiteSmoke" Height="20" Width="90" Margin="530,0,0,390" Visibility="Hidden"/> -->
+        <!-- <TextBlock x:Name="InfoPageDown" Text="Nächste Seite" Background="WhiteSmoke" Height="20" Width="90" Margin="670,0,0,390" Visibility="Hidden"/> -->
+        <!-- <TextBlock x:Name="InfoSettings" Text="Einstellungen" Background="WhiteSmoke" Height="20" Width="90" Margin="450,0,0,390" Visibility="Hidden"/> -->
         
     </Grid>
 </Window>

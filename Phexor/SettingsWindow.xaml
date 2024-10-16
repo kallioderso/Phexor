@@ -17,12 +17,16 @@
         <Border BorderBrush="Azure" Height="50" Width="820" BorderThickness="5" Margin="0,430,0,0" x:Name="Border6"/>
         <Border BorderBrush="Azure" Height="50" Width="135" BorderThickness="5" Margin="0,0,685,430" x:Name="Border7"/>
         <Border BorderBrush="Azure" Height="50" Width="820" BorderThickness="5" Margin="0,0,0,340" x:Name="Border8"/>
+        <Border BorderBrush="Azure" Height="50" Width="120" BorderThickness="5" Margin="0,0,700,50" x:Name="Border9"/>
+        <Border BorderBrush="Azure" Height="50" Width="705" BorderThickness="5" Margin="115,0,0,50" x:Name="Border10"/>
         
         <TextBlock Height="30" Width="800" Text="Safe:" FontSize="20" Foreground="Cornsilk" Margin="0,430,0,0" x:Name="TextBlock1" TextAlignment="Center" MouseLeftButtonDown="Save" MouseRightButtonDown="Save"/>
         <TextBlock Height="30" Width="170" Text="Fordergrund Farbe:" FontSize="20" Foreground="Cornsilk" Margin="0,0,630,340" x:Name="TextBlock2"/>
         <TextBlock Height="30" Width="170" Text="Hintergrund Farbe:" FontSize="20" Foreground="Cornsilk" Margin="0,0,100,340" x:Name="TextBlock3"/>
         <TextBlock Height="30" Width="170" Text="Zusätzliche Farbe:" FontSize="20" Foreground="Cornsilk" Margin="475,0,0,340" x:Name="TextBlock4"/>
         <TextBlock Height="25" Width="100" Text="Felder:" FontSize="20" Foreground="Cornsilk" Margin="0,0,700,430" x:Name="TextBlock5"/>
+        <TextBlock Height="25" Width="100" Text="Tutorial" FontSize="20" Foreground="Cornsilk" Margin="0,0,705,55" x:Name="TextBlock6" TextAlignment="Center" MouseDown="Tutorial"/>
+        <TextBlock Height="25" Width="180" Text="Kommt Bald" FontSize="20" Foreground="Cornsilk" Margin="0,0,390,55" x:Name="TextBlock7"/>
         
         
         
@@ -36,8 +40,9 @@
         <Border Name="SelectedColorDisplay2" Width="90" Height="90" BorderBrush="Black" BorderThickness="1" Margin="185,0,0,195"/>
         <Border Name="SelectedColorDisplay3" Width="90" Height="90" BorderBrush="Black" BorderThickness="1" Margin="715,0,0,195"/>
         
-        <TextBox x:Name="TextColorWheel1" Width="80" Height="30" Margin="0,0,385,200" Foreground="Black" Background="Transparent" BorderBrush="Transparent" FontSize="18"/>
-        <TextBox x:Name="TextColorWheel2" Width="80" Height="30" Margin="185,0,0,200" Foreground="Black" Background="Transparent" BorderBrush="Transparent" FontSize="18"/>
-        <TextBox x:Name="TextColorWheel3" Width="80" Height="30" Margin="715,0,0,200" Foreground="Black" Background="Transparent" BorderBrush="Transparent" FontSize="18"/>
+        <TextBox x:Name="TextColorWheel1" Width="80" Height="30" Margin="0,0,385,200" Foreground="Black" Background="Transparent" BorderBrush="Transparent" FontSize="18" KeyDown="ColorText_KeyDown"/>
+        <TextBox x:Name="TextColorWheel2" Width="80" Height="30" Margin="185,0,0,200" Foreground="Black" Background="Transparent" BorderBrush="Transparent" FontSize="18" KeyDown="ColorText_KeyDown"/>
+        <TextBox x:Name="TextColorWheel3" Width="80" Height="30" Margin="715,0,0,200" Foreground="Black" Background="Transparent" BorderBrush="Transparent" FontSize="18" KeyDown="ColorText_KeyDown"/>
+        
     </Grid>
 </Window>

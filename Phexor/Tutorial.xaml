@@ -6,51 +6,48 @@
         mc:Ignorable="d"
         Closed="Tutorial_OnClosed"
         Title="Phexor Tutorial" Width="900" Height="550" Icon="Grafiks/Icon.ico">
-     <Grid Background="#263238">
-        
+    <Grid Background="#263238">
+
+        <!-- Borders -->
         <Border BorderBrush="Gray" Background="#223238" Height="480" Width="820" BorderThickness="5" x:Name="Border1"/>
         <Border BorderBrush="Gray" BorderThickness="5" Height="440" Width="820" Margin="0,40,0,0" x:Name="Border2"/>
         <Border BorderBrush="Gray" BorderThickness="5" Height="400" Width="820" Margin="0,80,0,0" x:Name="Border3"/>
-        <Border BorderBrush="Gray"  BorderThickness="5" Height="440" Width="210" Margin="0,40,610,0" x:Name="Border4"/>
-        
-        <TextBlock Text="Verzeichnise" Height="25" Width="110" Margin="0,0,680,360"  TextAlignment="Center" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Gray" x:Name="TextBlock1"/>
-        <TextBlock Text="Dateien" Height="25" Width="70" Margin="0,0,310,360"  TextAlignment="Center" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Gray" x:Name="TextBlock2"/>
-        
-        <Border Height="40" Width="5" Background="Gray" Margin="510,5,0,440" x:Name="Border6"> 
+        <Border BorderBrush="Gray" BorderThickness="5" Height="440" Width="210" Margin="0,40,610,0" x:Name="Border4"/>
+
+        <Border BorderBrush="Gray" BorderThickness="5" Height="400" Width="615" Margin="205,80,0,0" x:Name="Border9"/>
+        <Border x:Name="SettingButton" Height="30" Width="30" Background="Gray" Margin="553,5,0,440" CornerRadius="6"/>        
+        <Border Height="40" Width="5" Background="Gray" Margin="595,5,0,440" x:Name="Border7">
             <TextBlock Text="" FontSize="17" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
+        <Border BorderBrush="Gray" Background="Transparent" Height="45" Width="666" BorderThickness="5" x:Name="Border5" Margin="0,0,153,435"/>
+        <Border BorderBrush="Gray" BorderThickness="5" Height="400" Width="210" Margin="0,80,610,0" x:Name="Border8"/>
+
+        <!-- TextBlocks -->
+        <TextBlock Text="Verzeichnise" Height="25" Width="110" Margin="0,0,680,360" TextAlignment="Center" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Gray" x:Name="TextBlock1"/>
+        <TextBlock Text="Dateien" Height="25" Width="70" Margin="0,0,310,360" TextAlignment="Center" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Gray" x:Name="TextBlock2"/>
         
-        <Border x:Name="SettingButton" Height="30" Width="30" Background="Gray" Margin="553,5,0,440" CornerRadius="6"> 
-            
-        </Border>
-        
+        <!-- Image -->
         <Image Source="../Grafiks/Settings.png" Height="30" Width="30" Margin="552,0,0,435" IsHitTestVisible="False"/>
-        
-        <Border Height="40" Width="5" Background="Gray" Margin="595,5,0,440" x:Name="Border5"> 
-            <TextBlock Text="" FontSize="17" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+        <!-- TextBox -->
+        <TextBox Height="28" Width="500" Background="Transparent" BorderBrush="Transparent" Margin="0,2,297,435" x:Name="PfadInput" Text="Füge hier deinen Pfad ein..." FontSize="15" Foreground="Gray" TextAlignment="Left" KeyDown="PfadInput_OnKeyDown" MouseEnter="RemoveStandardText"/>
+
+        <!-- StackPanels -->
+        <StackPanel x:Name="Verzeichnise" Width="195" Height="380" Margin="0,125,610,45"/>
+        <StackPanel x:Name="Dateien" Width="595" Height="380" Margin="205,125,0,45"/>
+
+        <Border Width="550" Height="60" CornerRadius="16"  Margin="0,0,0,0" x:Name="TextBorder" BorderThickness="5">
+            <TextBlock Text="" Height="50" Width="500" FontSize="30" x:Name="Introduction" Foreground="Gray"/>
         </Border>
         
-        <Border x:Name="PageUpButton" Height="30" Width="30" Background="Gray" Margin="637,5,0,440" CornerRadius="6"> 
-            <TextBlock Text="↑" FontSize="17" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Border x:Name="PageUpButton" Height="30" Width="30" Background="Gray" Margin="637,5,0,440" CornerRadius="6">
+            <TextBlock Text="↑" FontSize="17" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="ClickPageUp"/>
         </Border>
-        
-        <Border x:Name="PageButton" Height="30" Width="30" Background="Gray" Margin="705,5,0,440" CornerRadius="6" > 
+        <Border x:Name="PageButton" Height="30" Width="30" Background="Gray" Margin="705,5,0,440" CornerRadius="6">
             <TextBlock x:Name="PageCounter" Text="1" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
-        
-        <Border x:Name="PageDownButton" Height="30" Width="30" Background="Gray" Margin="773,5,0,440" CornerRadius="6" > 
+        <Border x:Name="PageDownButton" Height="30" Width="30" Background="Gray" Margin="773,5,0,440" CornerRadius="6" MouseDown="ClickPageDown">
             <TextBlock Text="↓" FontSize="17" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
-        
-        <TextBox Height="28" Width="500" Background="Transparent" BorderBrush="Transparent" Margin="0,2,297,435" x:Name="PfadInput" Text="Füge hier deinen Pfad ein (Drücke dann Enter)" FontSize="15" Foreground="Cornsilk" TextAlignment="Left"  KeyDown="PfadInput_OnKeyDown"  MouseEnter="RemoveStandardText"/>
-        
-        <StackPanel x:Name="Verzeichnise" Width="195" Height="380"  Margin="0,125,610,45">
-            
-        </StackPanel>
-        
-        <StackPanel x:Name="Dateien" Width="595" Height="380"  Margin="205,125,0,45">
-            
-        </StackPanel>
-        
     </Grid>
 </Window>

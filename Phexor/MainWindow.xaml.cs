@@ -165,22 +165,22 @@ namespace Phexor
                 border.Width = 32;
             }
             
-            if (border == PageButton)
-            {
-                InfoPage.Visibility = Visibility.Visible;
-            }
-            if (border == PageUpButton)
-            {
-                InfoPageUp.Visibility = Visibility.Visible;
-            }
-            if (border == PageDownButton)
-            {
-                InfoPageDown.Visibility = Visibility.Visible;
-            }
-            if (border == SettingButton)
-            {
-                InfoSettings.Visibility = Visibility.Visible;
-            }
+            // if (border == PageButton)
+            // {
+            //     InfoPage.Visibility = Visibility.Visible;
+            // }
+            // if (border == PageUpButton)
+            // {
+            //     InfoPageUp.Visibility = Visibility.Visible;
+            // }
+            // if (border == PageDownButton)
+            // {
+            //     InfoPageDown.Visibility = Visibility.Visible;
+            // }
+            // if (border == SettingButton)
+            // {
+            //     InfoSettings.Visibility = Visibility.Visible;
+            // }
         }
 
         private void Border_MouseLeave(object sender, MouseEventArgs e)
@@ -193,22 +193,22 @@ namespace Phexor
                 border.Width = 30;
             }
 
-            if (border == PageButton)
-            {
-                InfoPage.Visibility = Visibility.Hidden;
-            }
-            if (border == PageUpButton)
-            {
-                InfoPageUp.Visibility = Visibility.Hidden;
-            }
-            if (border == PageDownButton)
-            {
-                InfoPageDown.Visibility = Visibility.Hidden;
-            }
-            if (border == SettingButton)
-            {
-                InfoSettings.Visibility = Visibility.Hidden;
-            }
+            // if (border == PageButton)
+            // {
+            //     InfoPage.Visibility = Visibility.Hidden;
+            // }
+            // if (border == PageUpButton)
+            // {
+            //     InfoPageUp.Visibility = Visibility.Hidden;
+            // }
+            // if (border == PageDownButton)
+            // {
+            //     InfoPageDown.Visibility = Visibility.Hidden;
+            // }
+            // if (border == SettingButton)
+            // {
+            //     InfoSettings.Visibility = Visibility.Hidden;
+            // }
         }
 
         private void LoadAllFolder(string MeinPfad)
