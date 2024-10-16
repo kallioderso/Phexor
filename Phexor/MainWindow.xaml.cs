@@ -416,11 +416,11 @@ namespace Phexor
         {
             if (!File.Exists(Settingsfile.SettingsDatei))
             {
+                Settingsfile.SetSettings("#FFFFF8DC", "#FFF0FFFF", "#FFE6E6FA", 20);
+                Settingsfile.GetSettings();
                 this.Hide();
                 Phexor.Tutorial tutorial = new Phexor.Tutorial();
                 tutorial.Show();
-                Settingsfile.SetSettings("#FFFFF8DC", "#FFF0FFFF", "#FFE6E6FA", 20);
-                Settingsfile.GetSettings();
             }
             else
             {

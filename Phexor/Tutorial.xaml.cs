@@ -34,7 +34,9 @@ public partial class Tutorial : Window
         PfadInput.Foreground = Foreground;
         Border5.BorderBrush = Background;
         Introduction.Text = "Füge zuerst einmahl deinen Pfad ein";
-        Introduction.Foreground = Optional;
+
+        Introduction.Foreground = Brushes.Black;
+        
         for (int i = 0; i < Settingsfile.Fields; i++)
         {
             TextBlock order = new TextBlock();
