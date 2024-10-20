@@ -10,9 +10,12 @@
 - after Starting the Program for the first time you get an quick Introduction.
 
 ## Upcomming features
-- create an Tutorial.
 - creating new Settings.
-- create new customize settings.
+- Adding Pasword Functions.
+- Adding File properties
+- Adding Folder properties
+- Adding File Actions.
+- Adding Folder Actions.
 
 ## Information Sources:
 - *Youtube:* [Phexor](https://www.youtube.com/@Phexor-OpenSource).
