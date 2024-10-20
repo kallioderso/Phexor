@@ -31,7 +31,7 @@ public partial class SettingsWindow : Window
         InitializeComponent();
         DrawColorWheels();
         var borders = new Border[] { Border1, Border2, Border3, Border4, Border5, Border6, Border7, Border8, Border9, Border10 };
-        var TextBlocks = new TextBlock[] { TextBlock1, TextBlock2, TextBlock3, TextBlock4, TextBlock5, TextBlock6};
+        var TextBlocks = new TextBlock[] { TextBlock1, TextBlock2, TextBlock3, TextBlock4, TextBlock5, TextBlock6, TextBlock7};
         GetSettings();
         Foreground = ForegroundColor;
         Background = BackgroundColor;
@@ -219,20 +219,17 @@ public partial class SettingsWindow : Window
             {
                 if (ColorText == TextColorWheel1)
                 {
-                    SelectedColorDisplay1.Background =
-                        new SolidColorBrush((Color)ColorConverter.ConvertFromString(ColorText.Text)!);
+                    SelectedColorDisplay1.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(ColorText.Text)!);
                     Foreground = ColorText.Text;
                 }
                 else if (ColorText == TextColorWheel2)
                 {
-                    SelectedColorDisplay2.Background =
-                        new SolidColorBrush((Color)ColorConverter.ConvertFromString(ColorText.Text)!);
+                    SelectedColorDisplay2.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(ColorText.Text)!);
                     Background = ColorText.Text;
                 }
                 else if (ColorText == TextColorWheel3)
                 {
-                    SelectedColorDisplay3.Background =
-                        new SolidColorBrush((Color)ColorConverter.ConvertFromString(ColorText.Text)!);
+                    SelectedColorDisplay3.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(ColorText.Text)!);
                     Optional = ColorText.Text;
                 }
             }
@@ -246,5 +243,20 @@ public partial class SettingsWindow : Window
     {
         startAnotherTutorial = true;
         this.Close();
+    }
+
+    private void SetOriginalDesign(object sender, MouseButtonEventArgs e)
+    {
+        SelectedColorDisplay1.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFF8DC")!);
+        Foreground = "#FFFFF8DC";
+        TextColorWheel1.Text = "#FFFFF8DC";
+        
+        SelectedColorDisplay2.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF0FFFF")!);
+        Background = "#FFF0FFFF";
+        TextColorWheel2.Text = "#FFF0FFFF";
+        
+        SelectedColorDisplay3.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFE6E6FA")!);
+        Optional = "#FFE6E6FA";
+        TextColorWheel3.Text = "#FFE6E6FA";
     }
 }

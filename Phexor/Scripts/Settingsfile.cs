@@ -1,6 +1,9 @@
 using System;
 using System.IO;
+using System.Net.Mime;
+using System.Reflection;
 using System.Text;
+using System.Windows;
 
 
 namespace Phexor.Scripts;
@@ -14,7 +17,8 @@ public class Settingsfile
     private static int settingCount = 0;
 
     public static string AppdataFolder = Path.Combine((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)), "Phexor");
-    public static string SettingsDatei = Path.Combine(AppdataFolder, "Settings.txt");
+    public static string SettingsOrdner = Path.Combine(AppdataFolder, "Settings");
+    public static string SettingsDatei = Path.Combine(AppdataFolder, SettingsOrdner + @"\Settings.txt");
 
     public static void GetSettings()
     {
@@ -43,6 +47,11 @@ public class Settingsfile
                 Directory.CreateDirectory(AppdataFolder);
             }
 
+            if (!Directory.Exists(SettingsOrdner))
+            {
+                Directory.CreateDirectory(SettingsOrdner);
+            }
+            
             if (File.Exists(SettingsDatei))
             {
                 File.Delete(SettingsDatei);
