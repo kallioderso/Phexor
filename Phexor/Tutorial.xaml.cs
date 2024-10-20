@@ -75,7 +75,7 @@ public partial class Tutorial : Window
 
     private void PfadInput_OnKeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.Enter)
+        if (e.Key == Key.Enter && TutorialNumber == 0)
         {
             if (Directory.Exists(PfadInput.Text))
             {
@@ -92,6 +92,10 @@ public partial class Tutorial : Window
                 Counter = 0;
                 TutorialNumber++;
             }
+        }
+        else
+        {
+            return;
         }
     }
 
@@ -113,6 +117,10 @@ public partial class Tutorial : Window
                 Counter++;
             }
         }
+        else
+        {
+            return;
+        }
     }
 
     private void OpenFile(object sender, MouseButtonEventArgs e)
@@ -129,11 +137,15 @@ public partial class Tutorial : Window
             Border9.BorderBrush = Brushes.Gray;
             PageDownButton.Background = Background;
         }
+        else
+        {
+            return;
+        }
     }
 
     private void RemoveStandardText(object sender, MouseEventArgs e)
     {
-        if (PfadInput.Text == "" || PfadInput.Text == "Füge hier deinen Pfad ein")
+        if (PfadInput.Foreground != Brushes.Gray)
         {
             PfadInput.Text = String.Empty;
         }
@@ -181,6 +193,10 @@ public partial class Tutorial : Window
             }
             Counter = 0;
         }
+        else
+        {
+            return;
+        }
     }
 
     private async void ClickPageUp(object sender, MouseButtonEventArgs e)
@@ -198,6 +214,10 @@ public partial class Tutorial : Window
             SettingButton.Background = Background;
             await Task.Delay(4000);
             this.Close();
+        }
+        else
+        {
+            return;
         }
     }
 }

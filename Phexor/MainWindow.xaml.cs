@@ -21,6 +21,7 @@ namespace Phexor
 {
     public partial class MainWindow
     {
+        private bool NotTrueClose = false;
         private int _ordnerUndDateienAnzahl;
         private SolidColorBrush _foregroundBrush;
         private SolidColorBrush _backgroundBrush;
@@ -29,7 +30,7 @@ namespace Phexor
         private List<TextBlock> _fileListe = new List<TextBlock>();
         private int Page = 1;
         private int WhichPage = 0;
-        private string Pfad;
+        private string Pfad = "";
         private string LastPath;
 
         public MainWindow()
@@ -164,23 +165,6 @@ namespace Phexor
                 border.Height = 32;
                 border.Width = 32;
             }
-            
-            // if (border == PageButton)
-            // {
-            //     InfoPage.Visibility = Visibility.Visible;
-            // }
-            // if (border == PageUpButton)
-            // {
-            //     InfoPageUp.Visibility = Visibility.Visible;
-            // }
-            // if (border == PageDownButton)
-            // {
-            //     InfoPageDown.Visibility = Visibility.Visible;
-            // }
-            // if (border == SettingButton)
-            // {
-            //     InfoSettings.Visibility = Visibility.Visible;
-            // }
         }
 
         private void Border_MouseLeave(object sender, MouseEventArgs e)
@@ -192,23 +176,6 @@ namespace Phexor
                 border.Height = 30;
                 border.Width = 30;
             }
-
-            // if (border == PageButton)
-            // {
-            //     InfoPage.Visibility = Visibility.Hidden;
-            // }
-            // if (border == PageUpButton)
-            // {
-            //     InfoPageUp.Visibility = Visibility.Hidden;
-            // }
-            // if (border == PageDownButton)
-            // {
-            //     InfoPageDown.Visibility = Visibility.Hidden;
-            // }
-            // if (border == SettingButton)
-            // {
-            //     InfoSettings.Visibility = Visibility.Hidden;
-            // }
         }
 
         private void LoadAllFolder(string MeinPfad)
@@ -401,6 +368,7 @@ namespace Phexor
         {
             Phexor.SettingsWindow settings = new SettingsWindow();
             settings.Show();
+            NotTrueClose = true;
             this.Close();
         }
 
@@ -425,6 +393,30 @@ namespace Phexor
             else
             {
                 Settingsfile.GetSettings();
+            }
+        }
+
+        private void OnClose(object sender, EventArgs e)
+        {
+            
+            if (!NotTrueClose)
+            {
+                var phexorProcesses = Process.GetProcessesByName("Phexor");
+                foreach (var process in phexorProcesses)
+                {
+                    try
+                    {
+                        process.Kill();
+                        process.WaitForExit();
+                    }
+                    catch (Exception)
+                    {
+                    }
+                } 
+            }
+            else
+            {
+                NotTrueClose = false;
             }
         }
     }
