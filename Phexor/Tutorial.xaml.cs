@@ -16,8 +16,9 @@ public partial class Tutorial : Window
 {
     private List<TextBlock> _verzeichnisListe = new List<TextBlock>();
     private List<TextBlock> _fileListe = new List<TextBlock>();
-    private int _ordnerUndDateienAnzahl = Settingsfile.Fields;
-    private int Counter = 0;
+    private int _ordnerUndDateienAnzahl = 20;
+    private int Counter1 = 0;
+    private int Counter2 = 0;
     private int TutorialNumber = 0;
     private SolidColorBrush Foreground;
     private SolidColorBrush Background;
@@ -37,7 +38,7 @@ public partial class Tutorial : Window
 
         Introduction.Foreground = Brushes.Black;
         
-        for (int i = 0; i < Settingsfile.Fields; i++)
+        for (int i = 0; i < 20; i++)
         {
             TextBlock order = new TextBlock();
             order.Name = $"Ordner{i}";
@@ -85,11 +86,11 @@ public partial class Tutorial : Window
                 Introduction.Text = "Klicke nun auf eines Der verzeichnise";
                 foreach (var Verzeichnis in _verzeichnisListe)
                 {
-                    Verzeichnis.Text = "Verzeichnis" + Counter;
-                    Counter++;
+                    Verzeichnis.Text = "Verzeichnis" + Counter1;
+                    Counter1++;
                 }
 
-                Counter = 0;
+                Counter1 = 0;
                 TutorialNumber++;
             }
         }
@@ -113,9 +114,10 @@ public partial class Tutorial : Window
             Introduction.Text = "Klicke nun auf eine der Dateien";
             foreach (var File in _fileListe)
             {
-                File.Text = "Datei" + Counter;
-                Counter++;
+                File.Text = "Datei" + Counter2;
+                Counter2++;
             }
+            Counter2 = 0;
         }
         else
         {
@@ -162,36 +164,17 @@ public partial class Tutorial : Window
             PageCounter.Text = "2";
             foreach (var File in _fileListe)
             {
-                File.Text = "Datei" + (Counter + _ordnerUndDateienAnzahl);
-                Counter++;
+                File.Text = "Datei" + (Counter2 + _ordnerUndDateienAnzahl);
+                Counter2++;
             }
-            Counter = 0;
+            Counter2 = 0;
             
             foreach (var Verzeichnis in _verzeichnisListe)
             {
-                Verzeichnis.Text = "Verzeichnis" + (Counter + _ordnerUndDateienAnzahl);
-                Counter++;
+                Verzeichnis.Text = "Verzeichnis" + (Counter1 + _ordnerUndDateienAnzahl);
+                Counter1++;
             }
-            Counter = 0;
-            
-            await Task.Delay(5000);
-            
-            PageButton.Background = Brushes.Gray;
-            PageUpButton.Background = Background;
-            Introduction.Text = "Klicke nun auf den Pfeil nach Oben";
-            foreach (var File in _fileListe)
-            {
-                File.Text = "Datei" + Counter;
-                Counter++;
-            }
-            Counter = 0;
-            
-            foreach (var Verzeichnis in _verzeichnisListe)
-            {
-                Verzeichnis.Text = "Verzeichnis" + Counter;
-                Counter++;
-            }
-            Counter = 0;
+            Counter1 = 0;
         }
         else
         {
@@ -199,20 +182,61 @@ public partial class Tutorial : Window
         }
     }
 
-    private async void ClickPageUp(object sender, MouseButtonEventArgs e)
+    private void ClickCount(object sender, MouseButtonEventArgs e)
     {
+
         if (TutorialNumber == 4)
+        {
+            TutorialNumber++;
+            PageButton.Background = Brushes.Gray;
+            PageUpButton.Background = Background;
+            Introduction.Text = "Klicke nun auf den Pfeil nach Oben";
+            foreach (var File in _fileListe)
+            {
+                File.Text = "Datei" + Counter2;
+                Counter2++;
+            }
+            Counter2 = 0;
+            
+            foreach (var Verzeichnis in _verzeichnisListe)
+            {
+                Verzeichnis.Text = "Verzeichnis" + Counter1;
+                Counter1++;
+            }
+            Counter1 = 0;
+        }
+        else if (TutorialNumber == 6)
+        {
+            TutorialNumber++;
+            PageButton.Background = Brushes.Gray;
+            Introduction.Text = "Weitere Einstellungen findest du Dort";
+            SettingButton.Background = Background;
+        }
+        else
+        {
+            return;
+        }
+    }
+    private void ClickPageUp(object sender, MouseButtonEventArgs e)
+    {
+        if (TutorialNumber == 5)
         {
             TutorialNumber++;
             PageUpButton.Background = Brushes.Gray;
             PageCounter.Text = "1";
             PageButton.Background = Background;
             Introduction.Text = "Nun sind wir auf der ersten Seite";
-            await Task.Delay(5000);
-            PageButton.Background = Brushes.Gray;
-            Introduction.Text = "Weitere Einstellungen findest du Dort";
-            SettingButton.Background = Background;
-            await Task.Delay(4000);
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    private void SettingsButton(object sender, MouseButtonEventArgs e)
+    {
+        if (TutorialNumber == 7)
+        {
             this.Close();
         }
         else
