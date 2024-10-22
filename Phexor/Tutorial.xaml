@@ -15,11 +15,11 @@
         <Border BorderBrush="Gray" BorderThickness="5" Height="440" Width="210" Margin="0,40,610,0" x:Name="Border4"/>
 
         <Border BorderBrush="Gray" BorderThickness="5" Height="400" Width="615" Margin="205,80,0,0" x:Name="Border9"/>
-        <Border x:Name="SettingButton" Height="30" Width="30" Background="Gray" Margin="553,5,0,440" CornerRadius="6" MouseDown="SettingsButton"/>        
-        <Border Height="40" Width="5" Background="Gray" Margin="595,5,0,440" x:Name="Border7">
+        <Border x:Name="SettingButton" Height="30" Width="30" Background="Gray" Margin="773,5,0,440" CornerRadius="6" MouseDown="SettingsButton"/>        
+        <Border Height="40" Width="5" Background="Gray" Margin="732,5,0,440" x:Name="Border7">
             <TextBlock Text="" FontSize="17" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
-        <Border BorderBrush="Gray" Background="Transparent" Height="45" Width="666" BorderThickness="5" x:Name="Border5" Margin="0,0,153,435"/>
+        <Border BorderBrush="Gray" Background="Transparent" Height="45" Width="674" BorderThickness="5" x:Name="Border5" Margin="0,0,146,435"/>
         <Border BorderBrush="Gray" BorderThickness="5" Height="400" Width="210" Margin="0,80,610,0" x:Name="Border8"/>
 
         <!-- TextBlocks -->
@@ -27,7 +27,7 @@
         <TextBlock Text="Dateien" Height="25" Width="70" Margin="0,0,310,360" TextAlignment="Center" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Gray" x:Name="TextBlock2"/>
         
         <!-- Image -->
-        <Image Source="../Grafiks/Settings.png" Height="30" Width="30" Margin="552,0,0,435" IsHitTestVisible="False"/>
+        <Image Source="../Grafiks/Settings.png" Height="30" Width="30" Margin="773,5,0,440" IsHitTestVisible="False"/>
 
         <!-- TextBox -->
         <TextBox Height="28" Width="500" Background="Transparent" BorderBrush="Transparent" Margin="0,2,297,435" x:Name="PfadInput" Text="Füge hier deinen Pfad ein..." FontSize="15" Foreground="Gray" TextAlignment="Left" KeyDown="PfadInput_OnKeyDown" MouseEnter="RemoveStandardText"/>
@@ -40,13 +40,13 @@
             <TextBlock Text="" Height="50" Width="500" FontSize="30" x:Name="Introduction" Foreground="Gray"/>
         </Border>
         
-        <Border x:Name="PageUpButton" Height="30" Width="30" Background="Gray" Margin="637,5,0,440" CornerRadius="6">
+        <Border x:Name="PageUpButton" Height="30" Width="30" Background="Gray" Margin="562,5,0,440" CornerRadius="6">
             <TextBlock Text="↑" FontSize="17" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="ClickPageUp"/>
         </Border>
-        <Border x:Name="PageButton" Height="30" Width="30" Background="Gray" Margin="705,5,0,440" CornerRadius="6" MouseDown="ClickCount">
+        <Border x:Name="PageButton" Height="30" Width="30" Background="Gray" Margin="627,5,0,440" CornerRadius="6" MouseDown="ClickCount">
             <TextBlock x:Name="PageCounter" Text="1" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
-        <Border x:Name="PageDownButton" Height="30" Width="30" Background="Gray" Margin="773,5,0,440" CornerRadius="6" MouseDown="ClickPageDown">
+        <Border x:Name="PageDownButton" Height="30" Width="30" Background="Gray" Margin="692,5,0,440" CornerRadius="6" MouseDown="ClickPageDown">
             <TextBlock Text="↓" FontSize="17" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
     </Grid>

@@ -14,6 +14,7 @@ public class Settingsfile
     public static string BackgroundColor = "";
     public static string OptionalColor = "";
     public static int Fields = 0;
+    public static bool ScrollRad = false;
     private static int settingCount = 0;
 
     public static string AppdataFolder = Path.Combine((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)), "Phexor");
@@ -31,6 +32,7 @@ public class Settingsfile
             if (setting.Length >= 2) BackgroundColor = setting[1];
             if (setting.Length >= 3) OptionalColor = setting[2];
             if (setting.Length >= 4) Fields = Convert.ToInt32(setting[3]);
+            if (setting.Length >= 4) ScrollRad = Convert.ToBoolean(setting[4]);
         }
         catch (Exception e)
         {
@@ -38,7 +40,7 @@ public class Settingsfile
         }
     }
     
-    public static void SetSettings(string Foreground, string Background, string Optional, double Fields)
+    public static void SetSettings(string Foreground, string Background, string Optional, double Fields, bool ScrollMenu)
     {
         try
         {
@@ -60,7 +62,7 @@ public class Settingsfile
             using (StreamWriter writer = new StreamWriter(SettingsDatei, false, Encoding.UTF8))
             {
                 
-                string SettingsText = ( Foreground + "@" + Background + "@" + Optional + "@" + Fields);
+                string SettingsText = ( Foreground + "@" + Background + "@" + Optional + "@" + Fields + "@" + ScrollMenu);
                 writer.WriteLine(SettingsText);
             }
         }

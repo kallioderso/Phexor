@@ -41,7 +41,28 @@ namespace Phexor
             var borders = new Border[] { Border1, Border2, Border3, Border4};
             var textBlocks = new TextBlock[] { TextBlock1, TextBlock2};
             CheckForSettings();
-            _ordnerUndDateienAnzahl = Settingsfile.Fields;
+            if (!Settingsfile.ScrollRad)
+            {
+                Dateien2.Visibility = Visibility.Hidden;
+                Verzeichnise2.Visibility = Visibility.Hidden;
+                Dateien.Visibility = Visibility.Visible;
+                Verzeichnise.Visibility = Visibility.Visible;
+                _ordnerUndDateienAnzahl = Settingsfile.Fields;
+                PageUpButton.Visibility = Visibility.Visible;
+                PageDownButton.Visibility = Visibility.Visible;
+                PageButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Dateien.Visibility = Visibility.Hidden;
+                Verzeichnise.Visibility = Visibility.Hidden;
+                Dateien2.Visibility = Visibility.Visible;
+                Verzeichnise2.Visibility = Visibility.Visible;
+                _ordnerUndDateienAnzahl = Settingsfile.Fields * 4;
+                PageUpButton.Visibility = Visibility.Hidden;
+                PageDownButton.Visibility = Visibility.Hidden;
+                PageButton.Visibility = Visibility.Hidden;
+            }
             _foregroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Settingsfile.ForegroundColor)!);
             _backgroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Settingsfile.BackgroundColor)!);
             _optionalBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Settingsfile.OptionalColor)!);
@@ -64,7 +85,6 @@ namespace Phexor
                 }
 
                 Border5.Background = _backgroundBrush;
-                Border6.Background = _backgroundBrush;
                 PfadInput.Foreground = _foregroundBrush;
             }
             catch (Exception e)
@@ -76,30 +96,58 @@ namespace Phexor
             for (int i = 0; i < _ordnerUndDateienAnzahl; i++)
             {
                 TextBlock order = new TextBlock();
+                if (Settingsfile.ScrollRad)
+                {
+                    order.Height = 20;
+                }
+                else
+                {
+                    order.Height = (Verzeichnise.Height/_ordnerUndDateienAnzahl);
+                    order.Width = (Verzeichnise.Width);
+                }
                 order.Name = $"Ordner{i}";
                 order.Foreground = _foregroundBrush;
                 order.FontSize = 10;
                 order.Text = "";
-                order.Height = (Verzeichnise.Height/_ordnerUndDateienAnzahl);
-                order.Width = (Verzeichnise.Width);
                 order.MouseLeftButtonDown += Field_Click;
                 order.MouseRightButtonDown += Field_Setting;
                 order.VerticalAlignment = VerticalAlignment.Top; 
                 _verzeichnisListe.Add(order);
-                Verzeichnise.Children.Add(order);
+                if (!Settingsfile.ScrollRad)
+                {
+                    Verzeichnise.Children.Add(order);
+                }
+                else
+                {
+                    Verzeichnise2.Items.Add(order);
+                }
                 
                 TextBlock Datei = new TextBlock();
+                if (Settingsfile.ScrollRad)
+                {
+                    Datei.Height = 20;
+                }
+                else
+                {
+                    Datei.Height = (Dateien.Height/_ordnerUndDateienAnzahl);
+                    Datei.Width = (Dateien.Width);
+                }
                 Datei.Name = $"Datei{i}";
                 Datei.Foreground = _foregroundBrush;
                 Datei.FontSize = 10;
                 Datei.Text = "";
-                Datei.Height = (Dateien.Height/_ordnerUndDateienAnzahl);
-                Datei.Width = (Dateien.Width);
                 Datei.MouseLeftButtonDown += OpenFile;
                 Datei.MouseRightButtonDown += File_RightClick;
                 Datei.VerticalAlignment = VerticalAlignment.Top; 
                 _fileListe.Add(Datei);
-                Dateien.Children.Add(Datei);
+                if (!Settingsfile.ScrollRad)
+                {
+                    Dateien.Children.Add(Datei);
+                }
+                else
+                {
+                    Dateien2.Items.Add(Datei);
+                }
             }
         }
         
@@ -384,7 +432,7 @@ namespace Phexor
         {
             if (!File.Exists(Settingsfile.SettingsDatei))
             {
-                Settingsfile.SetSettings("#FFFFF8DC", "#FFF0FFFF", "#FFE6E6FA", 20);
+                Settingsfile.SetSettings("#FFFFF8DC", "#FFF0FFFF", "#FFE6E6FA", 20, false);
                 Settingsfile.GetSettings();
                 this.Hide();
                 Phexor.Tutorial tutorial = new Phexor.Tutorial();
