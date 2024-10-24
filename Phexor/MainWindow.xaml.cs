@@ -22,57 +22,34 @@ namespace Phexor
     public partial class MainWindow
     {
         private bool NotTrueClose = false;
-        private int _ordnerUndDateienAnzahl;
+        private int Fields;
         private SolidColorBrush _foregroundBrush;
         private SolidColorBrush _backgroundBrush;
         private SolidColorBrush _optionalBrush;
         private List<TextBlock> _verzeichnisListe = new List<TextBlock>();
         private List<TextBlock> _fileListe = new List<TextBlock>();
-        private int Page = 1;
-        private int WhichPage = 0;
         private string Pfad = "";
         private string LastPath;
+        private int FileCount = 0;
+        private int FolderCount = 0;
 
         public MainWindow()
         {
             this.Icon = new BitmapImage(new Uri("pack://application:,,,/Grafiks/Icon.ico"));
             InitializeComponent();
-            var buttonsBorder = new Border[] { PageButton, PageUpButton, PageDownButton, SettingButton};
             var borders = new Border[] { Border1, Border2, Border3, Border4};
             var textBlocks = new TextBlock[] { TextBlock1, TextBlock2};
             CheckForSettings();
-            if (!Settingsfile.ScrollRad)
-            {
-                Dateien2.Visibility = Visibility.Hidden;
-                Verzeichnise2.Visibility = Visibility.Hidden;
-                Dateien.Visibility = Visibility.Visible;
-                Verzeichnise.Visibility = Visibility.Visible;
-                _ordnerUndDateienAnzahl = Settingsfile.Fields;
-                PageUpButton.Visibility = Visibility.Visible;
-                PageDownButton.Visibility = Visibility.Visible;
-                PageButton.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Dateien.Visibility = Visibility.Hidden;
-                Verzeichnise.Visibility = Visibility.Hidden;
-                Dateien2.Visibility = Visibility.Visible;
-                Verzeichnise2.Visibility = Visibility.Visible;
-                _ordnerUndDateienAnzahl = Settingsfile.Fields * 4;
-                PageUpButton.Visibility = Visibility.Hidden;
-                PageDownButton.Visibility = Visibility.Hidden;
-                PageButton.Visibility = Visibility.Hidden;
-            }
             _foregroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Settingsfile.ForegroundColor)!);
             _backgroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Settingsfile.BackgroundColor)!);
             _optionalBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Settingsfile.OptionalColor)!);
+            Fields = Settingsfile.Fields;
+            FileCount = Fields;
+            FolderCount = Fields;
             
             try
             {
-                foreach (var border2 in buttonsBorder)
-                {
-                    border2.Background = _foregroundBrush;
-                }
+                SettingButton.Background = _foregroundBrush;
 
                 foreach (var border in borders)
                 {
@@ -93,45 +70,24 @@ namespace Phexor
             }
             
 
-            for (int i = 0; i < _ordnerUndDateienAnzahl; i++)
+            for (int i = 0; i < Fields; i++) // Generating Folder & file Fields
             {
                 TextBlock order = new TextBlock();
-                if (Settingsfile.ScrollRad)
-                {
-                    order.Height = 20;
-                }
-                else
-                {
-                    order.Height = (Verzeichnise.Height/_ordnerUndDateienAnzahl);
-                    order.Width = (Verzeichnise.Width);
-                }
+                order.Height = (Verzeichnise.Height/Settingsfile.Fields);
+                order.Width = (Verzeichnise.Width);
                 order.Name = $"Ordner{i}";
                 order.Foreground = _foregroundBrush;
                 order.FontSize = 10;
                 order.Text = "";
-                order.MouseLeftButtonDown += Field_Click;
+                order.MouseLeftButtonDown += Folder_Click;
                 order.MouseRightButtonDown += Field_Setting;
                 order.VerticalAlignment = VerticalAlignment.Top; 
                 _verzeichnisListe.Add(order);
-                if (!Settingsfile.ScrollRad)
-                {
-                    Verzeichnise.Children.Add(order);
-                }
-                else
-                {
-                    Verzeichnise2.Items.Add(order);
-                }
+                Verzeichnise.Children.Add(order);
                 
                 TextBlock Datei = new TextBlock();
-                if (Settingsfile.ScrollRad)
-                {
-                    Datei.Height = 20;
-                }
-                else
-                {
-                    Datei.Height = (Dateien.Height/_ordnerUndDateienAnzahl);
-                    Datei.Width = (Dateien.Width);
-                }
+                Datei.Height = (Dateien.Height/Settingsfile.Fields);
+                Datei.Width = (Dateien.Width);
                 Datei.Name = $"Datei{i}";
                 Datei.Foreground = _foregroundBrush;
                 Datei.FontSize = 10;
@@ -140,19 +96,98 @@ namespace Phexor
                 Datei.MouseRightButtonDown += File_RightClick;
                 Datei.VerticalAlignment = VerticalAlignment.Top; 
                 _fileListe.Add(Datei);
-                if (!Settingsfile.ScrollRad)
+                Dateien.Children.Add(Datei);
+            }
+        }
+        
+        private void CheckForSettings() // Search/Set Settings
+        {
+            if (!File.Exists(Settingsfile.SettingsDatei))
+            {
+                Settingsfile.SetSettings("#FFFFF8DC", "#FFF0FFFF", "#FFE6E6FA", 20, false);
+                Settingsfile.GetSettings();
+                this.Hide();
+                Phexor.Tutorial tutorial = new Phexor.Tutorial();
+                tutorial.Show();
+            }
+            else
+            {
+                Settingsfile.GetSettings();
+            }
+        }
+        
+        private void RemoveStandardText(object sender, MouseEventArgs mouseEventArgs) // Remove Standard Text (Input Field)
+        {
+            if (Pfad == "")
+            {
+                PfadInput.Text = String.Empty;
+            }
+        }
+        
+        private void PfadInput_OnKeyDown(object sender, KeyEventArgs e) //Start Exploring
+        {
+            if (e.Key == Key.Enter)
+            {
+                Pfad = PfadInput.Text;
+                LoadAllFields(Pfad);
+            }
+        }
+        
+        private void DirectoryScrollingWithMouse(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta < 0)
+            {
+                if (Directory.Exists(PfadInput.Text))
                 {
-                    Dateien.Children.Add(Datei);
+                    FolderCount++;
+                    LoadAllFields(PfadInput.Text);
                 }
                 else
                 {
-                    Dateien2.Items.Add(Datei);
+                }
+            }
+            else if (e.Delta > 0)
+            {
+                if (FolderCount != Settingsfile.Fields)
+                {
+                    FolderCount--;
+                    LoadAllFields(PfadInput.Text);
+                    Console.WriteLine(FolderCount);
+                }
+                else
+                {
+                }
+            }
+        }
+
+        private void FileScrollingWithMouse(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta < 0)
+            {
+                if (Directory.Exists(PfadInput.Text))
+                {
+                    FileCount++;
+                    LoadAllFields(PfadInput.Text);
+                }
+                else
+                {
+                }
+            }
+            else if (e.Delta > 0)
+            {
+                if (FileCount != Settingsfile.Fields)
+                {
+                    FileCount--;
+                    LoadAllFields(PfadInput.Text);
+                    Console.WriteLine(FileCount);
+                }
+                else
+                {
                 }
             }
         }
         
-
-        private void Field_Click(object sender, RoutedEventArgs e)
+        private void Folder_Click(object sender, RoutedEventArgs e) //Click Folder
         {
             var textBlock = sender as System.Windows.Controls.TextBlock;
             if (textBlock.Text == "" || textBlock.Text == null)
@@ -164,12 +199,11 @@ namespace Phexor
                 if (textBlock.Text != LastPath)
                 {
                     Console.WriteLine(Path.GetDirectoryName(Pfad));
-                    Page = 1;
-                    WhichPage = 0;
-                    PageCounter.Text = Convert.ToString(Page);
                     PfadInput.Text = Pfad + textBlock.Text;
                     LastPath = textBlock.Text;
-                    LoadAllFolder(Pfad + textBlock.Text);
+                    FolderCount = Fields;
+                    FileCount = Fields;
+                    LoadAllFields(Pfad + textBlock.Text);
                 }
                 else
                 {
@@ -177,225 +211,8 @@ namespace Phexor
                 }
             }
         }
-
-        private void LastPage(object sender, RoutedEventArgs e)
-        {
-            if (Page != 1)
-            {
-                Page--;
-                WhichPage -= _ordnerUndDateienAnzahl;
-                PageCounter.Text = Convert.ToString(Page);
-                Pfad = PfadInput.Text;
-                LoadAllFolder(Pfad);
-            }
-            else
-            {
-                return;
-            }
-
-        }
-
-        private void NextPage(object sender, RoutedEventArgs e)
-        {
-            Page++;
-            WhichPage += _ordnerUndDateienAnzahl;
-            PageCounter.Text = Convert.ToString(Page);
-            Pfad = PfadInput.Text;
-            LoadAllFolder(Pfad);
-        }
-
-        private void Border_MouseEnter(object sender, MouseEventArgs mouseEventArgs)
-        {
-            var border = sender as Border;
-            if (border != null && border != PageButton)
-            {
-                border.Background = _optionalBrush;
-                border.Height = 32;
-                border.Width = 32;
-            }
-        }
-
-        private void Border_MouseLeave(object sender, MouseEventArgs e)
-        {
-            var border = sender as System.Windows.Controls.Border;
-            if (border != null && border != PageButton)
-            {
-                border.Background = _foregroundBrush;
-                border.Height = 30;
-                border.Width = 30;
-            }
-        }
-
-        private void LoadAllFolder(string MeinPfad)
-        {
-            string directoryPath = MeinPfad + @"\";
-            Pfad = directoryPath;
-            int directoryPathLength = directoryPath.Length;
-
-            var directoryCount = 0;
-            var DirectorysDisplayed = 0;
-            var DirectorysNotDisplayed = 0;
-            var fileCount = 0;
-            var FilesDisplayed = 0;
-            var FilesNotDisplayed = 0;
-            try
-            {
-                var directors = Directory.GetDirectories(directoryPath);
-                if (directors != null)
-                {
-                    try
-                    {
-                        for (int i = 0; i < _ordnerUndDateienAnzahl; i++)
-                        {
-                            if (directoryCount < DirectorysNotDisplayed + WhichPage)
-                            {
-                                _verzeichnisListe[DirectorysNotDisplayed].Text = null;
-                            }
-
-                            DirectorysNotDisplayed++;
-                        }
-
-                        DirectorysNotDisplayed = 0;
-
-                        foreach (var directory in directors)
-                        {
-                            for (int i = 0; i < _ordnerUndDateienAnzahl; i++)
-                            {
-                                if (directoryCount < DirectorysNotDisplayed + WhichPage)
-                                {
-                                    _verzeichnisListe[DirectorysNotDisplayed].Text = null;
-                                }
-
-                                DirectorysNotDisplayed++;
-                            }
-
-                            DirectorysNotDisplayed = 0;
-
-                            if (directoryCount == DirectorysDisplayed + WhichPage)
-                            {
-                                _verzeichnisListe[DirectorysDisplayed].Text = directory.Substring(directoryPathLength);
-                                DirectorysDisplayed++;
-                            }
-
-                            directoryCount++;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < _ordnerUndDateienAnzahl; i++)
-                    {
-                        _verzeichnisListe[i].Text = null;
-                    }
-                }
-
-
-
-                var files = Directory.GetFiles(directoryPath);
-                if (files != null)
-                {
-                    try
-                    {
-                        for (int i = 0; i < _ordnerUndDateienAnzahl; i++)
-                        {
-                            if (fileCount < FilesNotDisplayed + WhichPage)
-                            {
-                                _fileListe[FilesNotDisplayed].Text = null;
-                            }
-
-                            FilesNotDisplayed++;
-                        }
-
-                        FilesNotDisplayed = 0;
-
-                        foreach (var file in files)
-                        {
-                            for (int i = 0; i < _ordnerUndDateienAnzahl; i++)
-                            {
-                                if (fileCount < FilesNotDisplayed + WhichPage)
-                                {
-                                    _fileListe[FilesNotDisplayed].Text = null;
-                                }
-
-                                FilesNotDisplayed++;
-                            }
-
-                            FilesNotDisplayed = 0;
-
-                            if (fileCount == FilesDisplayed + WhichPage)
-                            {
-                                _fileListe[FilesDisplayed].Text = file.Substring(directoryPathLength);
-                                FilesDisplayed++;
-                            }
-
-                            fileCount++;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        FilesNotDisplayed = 0;
-                        for (int i = 0; i < _ordnerUndDateienAnzahl; i++)
-                        {
-                            if (i < FilesNotDisplayed)
-                            {
-                                _fileListe[FilesNotDisplayed].Text = null;
-                            }
-
-                            FilesNotDisplayed++;
-                        }
-
-                        FilesNotDisplayed = 0;
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < _ordnerUndDateienAnzahl; i++)
-                    {
-                        _fileListe[i].Text = null;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                for (int i = 0; i < _ordnerUndDateienAnzahl; i++)
-                {
-                    _fileListe[i].Text = null;
-                    _verzeichnisListe[i].Text = null;
-                }
-            }
-        }
         
-
-
-        private void PfadInput_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                Pfad = PfadInput.Text;
-                LoadAllFolder(Pfad);
-                Page = 1;
-                WhichPage = 0;
-                PageCounter.Text = Convert.ToString(Page);
-            }
-        }
-
-        private void Field_Setting(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void File_RightClick(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-
-        private void OpenFile(object sender, MouseButtonEventArgs e)
+        private void OpenFile(object sender, MouseButtonEventArgs e) //Open Clicked File
         {
             var filePath = sender as TextBlock;
 
@@ -411,8 +228,30 @@ namespace Phexor
                 Console.WriteLine(exception);
             }
         }
+
+        private void Border_MouseEnter(object sender, MouseEventArgs mouseEventArgs) //Field Optional Colored
+        {
+            var border = sender as Border;
+            if (border != null)
+            {
+                border.Background = _optionalBrush;
+                border.Height = 32;
+                border.Width = 32;
+            }
+        }
+
+        private void Border_MouseLeave(object sender, MouseEventArgs e) //Field Normal Colored
+        {
+            var border = sender as System.Windows.Controls.Border;
+            if (border != null)
+            {
+                border.Background = _foregroundBrush;
+                border.Height = 30;
+                border.Width = 30;
+            }
+        }
         
-        private void SettingsWindow(object sender, MouseButtonEventArgs e)
+        private void SettingsWindow(object sender, MouseButtonEventArgs e) //Open Settings
         {
             Phexor.SettingsWindow settings = new SettingsWindow();
             settings.Show();
@@ -420,31 +259,163 @@ namespace Phexor
             this.Close();
         }
 
-        private void RemoveStandardText(object sender, MouseEventArgs mouseEventArgs)
+        private void LoadAllFields(string MeinPfad) //Set Folder/File-Fields Content
         {
-            if (Pfad == "")
+            string directoryPath = MeinPfad + @"\";
+            Pfad = directoryPath;
+            int directoryPathLength = directoryPath.Length;
+
+            var directoryCount = 0;
+            var DirectorysDisplayed = 0;
+            var DirectorysNotDisplayed = 0;
+            
+            var fileCount = 0;
+            var FilesDisplayed = 0;
+            var FilesNotDisplayed = 0;
+            
+            try
             {
-                PfadInput.Text = String.Empty;
+                var directors = Directory.GetDirectories(directoryPath);
+                if (directors != null)
+                {
+                    try
+                    {
+                        for (int i = 0; i < Fields; i++)
+                        {
+                            if (directoryCount < DirectorysNotDisplayed + FolderCount - Settingsfile.Fields)
+                            {
+                                _verzeichnisListe[DirectorysNotDisplayed].Text = null;
+                            }
+
+                            DirectorysNotDisplayed++;
+                        }
+
+                        DirectorysNotDisplayed = 0;
+
+                        foreach (var directory in directors)
+                        {
+                            for (int i = 0; i < Fields; i++)
+                            {
+                                if (directoryCount < DirectorysNotDisplayed + FolderCount - Settingsfile.Fields)
+                                {
+                                    _verzeichnisListe[DirectorysNotDisplayed].Text = null;
+                                }
+
+                                DirectorysNotDisplayed++;
+                            }
+
+                            DirectorysNotDisplayed = 0;
+
+                            if (directoryCount == DirectorysDisplayed + FolderCount - Settingsfile.Fields)
+                            {
+                                _verzeichnisListe[DirectorysDisplayed].Text = directory.Substring(directoryPathLength);
+                                DirectorysDisplayed++;
+                            }
+
+                            directoryCount++;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+                    
+                }
+                else
+                {
+                    for (int i = 0; i < Fields; i++)
+                    {
+                        _verzeichnisListe[i].Text = null;
+                    }
+                }
+                
+                var files = Directory.GetFiles(directoryPath);
+                if (files != null)
+                {
+                    try
+                    {
+                        for (int i = 0; i < Fields; i++)
+                        {
+                            if (fileCount < FilesNotDisplayed + FileCount - Settingsfile.Fields)
+                            {
+                                _fileListe[FilesNotDisplayed].Text = null;
+                            }
+
+                            FilesNotDisplayed++;
+                        }
+
+                        FilesNotDisplayed = 0;
+
+                        foreach (var file in files)
+                        {
+                            for (int i = 0; i < Fields; i++)
+                            {
+                                if (fileCount < FilesNotDisplayed + FileCount - Settingsfile.Fields)
+                                {
+                                    _fileListe[FilesNotDisplayed].Text = null;
+                                }
+
+                                FilesNotDisplayed++;
+                            }
+
+                            FilesNotDisplayed = 0;
+
+                            if (fileCount == FilesDisplayed + FileCount - Settingsfile.Fields)
+                            {
+                                _fileListe[FilesDisplayed].Text = file.Substring(directoryPathLength);
+                                FilesDisplayed++;
+                            }
+
+                            fileCount++;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        FilesNotDisplayed = 0;
+                        for (int i = 0; i < Fields; i++)
+                        {
+                            if (i < FilesNotDisplayed)
+                            {
+                                _fileListe[FilesNotDisplayed].Text = null;
+                            }
+
+                            FilesNotDisplayed++;
+                        }
+
+                        FilesNotDisplayed = 0;
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < Fields; i++)
+                    {
+                        _fileListe[i].Text = null;
+                    }
+                }
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                for (int i = 0; i < Fields; i++)
+                {
+                    _verzeichnisListe[i].Text = null;
+                    _fileListe[i].Text = null;
+                }
             }
         }
 
-        private void CheckForSettings()
+        private void Field_Setting(object sender, MouseButtonEventArgs e) // Coming Soon
         {
-            if (!File.Exists(Settingsfile.SettingsDatei))
-            {
-                Settingsfile.SetSettings("#FFFFF8DC", "#FFF0FFFF", "#FFE6E6FA", 20, false);
-                Settingsfile.GetSettings();
-                this.Hide();
-                Phexor.Tutorial tutorial = new Phexor.Tutorial();
-                tutorial.Show();
-            }
-            else
-            {
-                Settingsfile.GetSettings();
-            }
+
         }
 
-        private void OnClose(object sender, EventArgs e)
+        private void File_RightClick(object sender, MouseButtonEventArgs e) // Coming Soon
+        {
+
+        }
+
+        private void OnClose(object sender, EventArgs e) // Stop Running Prozesees
         {
             
             if (!NotTrueClose)
