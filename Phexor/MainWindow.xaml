@@ -16,7 +16,7 @@
         <TextBlock Text="Verzeichnise" Height="25" Width="110" Margin="0,0,680,360"  TextAlignment="Center" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Cornsilk" x:Name="TextBlock1"/>
         <TextBlock Text="Dateien" Height="25" Width="70" Margin="0,0,310,360"  TextAlignment="Center" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Cornsilk" x:Name="TextBlock2"/>
         
-        <Border x:Name="SettingButton" Height="30" Width="30" Background="Cornsilk" Margin="773,5,0,440" CornerRadius="6" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonDown="SettingsWindow" MouseRightButtonDown="SettingsWindow"> 
+        <Border x:Name="SettingsButton" Height="30" Width="30" Background="Cornsilk" Margin="773,5,0,440" CornerRadius="6" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonDown="SettingsWindow" MouseRightButtonDown="SettingsWindow"> 
             
         </Border>
         
@@ -26,13 +26,13 @@
             <TextBlock Text="" FontSize="17" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
         
-        <TextBox Height="28" Width="500" Background="Transparent" BorderBrush="Transparent" Margin="0,2,297,435" x:Name="PfadInput" Text="Füge Pfad ein..." FontSize="15" Foreground="Cornsilk" TextAlignment="Left"  KeyDown="PfadInput_OnKeyDown" MouseEnter="RemoveStandardText" />
+        <TextBox Height="28" Width="500" Background="Transparent" BorderBrush="Transparent" Margin="0,2,297,435" x:Name="PathInput" Text="Füge Pfad ein..." FontSize="15" Foreground="Cornsilk" TextAlignment="Left"  KeyDown="PfadInput_OnKeyDown" MouseEnter="RemoveStandardText" />
         
-        <StackPanel x:Name="Verzeichnise" Width="195" Height="380"  Margin="0,125,610,45" MouseWheel="DirectoryScrollingWithMouse">
+        <StackPanel x:Name="Directorys" Width="195" Height="380"  Margin="0,125,610,45" MouseWheel="DirectoryScrollingWithMouse">
             
         </StackPanel>
         
-        <StackPanel x:Name="Dateien" Width="595" Height="380"  Margin="205,125,0,45" MouseWheel="FileScrollingWithMouse">
+        <StackPanel x:Name="Files" Width="595" Height="380"  Margin="205,125,0,45" MouseWheel="FileScrollingWithMouse">
             
         </StackPanel>
         

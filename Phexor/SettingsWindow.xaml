@@ -17,18 +17,14 @@
         <Border BorderBrush="Azure" Height="50" Width="820" BorderThickness="5" Margin="0,430,0,0" x:Name="Border6"/>
         <Border BorderBrush="Azure" Height="50" Width="135" BorderThickness="5" Margin="0,0,685,430" x:Name="Border7"/>
         <Border BorderBrush="Azure" Height="50" Width="820" BorderThickness="5" Margin="0,0,0,340" x:Name="Border8"/>
-        <Border BorderBrush="Azure" Height="50" Width="120" BorderThickness="5" Margin="60,0,0,50" x:Name="Border9"/>
         <Border BorderBrush="Azure" Height="50" Width="180" BorderThickness="5" Margin="0,0,640,50" x:Name="Border10"/>
-        <Border BorderBrush="Azure" Height="50" Width="210" BorderThickness="5" Margin="0,0,260,50" x:Name="Border11"/>
         
         <TextBlock Height="30" Width="800" Text="Safe:" FontSize="20" Foreground="Cornsilk" Margin="0,430,0,0" x:Name="TextBlock1" TextAlignment="Center" MouseLeftButtonDown="Save" MouseRightButtonDown="Save"/>
         <TextBlock Height="30" Width="170" Text="Fordergrund Farbe:" FontSize="20" Foreground="Cornsilk" Margin="0,0,630,340" x:Name="TextBlock2"/>
         <TextBlock Height="30" Width="170" Text="Hintergrund Farbe:" FontSize="20" Foreground="Cornsilk" Margin="0,0,100,340" x:Name="TextBlock3"/>
         <TextBlock Height="30" Width="170" Text="Zusätzliche Farbe:" FontSize="20" Foreground="Cornsilk" Margin="475,0,0,340" x:Name="TextBlock4"/>
         <TextBlock Height="25" Width="100" Text="Felder:" FontSize="20" Foreground="Cornsilk" Margin="0,0,700,430" x:Name="TextBlock5"/>
-        <TextBlock Height="30" Width="100" Text="Tutorial" FontSize="20" Foreground="Cornsilk" Margin="58,0,0,52" x:Name="TextBlock6" TextAlignment="Center" MouseDown="Tutorial"/>
         <TextBlock Height="30" Width="160" Text="Orignal Deisgn" FontSize="20" Foreground="Cornsilk" Margin="0,0,642,51" x:Name="TextBlock7" MouseDown="SetOriginalDesign" TextAlignment="Center"/>
-        <TextBlock Height="30" Width="190" Text="Scrollrad Anschalten" FontSize="20" Foreground="Cornsilk" Margin="0,0,262,51" x:Name="TextBlock8" TextAlignment="Center" MouseDown="ScrollRadFunction"/>
         
         
         

@@ -14,7 +14,6 @@ namespace Phexor;
 
 public partial class SettingsWindow : Window
 {
-    private bool startAnotherTutorial = false;
     private bool ColorSelecting = false;
     private bool ScrollRad;
     private static string Foreground;
@@ -31,22 +30,13 @@ public partial class SettingsWindow : Window
         this.Icon = new BitmapImage(new Uri("pack://application:,,,/Grafiks/Icon.ico"));
         InitializeComponent();
         DrawColorWheels();
-        var borders = new Border[] { Border1, Border2, Border3, Border4, Border5, Border6, Border7, Border8, Border9, Border10, Border11};
-        var TextBlocks = new TextBlock[] { TextBlock1, TextBlock2, TextBlock3, TextBlock4, TextBlock5, TextBlock6, TextBlock7, TextBlock8};
+        var borders = new Border[] { Border1, Border2, Border3, Border4, Border5, Border6, Border7, Border8, Border10};
+        var TextBlocks = new TextBlock[] { TextBlock1, TextBlock2, TextBlock3, TextBlock4, TextBlock5, TextBlock7};
         GetSettings();
         Foreground = ForegroundColor;
         Background = BackgroundColor;
         Optional = OptionalColor;
         _fields = Fields;
-        ScrollRad = Settingsfile.ScrollRad;
-        if (ScrollRad)
-        {
-            TextBlock8.Text = "Scrollrad Ausschalten";
-        }
-        else
-        {
-            TextBlock8.Text = "Scrollrad Anschalten";
-        }
         ForegroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(ForegroundColor)!);
         BackgroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(BackgroundColor)!);
         OptionalBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(OptionalColor)!);
@@ -71,19 +61,8 @@ public partial class SettingsWindow : Window
 
     private void Settings_OnClosing(object? sender, CancelEventArgs e)
     {
-        if (!startAnotherTutorial)
-        {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-        }
-        else if (startAnotherTutorial)
-        {
-            startAnotherTutorial = false;
-            Phexor.Tutorial tutorial = new Phexor.Tutorial();
-            tutorial.Show();
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Hide();
-        }
+        MainWindow mainWindow = new MainWindow();
+        mainWindow.Show();
     }
 
     private void Save(object sender, MouseButtonEventArgs mouseButtonEventArgs)
@@ -249,12 +228,6 @@ public partial class SettingsWindow : Window
         }
     }
 
-    private void Tutorial(object sender, MouseButtonEventArgs e)
-    {
-        startAnotherTutorial = true;
-        this.Close();
-    }
-
     private void SetOriginalDesign(object sender, MouseButtonEventArgs e)
     {
         SelectedColorDisplay1.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFF8DC")!);
@@ -268,19 +241,5 @@ public partial class SettingsWindow : Window
         SelectedColorDisplay3.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFE6E6FA")!);
         Optional = "#FFE6E6FA";
         TextColorWheel3.Text = "#FFE6E6FA";
-    }
-
-    private void ScrollRadFunction(object sender, MouseButtonEventArgs e)
-    {
-        if (!ScrollRad)
-        {
-            TextBlock8.Text = "Scrollrad Ausschalten";
-            ScrollRad = true;
-        }
-        else
-        {
-            TextBlock8.Text = "Scrollrad Anschalten";
-            ScrollRad = false;
-        }
     }
 }
