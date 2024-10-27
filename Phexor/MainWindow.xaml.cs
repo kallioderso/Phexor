@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using System.Linq;
 using System.Net.Mime;
 using System.Security.Principal;
 using System.Windows.Media.Imaging;
@@ -35,6 +36,7 @@ namespace Phexor
         private SolidColorBrush _optionalBrush; //C. V. for Xc. & C#c.
         private List<TextBlock> _verzeichnisListe = new List<TextBlock>(); //C. L. for LoadAllFields M.
         private List<TextBlock> _fileListe = new List<TextBlock>(); //C. L. for LoadAllFields M.
+        private List<string> _Redolist = new List<string>();
         private string Path = ""; //C. L. for LoadAllFields M.
         private string LastPath; //C. L. for LoadAllFields M.
         private int FileCount = 0; //C. L. for LoadAllFields M.
@@ -49,7 +51,7 @@ namespace Phexor
             CheckForSettings(); //Start M.
             _foregroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Settingsfile.ForegroundColor)!); //set V. for Xc. & C#c.
             _backgroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Settingsfile.BackgroundColor)!); //set V. for Xc. & C#c.
-            _optionalBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Settingsfile.OptionalColor)!); //set V. for Xc. & C#c.
+            _optionalBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Settingsfile.SpecialColor)!); //set V. for Xc. & C#c.
             Fields = Settingsfile.Fields; //set V. for C#c.
             FileCount = Fields; //set V. for LoadAllFields
             FolderCount = Fields; //set V. for LoadAllFields
@@ -57,6 +59,8 @@ namespace Phexor
             try //try to prevent Crashes
             {
                 SettingsButton.Background = _foregroundBrush; //set Xc. Colors
+                BackButton.Background = _foregroundBrush; //set Xc. Colors
+                ForeButton.Background = _foregroundBrush; //set Xc. Colors
 
                 foreach (var border in borders)
                 {
@@ -69,6 +73,7 @@ namespace Phexor
                 }
 
                 Border5.Background = _backgroundBrush; //set Xc. Colors
+                Border6.Background = _backgroundBrush; //set Xc. Colors
                 PathInput.Foreground = _foregroundBrush; //set Xc. Colors
             }
             catch (Exception e) //laterly for Logs used
@@ -112,9 +117,9 @@ namespace Phexor
         
         private void CheckForSettings() // search/Set Settings
         {
-            if (!File.Exists(Settingsfile.SettingsDatei)) //check for File existens
+            if (!File.Exists(Settingsfile.SettingsFiles)) //check for File existens
             {
-                Settingsfile.SetSettings("#FFFFF8DC", "#FFF0FFFF", "#FFE6E6FA", 20, false); //set settings in txt
+                Settingsfile.SetSettings("#FFFFF8DC", "#FFF0FFFF", "#FFE6E6FA", 20); //set settings in txt
                 Settingsfile.GetSettings(); //get Settings from txt
                 this.Hide(); //vanish this Window
             }
@@ -136,7 +141,7 @@ namespace Phexor
         {
             if (e.Key == Key.Enter) //check which Button got pressed
             {
-                Path = PathInput.Text; //set Path to Path from textbox
+                setPath(Path = PathInput.Text); //set Path to Path from textbox
                 LoadAllFields(Path); //start the LoadAllFields M.
             }
         }
@@ -290,10 +295,51 @@ namespace Phexor
             this.Close(); // close this window
         }
 
+        private void UndoFunction(object sender, MouseButtonEventArgs e) //Undo Path Change
+        {
+            if (Path != null && Path != String.Empty && Path != "") //Check for Path emptynes
+            {
+                _Redolist.Add(Path); //Add the Current Path to an Redo list
+                List<string> Pathparts = new List<string>(Path.Split('\\')); //Split the Current Path
+                Pathparts.RemoveAll(s => s == ""); //Remove every empty Path part
+                var pathPartCount = Pathparts.Count(); // get the Count of the remaining Path parts
+                var UndoPath = ""; //C. V. for the new Undo path
+                for (int i = 0; i < pathPartCount - 1; i++) // loop for every existing path part
+                {
+                    UndoPath = UndoPath + Pathparts[i] + @"\"; //C. the new Path from the parts
+                }
+                setPath(UndoPath); // set created Path
+                LoadAllFields(Path); //use M. LoadAllFields with the new Path
+                PathInput.Text = Path; //change the Pathinput text to the new Path
+            }
+        }
+
+        private void RedoFunction(object sender, MouseButtonEventArgs e) //Redo Path change
+        {
+            if (_Redolist.Count != 0) //checks if Redolist is Empty
+            {
+                setPath(_Redolist[_Redolist.Count -1]); //set new Path from Redolist
+                _Redolist[_Redolist.Count -1].Remove(0); //Remove the Path from Redolist
+                LoadAllFields(Path); //Load new Path with m. LoadAllFields
+                PathInput.Text = Path; //change the Pathinput text to the new Path
+            }
+        }
+
+        private void setPath(string Input) //Path setting M.
+        {
+            List<string> setPathParts = new List<string>(Input.Split('\\')); //Split the Input into path parts
+            setPathParts.RemoveAll(s => s == ""); //removing every empty path part
+            Path = ""; //set parth to empty
+            foreach (var setPathPart in setPathParts) //loop for every path part
+            {
+                Path = Path + setPathPart + @"\"; //C. new Path
+            }
+        }
+
         private void LoadAllFields(string myPath) //Set Folder/File-Fields Content
         {
             string directoryPath = myPath + @"\"; //set the directorypath to the M. input
-            Path = directoryPath; //set the path to the directorypath
+            setPath(directoryPath); //set the path to the directorypath
             int directoryPathLength = directoryPath.Length; //C. V. for the length of the Path
 
             var directoryCount = 0; //C. V. for the directorys
@@ -431,7 +477,7 @@ namespace Phexor
                 {
                     try //prevent crashes
                     {
-                        process.Kill(); //"KIll" every running process
+                        process.Kill(); //"Kill" every running process
                         process.WaitForExit(); //Wait until it got definitly closed
                     }
                     catch (Exception) //laterly for Logs used

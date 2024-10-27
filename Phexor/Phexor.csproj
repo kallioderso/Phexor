@@ -96,9 +96,15 @@
         <Resource Include="Grafiks\Icon.ico">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Resource>
-        <Resource Include="Grafiks\Settings.png">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Resource>
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="Grafiks\Undo.png" />
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="Grafiks\Settings.png" />
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="Grafiks\Redo.png" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

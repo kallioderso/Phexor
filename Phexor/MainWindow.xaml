@@ -17,7 +17,15 @@
         <TextBlock Text="Dateien" Height="25" Width="70" Margin="0,0,310,360"  TextAlignment="Center" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Cornsilk" x:Name="TextBlock2"/>
         
         <Border x:Name="SettingsButton" Height="30" Width="30" Background="Cornsilk" Margin="773,5,0,440" CornerRadius="6" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonDown="SettingsWindow" MouseRightButtonDown="SettingsWindow"> 
-            
+            <Image Source="Grafiks/Settings.png" Height="27" Width="27" IsHitTestVisible="False"/>
+        </Border>
+        
+        <Border x:Name="BackButton" Height="30" Width="30" Background="Cornsilk" Margin="60,5,0,440" CornerRadius="6" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseDown="UndoFunction"> 
+            <Image Source="Grafiks/Undo.png" Height="27" Width="27" IsHitTestVisible="False"/>
+        </Border>
+        
+        <Border x:Name="ForeButton" Height="30" Width="30" Background="Cornsilk" Margin="125,5,0,440" CornerRadius="6" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseDown="RedoFunction"> 
+            <Image Source="Grafiks/Redo.png" Height="27" Width="27" IsHitTestVisible="False"/>
         </Border>
         
         <Image Source="Grafiks/Settings.png" Height="30" Width="30" Margin="773,0,0,435" IsHitTestVisible="False"/>
@@ -26,7 +34,11 @@
             <TextBlock Text="" FontSize="17" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
         
-        <TextBox Height="28" Width="500" Background="Transparent" BorderBrush="Transparent" Margin="0,2,297,435" x:Name="PathInput" Text="Füge Pfad ein..." FontSize="15" Foreground="Cornsilk" TextAlignment="Left"  KeyDown="PfadInput_OnKeyDown" MouseEnter="RemoveStandardText" />
+        <Border Height="40" Width="5" Background="Azure" Margin="20,5,0,440" x:Name="Border6"> 
+            <TextBlock Text="" FontSize="17" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+        
+        <TextBox Height="28" Width="400" Background="Transparent" BorderBrush="Transparent" Margin="0,2,400,435" x:Name="PathInput" Text="Füge Pfad ein..." FontSize="15" Foreground="Cornsilk" TextAlignment="Left"  KeyDown="PfadInput_OnKeyDown" MouseEnter="RemoveStandardText" />
         
         <StackPanel x:Name="Directorys" Width="195" Height="380"  Margin="0,125,610,45" MouseWheel="DirectoryScrollingWithMouse">
             
