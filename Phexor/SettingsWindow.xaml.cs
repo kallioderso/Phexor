@@ -33,6 +33,7 @@ public partial class SettingsWindow : Window
 
     public SettingsWindow()
     {
+        Logging.Log("Initialize", "SettingsWindow"); //C. Log Entry
         this.Icon = new BitmapImage(new Uri("pack://application:,,,/Grafiks/Icon.ico")); //set icon for Xc.
         InitializeComponent(); //Initialize Xc. Objects
         DrawColorWheels(); //C. the CW. in Xc.
@@ -67,18 +68,21 @@ public partial class SettingsWindow : Window
 
     private void Settings_OnClosing(object? sender, CancelEventArgs e) //M. for Closingevent
     {
+        Logging.Log("Close Started", "SettingsWindow"); //C. Log Entry
         MainWindow mainWindow = new MainWindow(); //C. new Mainwindow window
         mainWindow.Show(); // Show the new Mainwindow window
     }
 
     private void Save(object sender, MouseButtonEventArgs mouseButtonEventArgs) //M. for Saving the Settings and Close this window
     {
+        Logging.Log("Saving Settings", "SettingsWindow"); //C. Log Entry
         SetSettings(Foreground, Background, Special, FelderInput.Value); //Start Settings Save M.
         this.Close(); //Start Closing Prozess
     }
 
     private void DrawColorWheels() //Create the CW. Xc. Objects !!!(Parts of this Code got Created with the help of ChatGPT)!!!
     {
+        Logging.Log("Create ColorWheels", "SettingsWindow"); //C. Log Entry
         int size = wheelRadius * 2; //C. V. for the diameter
         WriteableBitmap bitmap = new WriteableBitmap(size, size, 96, 96, PixelFormats.Bgra32, null); //C. bitmap for the CW.
         byte[] pixels = new byte[size * size * 4]; //C. V. pixels for the CW.
@@ -193,10 +197,12 @@ public partial class SettingsWindow : Window
         if (!ColorSelecting) //checks if Colorselecting is False
         {
             ColorSelecting = true; //Sets Colorselecting to True
+            Logging.Log("Start ColorWheel Color Selecting", "SettingsWindow"); //C. Log Entry
         }
         else //checks if Colorselecting is True
         {
             ColorSelecting = false; //Sets Colorselecting to False
+            Logging.Log("End ColorWheel Color Selecting", "SettingsWindow"); //C. Log Entry
         }
     }
 
@@ -212,6 +218,7 @@ public partial class SettingsWindow : Window
             var ColorText = sender as TextBox; //Set an Referenz to the Xc. Textbox
             if (e.Key == Key.Enter) //check if the Entered Key is Enter
             {
+                Logging.Log("Enter Color per TextBox", "SettingsWindow"); //C. Log Entry
                 if (ColorText == TextColorWheel1) //checks if Referenzed Texbox is from CW. 1
                 {
                     SelectedColorDisplay1.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(ColorText.Text)!); //Changes the Background Brush for the SelectedColorDisplay 1
@@ -229,13 +236,15 @@ public partial class SettingsWindow : Window
                 }
             }
         }
-        catch (Exception exception) //lates used for Logs
+        catch (Exception exception) //Used for Logs
         {
+            Logging.CatchLog(Convert.ToString(e), "SettingsWindow"); //use CatchLog M.
         }
     }
 
     private void SetOriginalDesign(object sender, MouseButtonEventArgs e) //M. to reset saved Design
     {
+        Logging.Log("Set Colors To Original", "SettingsWindow"); //C. Log Entry
         SelectedColorDisplay1.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFF8DC")!); //Set Color of SelectedColorDisplay 1
         Foreground = "#FFFFF8DC"; //Change Foreground
         TextColorWheel1.Text = "#FFFFF8DC"; //Change CW. 1 Text

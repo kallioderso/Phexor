@@ -34,9 +34,13 @@ namespace Phexor
         private SolidColorBrush foregroundBrush; //C. V. for Xc. & C#c.
         private SolidColorBrush backgroundBrush; //C. V. for Xc. & C#c.
         private SolidColorBrush optionalBrush; //C. V. for Xc. & C#c.
+        private SolidColorBrush Placeholders; //C. V. for Xc. & C#c.
         private List<TextBlock> DirectoryList = new List<TextBlock>(); //C. L. for LoadAllFields M.
         private List<TextBlock> fileList = new List<TextBlock>(); //C. L. for LoadAllFields M.
-        private string Redostring;
+        private List<Image> fileImageList = new List<Image>(); //C. L. for LoadAllFields M.
+        private List<Border> PlaceholderDirectoryList = new List<Border>(); //C. L. for LoadAllFields M.
+        private List<Border> PlaceholderfileList = new List<Border>(); //C. L. for LoadAllFields M.
+        private string Redostring; //C. V. for an Redo path string
         private string Path; //C. L. for LoadAllFields M.
         private string LastPath; //C. L. for LoadAllFields M.
         private int FileCount; //C. L. for LoadAllFields M.
@@ -44,6 +48,7 @@ namespace Phexor
 
         public MainWindow()
         {
+            Logging.Log("Initialize", "MainWindow"); //C. Log Entry
             this.Icon = new BitmapImage(new Uri("pack://application:,,,/Grafiks/Icon.ico")); //Set Icon for Xc.
             InitializeComponent(); //Initialize Xc.
             var borders = new Border[] { Border1, Border2, Border3, Border4}; //C. L. with Xc. Objects
@@ -52,6 +57,7 @@ namespace Phexor
             foregroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Settingsfile.ForegroundColor)!); //set V. for Xc. & C#c.
             backgroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Settingsfile.BackgroundColor)!); //set V. for Xc. & C#c.
             optionalBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Settingsfile.SpecialColor)!); //set V. for Xc. & C#c.
+            Placeholders = Brushes.Transparent; //set V. C. for Xc. & C#c.
             Fields = Settingsfile.Fields; //set V. for C#c.
             FileCount = Fields; //set V. for LoadAllFields
             FolderCount = Fields; //set V. for LoadAllFields
@@ -62,12 +68,12 @@ namespace Phexor
                 BackButton.Background = foregroundBrush; //set Xc. Colors
                 ForeButton.Background = foregroundBrush; //set Xc. Colors
 
-                foreach (var border in borders)
+                foreach (var border in borders) //loop for every Border in Borders
                 {
                     border.BorderBrush = backgroundBrush; //set Xc. Colors
                 }
 
-                foreach (var textBlock in textBlocks)
+                foreach (var textBlock in textBlocks) //loop for every textblock in textblocks
                 {
                     textBlock.Foreground = foregroundBrush; //set Xc. Colors
                 }
@@ -76,11 +82,12 @@ namespace Phexor
                 Border6.Background = backgroundBrush; //set Xc. Colors
                 PathInput.Foreground = foregroundBrush; //set Xc. Colors
             }
-            catch (Exception e) //laterly for Logs used
+            catch (Exception e) //used for logs
             {
+                Logging.CatchLog(Convert.ToString(e), "Mainwindow"); //use CatchLog M.
             }
             
-
+            Logging.Log("Create Xc. Objects", "MainWindow"); //C. Log Entry
             for (int i = 0; i < Fields; i++) // Generating Folder & file Fields
             {
                 TextBlock order = new TextBlock(); //G. L. Xc. Object
@@ -94,9 +101,16 @@ namespace Phexor
                 order.MouseLeave += Border_MouseLeave; //set Xc. Event M.
                 order.MouseLeftButtonDown += Folder_Click; //set Xc. Event M.
                 order.MouseRightButtonDown += Field_Setting; //set Xc. Event M.
-                order.VerticalAlignment = VerticalAlignment.Top; //set Xc. Font Settings
+                order.VerticalAlignment = VerticalAlignment.Center; //set Xc. Font Settings
                 DirectoryList.Add(order); //add to L. 
                 Directorys.Children.Add(order); //add to Xc.
+                
+                Border PlaceholderOrder = new Border(); //C. Xc. Object as Placeholder
+                PlaceholderOrder.Height = 1; //set Height of the Xc. Placeholder
+                PlaceholderOrder.Width = (Directorys.Width - 5); //set Width of the Xc. Placeholder
+                PlaceholderDirectoryList.Add(PlaceholderOrder); //Add the Xc. Placeholder to an L.
+                Directorys.Children.Add(PlaceholderOrder); //Add the Xc. Placeholder to the Xc.
+                
                 
                 TextBlock Datei = new TextBlock(); //G. L. Xc. Object
                 Datei.Height = (Files.Height/Settingsfile.Fields); //set Xc. Size
@@ -109,14 +123,36 @@ namespace Phexor
                 Datei.MouseLeave += Border_MouseLeave; //set Xc. Event M.
                 Datei.MouseLeftButtonDown += OpenFile; //set Xc. Event M.
                 Datei.MouseRightButtonDown += File_RightClick; //set Xc. Event M.
-                Datei.VerticalAlignment = VerticalAlignment.Top; //set Xc. Font Settings
+                Datei.VerticalAlignment = VerticalAlignment.Center; //set Xc. Font Settings
                 fileList.Add(Datei); //add to L. 
                 Files.Children.Add(Datei); //add to Xc.
+
+                Border PlaceholderFile = new Border(); //C. Xc. Object as Placeholder
+                PlaceholderFile.Height = 1; //set Height of the Xc. Placeholder
+                PlaceholderFile.Width = (Files.Width - 5); //set Width of the Xc. Placeholder
+                PlaceholderfileList.Add(PlaceholderFile); //Add the Xc. Placeholder to an L.
+                Files.Children.Add(PlaceholderFile); //Add the Xc. Placeholder to the Xc.
+                
+                
+                Image FileImage = new Image(); //C. new FileImage Image Xc. Object
+                FileImage.Height = (Files.Height/Settingsfile.Fields); //set Xc. Size
+                FileImage.Width = (Files.Height/Settingsfile.Fields + 5); //set Xc. Size
+                FileImage.HorizontalAlignment = HorizontalAlignment.Right;
+                FileImage.VerticalAlignment = VerticalAlignment.Center;
+                FileImage.Name = $"FileImage{i}"; //set idendification Number
+                fileImageList.Add(FileImage); //add to L.
+                FileImages.Children.Add(FileImage); //add to Xc.
+
+                Border PlaceholderFileImages = new Border(); //C. Xc. Object as Placeholder
+                PlaceholderFileImages.Height = 1; //set Height of the Xc. Placeholder
+                PlaceholderFileImages.Width = (Files.Width - 5); //set Width of the Xc. Placeholder
+                FileImages.Children.Add(PlaceholderFileImages); //Add the Xc. Placeholder to the Xc.
             }
         }
         
         private void CheckForSettings() // search/Set Settings
         {
+            Logging.Log("Check for Settings", "MainWindow"); //C. Log Entry
             if (!File.Exists(Settingsfile.SettingsFiles)) //check for File existens
             {
                 Settingsfile.SetSettings("#FFFFF8DC", "#FFF0FFFF", "#FFE6E6FA", 20); //set settings in txt
@@ -129,19 +165,42 @@ namespace Phexor
             }
         }
         
-        private void RemoveStandardText(object sender, MouseEventArgs mouseEventArgs) // Remove Standard Text (Input Field)
+        private void ShortCuts(object sender, KeyEventArgs e) //ShortCut M.
         {
-            if (Path == "" || Path == null) //check for an Empty Path
+            if (e.Key == Key.I) //check if pressed Key is I (Input)
             {
-                PathInput.Text = String.Empty; //clear the Path input textboxs text
+                Logging.Log("Using Shortcut I", "MainWindow"); //C. Log Entry
+                Keyboard.Focus(PathInput); //Set the Focus to PathInput Textbox
+            }
+            else if (e.Key == Key.P) //check if pressed Key is P (Placheolders)
+            {
+                
+                if (Placeholders == Brushes.Transparent) //If Placheolders beeing Invisibel
+                {
+                    Logging.Log("Using Shortcut P (Activate)", "MainWindow"); //C. Log Entry
+                    Placeholders = optionalBrush; //Coloring the Placeholders
+                }
+                else //if Placeholder arent Invisibel
+                {
+                    Logging.Log("Using Shortcut P (Deactivate)", "MainWindow"); //C. Log Entry
+                    Placeholders = Brushes.Transparent; //Make Placeholders Invisibel
+                }
+                if (Path != null && Path !=  String.Empty && Path != "") //Check for an Empty Path
+                {
+                    LoadAllFields(Path); //call LoadALlFields M.
+                }
             }
         }
-
-        private void PlaceStandardText(object sender, MouseEventArgs mouseEventArgs) //Set Standard Text Again (Input Field)
+        
+        private void MouseShortCuts(object sender, MouseButtonEventArgs e) //M. for Mouseshortcuts
         {
-            if (Path == "" || Path == null) //Check for an Empty Path
+            if (e.ChangedButton == MouseButton.Left) //Check if Pressed Mousebutton is Leftclick
             {
-                PathInput.Text = "Füge Pfad ein..."; //set the Path input Textboxs text
+                Logging.Log("Using Shortcut LeftClick", "MainWindow"); //C. Log Entry
+                Keyboard.ClearFocus(); //Clear Every Focus from Keyboard
+                PathInput.Focusable = false; //Set PathInputs Focusable ability to false
+                Keyboard.Focus(Window); //Focus Every Object in Window (everything)
+                PathInput.Focusable = true; //Set PathInputs Focusable ability to true
             }
         }
         
@@ -149,9 +208,14 @@ namespace Phexor
         {
             if (e.Key == Key.Enter) //check which Button got pressed
             {
-                setPath(Path = PathInput.Text); //set Path to Path from textbox
+                Logging.Log("Enter Input", "MainWindow"); //C. Log Entry
+                setPath(PathInput.Text); //set Path to Path from textbox
                 LoadAllFields(Path); //start the LoadAllFields M.
                 Redostring = Path;//Add the Current Path to the Redostring
+                Keyboard.ClearFocus(); //Clear Every Focus from Keyboard
+                PathInput.Focusable = false; //Set PathInputs Focusable ability to false
+                Keyboard.Focus(Window); //Focus Every Object in Window (everything)
+                PathInput.Focusable = true; //Set PathInputs Focusable ability to true
             }
         }
         
@@ -159,6 +223,7 @@ namespace Phexor
         {
             if (e.Delta < 0) //check in which direction got scrolled
             {
+                Logging.Log("Directory Scrolling (+)", "MainWindow"); //C. Log Entry
                 if (Directory.Exists(PathInput.Text)) //check if Directory Exists
                 {
                     FolderCount++; //Increase  the Foldercount for LoadAllFields
@@ -170,6 +235,7 @@ namespace Phexor
             }
             else if (e.Delta > 0) //check if the other direction was it
             {
+                Logging.Log("Directory Scrolling (-)", "MainWindow"); //C. Log Entry
                 if (FolderCount != Settingsfile.Fields) //check if FolderCount goes to low
                 {
                     FolderCount--; //decrease the Foldercount for LoadAllFields
@@ -185,6 +251,7 @@ namespace Phexor
         {
             if (e.Delta < 0) //check in which direction got scrolled
             {
+                Logging.Log("File Scrolling (+)", "MainWindow"); //C. Log Entry
                 if (Directory.Exists(PathInput.Text)) //check if Directory Exists
                 {
                     FileCount++; //increase Filecount for LoadAllFields M.
@@ -196,6 +263,7 @@ namespace Phexor
             }
             else if (e.Delta > 0) //check if the other direction was it
             {
+                Logging.Log("File Scrolling (-)", "MainWindow"); //C. Log Entry
                 if (FileCount != Settingsfile.Fields) //check if FolderCount goes to low
                 {
                     FileCount--; //decrease the Filecount for the LoadAllFields M.
@@ -210,29 +278,19 @@ namespace Phexor
         private void Folder_Click(object sender, RoutedEventArgs e) //M. to react on Folderclick
         {
             var textBlock = sender as System.Windows.Controls.TextBlock; //C. an V. for the TextBlock
-            if (textBlock.Text == "" || textBlock.Text == null) //check if textblocks text is empty or null
+            if (textBlock.Text != "" && textBlock.Text != null) //check if textblocks text is empty or null
             {
-                return;
+                Logging.Log("Select new Underfolder", "MainWindow"); //C. Log Entry
+                PathInput.Text = Path + textBlock.Text; //set new text for the path input textbox
+                LastPath = textBlock.Text; //set new lastpath
+                FolderCount = Fields; //reset the Foldercount
+                FileCount = Fields; //reset the Filecount
+                LoadAllFields(Path + textBlock.Text); //start LoadAllFields M.
+                Redostring = Path; //Add the Current Path to the Redostring
             }
             else
             {
-                if (textBlock.Text != LastPath) //check for un Doubble Path Bug
-                {
-                    PathInput.Text = Path + textBlock.Text; //set new text for the path input textbox
-                    LastPath = textBlock.Text; //set new lastpath
-                    FolderCount = Fields; //reset the Foldercount
-                    FileCount = Fields; //reset the Filecount
-                    LoadAllFields(Path + textBlock.Text); //start LoadAllFields M.
-                    Redostring = Path;//Add the Current Path to the Redostring
-                }
-                else
-                {
-                    for (int i = 0; i < Fields; i++) //Removing all the Files and Folders
-                    {
-                        DirectoryList[i].Text = null; //removing the Folders
-                        fileList[i].Text = null; //removing the files
-                    }
-                }
+                Logging.CatchLog("Underfolder cant be Selected (Empty)", "MainWindow"); //C. Log Entry
             }
         }
         
@@ -242,13 +300,15 @@ namespace Phexor
 
             try //try to prevent Crashes (if file can´t be opened)
             {
+                Logging.Log("Open File", "MainWindow"); //C. Log Entry
                 if (filePath != null && (filePath.Text != null && filePath.Text != "")) //check if filepath is not null and Text also not null and not empty
                 {
                     if (filePath.Text != null) Process.Start(Path + @"\" + filePath.Text); //Start the Selected File 
                 }
             }
-            catch (Exception exception) //laterly for Logs used
+            catch (Exception exception) //used for logs
             {
+                Logging.CatchLog(Convert.ToString(e), "Mainwindow"); //use CatchLog M.
             }
         }
 
@@ -264,7 +324,7 @@ namespace Phexor
                     border.Width = 32; //change the size of the Xc. V.
                 }
             }
-            else
+            else if (sender is TextBlock) //check the Type of Sender
             {
                 var TextBlock = sender as TextBlock; //C. V. for sender (Textblock)
                 if (TextBlock.Text != null && TextBlock.Text != "") //check if Textblocks text is not empty
@@ -272,7 +332,16 @@ namespace Phexor
                     TextBlock.Foreground = optionalBrush; //change the Font color of the Xc. V.
                 }
             }
-            
+            else if (sender is TextBox) //check the Type of Sender
+            {
+                if (Equals(sender, PathInput)) //check if sender and PathInput are the same
+                {
+                    if (Path == "" || Path == null) //check for an Empty Path
+                    {
+                        PathInput.Text = String.Empty; //clear the Path input textboxs text
+                    }
+                }
+            }
         }
 
         private void Border_MouseLeave(object sender, MouseEventArgs e) //M. to make an event if an Refered Object got an MousLeave event
@@ -287,7 +356,7 @@ namespace Phexor
                     border.Width = 30; //change the size of the Xc. V.
                 }
             }
-            else
+            else if (sender is TextBlock) //check the Type of Sender
             {
                 var TextBlock = sender as TextBlock; //C. V. for sender (Textblock)
                 if (TextBlock.Text != null && TextBlock.Text != "") //check if Textblocks text is not empty
@@ -295,10 +364,21 @@ namespace Phexor
                     TextBlock.Foreground = foregroundBrush; //change the Font color of the Xc. V.
                 }
             }
+            else if (sender is TextBox) //check the Type of Sender
+            {
+                if (Equals(sender, PathInput)) //check if sender and PathInput are the same
+                {
+                    if (Path == "" || Path == null) //Check for an Empty Path
+                    {
+                        PathInput.Text = "Füge Pfad ein..."; //set the Path input Textboxs text
+                    }
+                }
+            }
         }
         
         private void SettingsWindow(object sender, MouseButtonEventArgs e) //Open Settings Window
         {
+            Logging.Log("Open Settings", "MainWindow"); //C. Log Entry
             Phexor.SettingsWindow settings = new SettingsWindow(); //C. new Settings window
             settings.Show(); //show the Created Settings window
             NotTrueClose = true; //prevent an close of the program
@@ -309,6 +389,7 @@ namespace Phexor
         {
             if (Path != null && Path != String.Empty && Path != "") //Check for Path emptynes
             {
+                Logging.Log("Undo M.", "MainWindow"); //C. Log Entry
                 List<string> Pathparts = new List<string>(Path.Split('\\')); //Split the Current Path
                 Pathparts.RemoveAll(s => s == ""); //Remove every empty Path part
                 var pathPartCount = Pathparts.Count(); // get the Count of the remaining Path parts
@@ -321,12 +402,17 @@ namespace Phexor
                 LoadAllFields(Path); //use M. LoadAllFields with the new Path
                 PathInput.Text = Path; //change the Pathinput text to the new Path
             }
+            else //use for logs
+            {
+                Logging.CatchLog("Cant Undo (Path Empty)", "MainWindow"); //C. Log Entry
+            }
         }
 
         private void RedoFunction(object sender, MouseButtonEventArgs e) //Redo Path change
         {
-            if (Redostring != null ||Redostring != "" || Redostring != Path) //checks if Redostring is Empty and not the same as Path
+            if (Redostring != null && Redostring != "" && Redostring != Path) //checks if Redostring is Empty and not the same as Path
             {
+                Logging.Log("Redo M.", "MainWindow"); //C. Log Entry
                 List<string> setPathParts = new List<string>(Path.Split('\\')); //Split the Path into path parts
                 setPathParts.RemoveAll(s => s == ""); //Remove every Empty Path part
                 
@@ -349,10 +435,15 @@ namespace Phexor
                     PathInput.Text = Path; //Set the Pathinput textbox content to the new Path
                 }
             }
+            else //use for Logs
+            {
+                Logging.CatchLog("Cant Redo (Nothing to Redo)", "MainWindow"); //C. Log Entry
+            }
         }
 
         private void setPath(string Input) //Path setting M.
         {
+            Logging.Log("Set new Path", "MainWindow"); //C. Log Entry
             List<string> setPathParts = new List<string>(Input.Split('\\')); //Split the Input into path parts
             setPathParts.RemoveAll(s => s == ""); //removing every empty path part
             Path = ""; //set parth to empty
@@ -364,131 +455,146 @@ namespace Phexor
 
         private void LoadAllFields(string myPath) //Set Folder/File-Fields Content
         {
-            string directoryPath = myPath + @"\"; //set the directorypath to the M. input
-            setPath(directoryPath); //set the path to the directorypath
-            int directoryPathLength = directoryPath.Length; //C. V. for the length of the Path
+            Logging.Log("Load new Path", "MainWindow"); //C. Log Entry
+            if (myPath != "") //check for an Empty Path
+            {
+                string directoryPath = myPath + @"\"; //set the directorypath to the M. input
+                setPath(directoryPath); //set the path to the directorypath
+                int directoryPathLength = directoryPath.Length; //C. V. for the length of the Path
 
-            var directoryCount = 0; //C. V. for the directorys
-            var DirectorysDisplayed = 0; //C. V. for the directorys
-            var DirectorysNotDisplayed = 0; //C. V. for the directorys
+                var directoryCount = 0; //C. V. for the directorys
+                var DirectorysDisplayed = 0; //C. V. for the directorys
+                var DirectorysNotDisplayed = 0; //C. V. for the directorys
             
-            var fileCount = 0; //C. V. for the files
-            var FilesDisplayed = 0; //C. V. for the files
-            var FilesNotDisplayed = 0; //C. V. for the files
-            
-            for (int i = 0; i < Fields; i++) //Reset the Input and Color of every Field 
-            {
-                DirectoryList[i].Text = null; //Reset text of Directory Textblock
-                DirectoryList[i].Foreground = foregroundBrush; //Reset Foregroundbrush of Directory Textblock
-                fileList[i].Text = null; //Reset text of File Textblock
-                fileList[i].Foreground = foregroundBrush; //Reset Foregroundbrush of File Textblock
-            }
-            
-            try //prevent crashes
-            {
-                var directors = Directory.GetDirectories(directoryPath); //Adding Every Directory to the directory L.
-                if (directors != null) //check if directorys are empty
+                var fileCount = 0; //C. V. for the files
+                var FilesDisplayed = 0; //C. V. for the files
+                var FilesNotDisplayed = 0; //C. V. for the files
+                
+                for (int i = 0; i < Fields; i++) //Reset the Input and Color of every Field 
                 {
-                    try //prevent crashes
+                    DirectoryList[i].Text = null; //Reset text of Directory Textblock
+                    DirectoryList[i].Foreground = foregroundBrush; //Reset Foregroundbrush of Directory Textblock
+                    fileList[i].Text = null; //Reset text of File Textblock
+                    fileList[i].Foreground = foregroundBrush; //Reset Foregroundbrush of File Textblock
+                    fileImageList[i].Source = null; //clear the fileImage Image-source
+                    PlaceholderDirectoryList[i].Background = Brushes.Transparent; //Clear the Placeholders Visbility (with Background Color)
+                    PlaceholderfileList[i].Background = Brushes.Transparent; //Clear the Placeholders Visbility (with Background Color)
+                }
+                
+                try //prevent crashes
+                {
+                    var directors = Directory.GetDirectories(directoryPath); //Adding Every Directory to the directory L.
+                    if (directors != null) //check if directorys are empty
                     {
-                        foreach (var directory in directors) //loop for each directory in the path
+                        try //prevent crashes
                         {
-                            for (int i = 0; i < Fields; i++) //loop for the Amount of Fields
+                            foreach (var directory in directors) //loop for each directory in the path
                             {
-                                if (directoryCount < DirectorysNotDisplayed + FolderCount - Settingsfile.Fields) //prove the position for this text removing 
+                                for (int i = 0; i < Fields; i++) //loop for the Amount of Fields
                                 {
-                                    DirectoryList[DirectorysNotDisplayed].Text = null; //Removing the text from the Textblock
+                                    if (directoryCount < DirectorysNotDisplayed + FolderCount - Settingsfile.Fields) //prove the position for this text removing 
+                                    {
+                                        DirectoryList[DirectorysNotDisplayed].Text = null; //Removing the text from the Textblock
+                                        PlaceholderDirectoryList[DirectorysNotDisplayed].Background = Brushes.Transparent; //Clear the Placeholders Visbility (with Background Color)
+                                    }
+
+                                    DirectorysNotDisplayed++; //increase DirectorysNotDisplayed count
                                 }
 
-                                DirectorysNotDisplayed++; //increase DirectorysNotDisplayed count
+                                DirectorysNotDisplayed = 0; //reset DirectorysNotDisplayed count
+
+                                if (directoryCount == DirectorysDisplayed + FolderCount - Settingsfile.Fields) //check for the position of the Textblock
+                                {
+                                    DirectoryList[DirectorysDisplayed].Text = directory.Substring(directoryPathLength); //setting the Textblocks Text to the directory name (just name, without Path)
+                                    PlaceholderDirectoryList[DirectorysDisplayed].Background = Placeholders; //Set the Placeholders Visibility (with background Color)
+                                    DirectorysDisplayed++; //increase DirectorysDisplayed count
+                                }
+
+                                directoryCount++; //increase directorycount
                             }
-
-                            DirectorysNotDisplayed = 0; //reset DirectorysNotDisplayed count
-
-                            if (directoryCount == DirectorysDisplayed + FolderCount - Settingsfile.Fields) //check for the position of the Textblock
-                            {
-                                DirectoryList[DirectorysDisplayed].Text = directory.Substring(directoryPathLength); //setting the Textblocks Text to the directory name (just name, without Path)
-                                DirectorysDisplayed++; //increase DirectorysDisplayed count
-                            }
-
-                            directoryCount++; //increase directorycount
+                        }
+                        catch (Exception e) //used for logs
+                        {
+                            Logging.CatchLog(Convert.ToString(e), "Mainwindow"); //use CatchLog M.
+                        }
+                        
+                    }
+                    else
+                    {
+                        for (int i = 0; i < Fields; i++)
+                        {
+                            DirectoryList[i].Text = null; //Clear the Text from every TextBlock
+                            PlaceholderDirectoryList[i].Background = Brushes.Transparent; //Clear the Placeholders Visbility (with Background Color)
                         }
                     }
-                    catch (Exception e) //laterly used for logs
+                    
+                    var files = Directory.GetFiles(directoryPath); //get every File from the Path
+                    if (files != null) //check if Files L. is empty
                     {
+                        try //prevent Crashes
+                        {
+                            foreach (var file in files) // Loop for every file 
+                            {
+                                for (int i = 0; i < Fields; i++) //loop for the maximum amount of settet Fields
+                                {
+                                    if (fileCount < FilesNotDisplayed + FileCount - Settingsfile.Fields) //prove the position for this text removing 
+                                    {
+                                        fileList[FilesNotDisplayed].Text = null; //Set Text of Textblock to null
+                                        PlaceholderfileList[FilesNotDisplayed].Background = Brushes.Transparent; //Clear the Placeholders Visbility (with Background Color)
+                                    }
 
+                                    FilesNotDisplayed++; //Increase FilesNotDisplayed count
+                                }
+
+                                FilesNotDisplayed = 0; //reset FilesNotDisplayed Count
+
+                                if (fileCount == FilesDisplayed + FileCount - Settingsfile.Fields) //prove the position for this Text
+                                {
+                                    fileList[FilesDisplayed].Text = file.Substring(directoryPathLength); //Set the Text of the Textblocks (just the Filename, not Path)
+                                    PlaceholderfileList[FilesDisplayed].Background = Placeholders; //Set the Placeholders Visibility (with background Color)
+                                    if (file.EndsWith(".txt") || file.EndsWith(".doc") || file.EndsWith(".docx") || file.EndsWith("odt") || file.EndsWith(".rtf")) //Check if file is text-file
+                                    {
+                                        fileImageList[FilesDisplayed].Source = new BitmapImage(new Uri("Grafiks/TXT.png", UriKind. Relative)); //Set matching File-Image
+                                    }
+                                    else if (file.EndsWith(".xls") || file.EndsWith(".xlsx") || file.EndsWith(".ods") || file.EndsWith(".csv")) //Check if file is an Excel-file or similiar
+                                    {
+                                        fileImageList[FilesDisplayed].Source = new BitmapImage(new Uri("Grafiks/XLS.png", UriKind. Relative)); //Set matching File-Image
+                                    }
+                                    else if (file.EndsWith(".ppt") || file.EndsWith("-pptx") || file.EndsWith(".odp")) //Check if file is an Presentation-file
+                                    {
+                                        fileImageList[FilesDisplayed].Source = new BitmapImage(new Uri("Grafiks/PPTX.png", UriKind. Relative)); //Set matching File-Image
+                                    }
+                                    else if (file.EndsWith(".pdf")) //Check if file is an PDF-file
+                                    {
+                                        fileImageList[FilesDisplayed].Source = new BitmapImage(new Uri("Grafiks/PDF.png", UriKind. Relative)); //Set matching File-Image
+                                    }
+                                    FilesDisplayed++; //incrase FilesDisplayed Count
+                                }
+
+                                fileCount++; //increase filecount
+                            }
+                        }
+                        catch (Exception e) //used for logs
+                        { 
+                            Logging.CatchLog(Convert.ToString(e), "Mainwindow"); //use CatchLog M.
+                        }
+                    }
+                    else //clearing the file L.
+                    {
+                        for (int i = 0; i < Fields; i++)
+                        {
+                            fileList[i].Text = null; //Clear the Text from every TextBlock
+                            PlaceholderfileList[i].Background = Brushes.Transparent; //Clear the Placeholders Visbility (with Background Color)
+                        }
                     }
                     
                 }
-                else
+                catch (Exception e) //clearing all th Fields and Write a Log
                 {
-                    for (int i = 0; i < Fields; i++)
-                    {
-                        DirectoryList[i].Text = null;
-                    }
-                }
-                
-                var files = Directory.GetFiles(directoryPath); //get every File from the Path
-                if (files != null) //check if Files L. is empty
-                {
-                    try //prevent Crashes
-                    {
-                        foreach (var file in files) // Loop for every file 
-                        {
-                            for (int i = 0; i < Fields; i++) //loop for the maximum amount of settet Fields
-                            {
-                                if (fileCount < FilesNotDisplayed + FileCount - Settingsfile.Fields) //prove the position for this text removing 
-                                {
-                                    fileList[FilesNotDisplayed].Text = null; //Set Text of Textblock to null
-                                }
-
-                                FilesNotDisplayed++; //Increase FilesNotDisplayed count
-                            }
-
-                            FilesNotDisplayed = 0; //reset FilesNotDisplayed Count
-
-                            if (fileCount == FilesDisplayed + FileCount - Settingsfile.Fields) //prove the position for this Text
-                            {
-                                fileList[FilesDisplayed].Text = file.Substring(directoryPathLength); //Set the Text of the Textblocks (just the Filename, not Path)
-                                FilesDisplayed++; //incrase FilesDisplayed Count
-                            }
-
-                            fileCount++; //increase filecount
-                        }
-                    }
-                    catch (Exception e) //Clearing the text of every File Textblock text
-                    {
-                        FilesNotDisplayed = 0; //reset V.
-                        for (int i = 0; i < Fields; i++) //loop
-                        {
-                            if (i < FilesNotDisplayed) //check if FilesNotDisplayed is bigger than the loop count
-                            {
-                                fileList[FilesNotDisplayed].Text = null; //Remove the text out of the Textblock
-                            }
-
-                            FilesNotDisplayed++; //Increase Count of V.
-                        }
-
-                        FilesNotDisplayed = 0; //reset V.
-                    }
-                }
-                else //clearing the file L.
-                {
-                    for (int i = 0; i < Fields; i++)
-                    {
-                        fileList[i].Text = null;
-                    }
-                }
-                
-            }
-            catch (Exception e) //clearing all th Fields
-            {
-                for (int i = 0; i < Fields; i++)
-                {
-                    DirectoryList[i].Text = null;
-                    fileList[i].Text = null;
+                    Logging.CatchLog(Convert.ToString(e), "Mainwindow"); //use CatchLog M.
                 }
             }
+            
         }
 
         private void Field_Setting(object sender, MouseButtonEventArgs e) // Coming Soon
@@ -503,7 +609,7 @@ namespace Phexor
 
         private void OnClose(object sender, EventArgs e) // Stop Running Prozesees
         {
-            
+            Logging.Log("Close Started", "MainWindow"); //C. Log Entry
             if (!NotTrueClose) //check for V. to know what kind of close
             {
                 var phexorProcesses = Process.GetProcessesByName("Phexor"); //check for every active process
@@ -514,8 +620,9 @@ namespace Phexor
                         process.Kill(); //"Kill" every running process
                         process.WaitForExit(); //Wait until it got definitly closed
                     }
-                    catch (Exception) //laterly for Logs used
+                    catch (Exception) //for Logs used
                     {
+                        Logging.CatchLog(Convert.ToString(e), "Mainwindow"); //use CatchLog M.
                     }
                 } 
             }

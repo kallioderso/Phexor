@@ -59,6 +59,7 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Scripts\Logging.cs" />
         <Compile Include="Scripts\Settingsfile.cs" />
         <Compile Include="SettingsWindow.xaml.cs" />
         <Page Include="MainWindow.xaml">
@@ -105,6 +106,12 @@
     </ItemGroup>
     <ItemGroup>
       <Resource Include="Grafiks\Redo.png" />
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="Grafiks\PDF.png" />
+      <Resource Include="Grafiks\PPTX.png" />
+      <Resource Include="Grafiks\TXT.png" />
+      <Resource Include="Grafiks\XLS.png" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,7 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
         Closed="OnClose"
-      Title="Phexor" Width="900" Height="550" Icon="Grafiks/Icon.ico">
+        PreviewKeyDown="ShortCuts"
+        MouseDown="MouseShortCuts"
+      Title="Phexor" Width="900" Height="550" Icon="Grafiks/Icon.ico" x:Name="Window">
     <Grid Background="#263238">
         
         <Border BorderBrush="Azure" Background="#223238" Height="480" Width="820" BorderThickness="5" x:Name="Border1"/>
@@ -38,7 +40,7 @@
             <TextBlock Text="" FontSize="17" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
         
-        <TextBox Height="28" Width="400" Background="Transparent" BorderBrush="Transparent" Margin="0,2,400,435" x:Name="PathInput" Text="Füge Pfad ein..." FontSize="15" Foreground="Cornsilk" TextAlignment="Left"  KeyDown="PfadInput_OnKeyDown" MouseEnter="RemoveStandardText" MouseLeave="PlaceStandardText"/>
+        <TextBox Height="28" Width="400" Background="Transparent" BorderBrush="Transparent" Margin="0,2,400,435" x:Name="PathInput" Text="Füge Pfad ein..." FontSize="15" Foreground="Cornsilk" TextAlignment="Left"  KeyDown="PfadInput_OnKeyDown" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave"/>
         
         <StackPanel x:Name="Directorys" Width="195" Height="380"  Margin="0,125,610,45" MouseWheel="DirectoryScrollingWithMouse">
             
@@ -48,5 +50,8 @@
             
         </StackPanel>
         
+        <StackPanel x:Name="FileImages" Width="30" Height="380"  Margin="765,125,0,45" MouseWheel="FileScrollingWithMouse">
+            
+        </StackPanel>
     </Grid>
 </Window>
