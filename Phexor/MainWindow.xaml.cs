@@ -91,7 +91,7 @@ namespace Phexor
             for (int i = 0; i < Fields; i++) // Generating Folder & file Fields
             {
                 TextBlock order = new TextBlock(); //G. L. Xc. Object
-                order.Height = (Directorys.Height/Settingsfile.Fields); //set Xc. Size
+                order.Height = (Directorys.Height/Settingsfile.Fields - 1); //set Xc. Size
                 order.Width = (Directorys.Width); //set Xc. Size
                 order.Name = $"Directory{i}"; //set identification Number
                 order.Foreground = foregroundBrush; //set Xc. Color
@@ -113,7 +113,7 @@ namespace Phexor
                 
                 
                 TextBlock Datei = new TextBlock(); //G. L. Xc. Object
-                Datei.Height = (Files.Height/Settingsfile.Fields); //set Xc. Size
+                Datei.Height = (Files.Height/Settingsfile.Fields - 1); //set Xc. Size
                 Datei.Width = (Files.Width); //set Xc. Size
                 Datei.Name = $"File{i}"; //set identification Number
                 Datei.Foreground = foregroundBrush; //set Xc. Color
@@ -135,10 +135,11 @@ namespace Phexor
                 
                 
                 Image FileImage = new Image(); //C. new FileImage Image Xc. Object
-                FileImage.Height = (Files.Height/Settingsfile.Fields); //set Xc. Size
-                FileImage.Width = (Files.Height/Settingsfile.Fields + 5); //set Xc. Size
-                FileImage.HorizontalAlignment = HorizontalAlignment.Right;
-                FileImage.VerticalAlignment = VerticalAlignment.Center;
+                FileImage.Height = (Files.Height/Settingsfile.Fields  -1); //set Xc. Size
+                FileImage.Width = (Files.Height/Settingsfile.Fields + 2); //set Xc. Size
+                FileImage.Stretch = Stretch.Uniform; //Prevent Cuttet Images in Xc. 
+                FileImage.HorizontalAlignment = HorizontalAlignment.Right; //set Xc. Aligments
+                FileImage.VerticalAlignment = VerticalAlignment.Center; //set Xc. Aligments
                 FileImage.Name = $"FileImage{i}"; //set idendification Number
                 fileImageList.Add(FileImage); //add to L.
                 FileImages.Children.Add(FileImage); //add to Xc.
@@ -456,7 +457,7 @@ namespace Phexor
         private void LoadAllFields(string myPath) //Set Folder/File-Fields Content
         {
             Logging.Log("Load new Path", "MainWindow"); //C. Log Entry
-            if (myPath != "") //check for an Empty Path
+            if (Directory.Exists(myPath) || File.Exists(myPath)) //check for an not Existing Path
             {
                 string directoryPath = myPath + @"\"; //set the directorypath to the M. input
                 setPath(directoryPath); //set the path to the directorypath
@@ -517,7 +518,6 @@ namespace Phexor
                         {
                             Logging.CatchLog(Convert.ToString(e), "Mainwindow"); //use CatchLog M.
                         }
-                        
                     }
                     else
                     {
@@ -593,6 +593,10 @@ namespace Phexor
                 {
                     Logging.CatchLog(Convert.ToString(e), "Mainwindow"); //use CatchLog M.
                 }
+            }
+            else
+            {
+                Logging.CatchLog("Path Not Exists", "Mainwindow"); //use CatchLog M.
             }
             
         }
