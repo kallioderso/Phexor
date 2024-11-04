@@ -191,6 +191,11 @@ namespace Phexor
                     LoadAllFields(Path); //call LoadALlFields M.
                 }
             }
+            else if (e.Key == Key.U)
+            {
+                Logging.Log("Using Shortcut U", "MainWindow");
+                UndoFunction(null, null);
+            }
         }
         
         private void MouseShortCuts(object sender, MouseButtonEventArgs e) //M. for Mouseshortcuts
@@ -386,7 +391,7 @@ namespace Phexor
             this.Close(); // close this window
         }
 
-        private void UndoFunction(object sender, MouseButtonEventArgs e) //Undo Path Change
+        private void UndoFunction(object sender, MouseButtonEventArgs mouseButtonEventArgs) //Undo Path Change
         {
             if (Path != null && Path != String.Empty && Path != "") //Check for Path emptynes
             {
@@ -409,7 +414,7 @@ namespace Phexor
             }
         }
 
-        private void RedoFunction(object sender, MouseButtonEventArgs e) //Redo Path change
+        private void RedoFunction(object sender, MouseButtonEventArgs mouseButtonEventArgs) //Redo Path change
         {
             if (Redostring != null && Redostring != "" && Redostring != Path) //checks if Redostring is Empty and not the same as Path
             {
