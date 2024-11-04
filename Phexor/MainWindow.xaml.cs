@@ -170,31 +170,48 @@ namespace Phexor
         {
             if (e.Key == Key.I) //check if pressed Key is I (Input)
             {
-                Logging.Log("Using Shortcut I", "MainWindow"); //C. Log Entry
-                Keyboard.Focus(PathInput); //Set the Focus to PathInput Textbox
+                if (!PathInput.IsKeyboardFocused) //check if PathInput is false
+                {
+                    Logging.Log("Using Shortcut I", "MainWindow"); //C. Log Entry
+                    Keyboard.Focus(PathInput); //Set the Focus to PathInput Textbox
+                }
             }
             else if (e.Key == Key.P) //check if pressed Key is P (Placheolders)
             {
-                
-                if (Placeholders == Brushes.Transparent) //If Placheolders beeing Invisibel
+                if (!PathInput.IsKeyboardFocused) //check if PathInput is false
                 {
-                    Logging.Log("Using Shortcut P (Activate)", "MainWindow"); //C. Log Entry
-                    Placeholders = optionalBrush; //Coloring the Placeholders
-                }
-                else //if Placeholder arent Invisibel
-                {
-                    Logging.Log("Using Shortcut P (Deactivate)", "MainWindow"); //C. Log Entry
-                    Placeholders = Brushes.Transparent; //Make Placeholders Invisibel
-                }
-                if (Path != null && Path !=  String.Empty && Path != "") //Check for an Empty Path
-                {
-                    LoadAllFields(Path); //call LoadALlFields M.
+                    if (Placeholders == Brushes.Transparent) //If Placheolders beeing Invisibel
+                    {
+                        Logging.Log("Using Shortcut P (Activate)", "MainWindow"); //C. Log Entry
+                        Placeholders = optionalBrush; //Coloring the Placeholders
+                    }
+                    else //if Placeholder arent Invisibel
+                    {
+                        Logging.Log("Using Shortcut P (Deactivate)", "MainWindow"); //C. Log Entry
+                        Placeholders = Brushes.Transparent; //Make Placeholders Invisibel
+                    }
+
+                    if (Path != null && Path != String.Empty && Path != "") //Check for an Empty Path
+                    {
+                        LoadAllFields(Path); //call LoadALlFields M.
+                    }
                 }
             }
-            else if (e.Key == Key.U)
+            else if (e.Key == Key.U) //check if pressed Key is U (Undo)
             {
-                Logging.Log("Using Shortcut U", "MainWindow");
-                UndoFunction(null, null);
+                if (!PathInput.IsKeyboardFocused) //check if PathInput is false
+                {
+                    Logging.Log("Using Shortcut U", "MainWindow"); //C. Log Entry
+                    UndoFunction(null, null); //call UndoFunction M.
+                }
+            }
+            else if (e.Key == Key.R) //check if pressed Key is R (Redo)
+            {
+                if (!PathInput.IsKeyboardFocused) //check if PathInput is false
+                {
+                    Logging.Log("Using Shortcut R", "MainWindow"); //C. Log Entry
+                    RedoFunction(null, null); //call RedoFunction M.
+                }
             }
         }
         
@@ -372,7 +389,7 @@ namespace Phexor
             }
             else if (sender is TextBox) //check the Type of Sender
             {
-                if (Equals(sender, PathInput)) //check if sender and PathInput are the same
+                if (Equals(sender, PathInput) && !PathInput.IsKeyboardFocused) //check if sender and PathInput are the same
                 {
                     if (Path == "" || Path == null) //Check for an Empty Path
                     {
