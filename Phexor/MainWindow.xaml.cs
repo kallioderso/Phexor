@@ -168,56 +168,50 @@ namespace Phexor
         
         private void ShortCuts(object sender, KeyEventArgs e) //ShortCut M.
         {
-            if (e.Key == Key.I) //check if pressed Key is I (Input)
+            if (e.Key == Key.I && !PathInput.IsKeyboardFocused) //check if pressed Key is I (Input) and PathInput is not Keyboard Focused
             {
-                if (!PathInput.IsKeyboardFocused) //check if PathInput is false
-                {
-                    Logging.Log("Using Shortcut I", "MainWindow"); //C. Log Entry
-                    Keyboard.Focus(PathInput); //Set the Focus to PathInput Textbox
-                }
+                Logging.Log("Using Shortcut I", "MainWindow"); //C. Log Entry
+                Keyboard.Focus(PathInput); //Set the Focus to PathInput Textbox
             }
-            else if (e.Key == Key.P) //check if pressed Key is P (Placheolders)
+            else if (e.Key == Key.P && !PathInput.IsKeyboardFocused) //check if pressed Key is P (Placheolders) and PathInput is not Keyboard Focused
             {
-                if (!PathInput.IsKeyboardFocused) //check if PathInput is false
+                if (Placeholders == Brushes.Transparent) //If Placheolders beeing Invisibel
                 {
-                    if (Placeholders == Brushes.Transparent) //If Placheolders beeing Invisibel
-                    {
-                        Logging.Log("Using Shortcut P (Activate)", "MainWindow"); //C. Log Entry
-                        Placeholders = optionalBrush; //Coloring the Placeholders
-                    }
-                    else //if Placeholder arent Invisibel
-                    {
-                        Logging.Log("Using Shortcut P (Deactivate)", "MainWindow"); //C. Log Entry
-                        Placeholders = Brushes.Transparent; //Make Placeholders Invisibel
-                    }
+                    Logging.Log("Using Shortcut P (Activate)", "MainWindow"); //C. Log Entry
+                    Placeholders = optionalBrush; //Coloring the Placeholders
+                }
+                else //if Placeholder arent Invisibel
+                {
+                    Logging.Log("Using Shortcut P (Deactivate)", "MainWindow"); //C. Log Entry
+                    Placeholders = Brushes.Transparent; //Make Placeholders Invisibel
+                }
 
-                    if (Path != null && Path != String.Empty && Path != "") //Check for an Empty Path
-                    {
-                        LoadAllFields(Path); //call LoadALlFields M.
-                    }
-                }
-            }
-            else if (e.Key == Key.U) //check if pressed Key is U (Undo)
-            {
-                if (!PathInput.IsKeyboardFocused) //check if PathInput is false
+                if (Path != null && Path != String.Empty && Path != "") //Check for an Empty Path
                 {
-                    Logging.Log("Using Shortcut U", "MainWindow"); //C. Log Entry
-                    UndoFunction(null, null); //call UndoFunction M.
-                }
+                    LoadAllFields(Path); //call LoadALlFields M.
+                } 
             }
-            else if (e.Key == Key.R) //check if pressed Key is R (Redo)
+            else if (e.Key == Key.U && !PathInput.IsKeyboardFocused) //check if pressed Key is U (Undo) and PathInput is not Keyboard Focused
             {
-                if (!PathInput.IsKeyboardFocused) //check if PathInput is false
-                {
-                    Logging.Log("Using Shortcut R", "MainWindow"); //C. Log Entry
-                    RedoFunction(null, null); //call RedoFunction M.
-                }
+
+                Logging.Log("Using Shortcut U", "MainWindow"); //C. Log Entry
+                UndoFunction(null, null); //call UndoFunction M.
+            }
+            else if (e.Key == Key.R && !PathInput.IsKeyboardFocused) //check if pressed Key is R (Redo) and PathInput is not Keyboard Focused
+            {
+                Logging.Log("Using Shortcut R", "MainWindow"); //C. Log Entry
+                RedoFunction(null, null); //call RedoFunction M.
+            }
+            else if (e.Key == Key.S && !PathInput.IsKeyboardFocused) //check if pressed Key is S (Settings) and PathInput is not Keyboard Focused
+            {
+                Logging.Log("Using Shortcut S", "MainWindow"); //C. Log Entry
+                SettingsWindow(null, null); // call SettingsWindow M.
             }
         }
         
         private void MouseShortCuts(object sender, MouseButtonEventArgs e) //M. for Mouseshortcuts
         {
-            if (e.ChangedButton == MouseButton.Left) //Check if Pressed Mousebutton is Leftclick
+            if (e.ChangedButton == MouseButton.Left && PathInput.IsKeyboardFocused) //Check if Pressed Mousebutton is Leftclick and PathInput is not Keyboard Focused
             {
                 Logging.Log("Using Shortcut LeftClick", "MainWindow"); //C. Log Entry
                 Keyboard.ClearFocus(); //Clear Every Focus from Keyboard
