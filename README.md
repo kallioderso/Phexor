@@ -1,13 +1,13 @@
 [![Releases](https://media.discordapp.net/attachments/1232963421666807890/1302697170180374548/Polish_20241103_172337035.png?ex=67290ec8&is=6727bd48&hm=c87c0c700af2a7a642596d373672ac68539e3a75cd026151f6ed5159a30faade&=&format=webp&quality=lossless&width=1440&height=613)](https://github.com/kallioderso/Phexor/releases)
 ![GitHub Created At](https://img.shields.io/github/created-at/kallioderso/Phexor)
-[![GitHub License](https://img.shields.io/github/license/kallioderso/Phexor?)]([https%3A%2F%2Fgithub.com%2Fkallioderso%2FPhexor%2FLicense](https://github.com/kallioderso/Phexor?tab=License-1-ov-file))
+[![GitHub License](https://img.shields.io/github/license/kallioderso/Phexor?)]([https%3A%2F%2Fgithub.com%2Fkallioderso%2FPhexor%2FLicense](https://github.com/kallioderso/Phexor?tab=GPL-3.0-1-ov-file))
 [![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/kallioderso/Phexor/total?)](https%3A%2F%2Fgithub.com%2Fkallioderso%2FPhexor%2Freleases)
-[![GitHub Release](https://img.shields.io/github/v/release/kallioderso/Phexor?include_prereleases&)](https%3A%2F%2Fgithub.com%2Fkallioderso%2FPhexor%2Freleases%2Flatest)
-[![GitHub Release Date](https://img.shields.io/github/release-date/kallioderso/Phexor?&)](https%3A%2F%2Fgithub.com%2Fkallioderso%2FPhexor%2Freleases%2Flatest)
+[![GitHub Release](https://img.shields.io/github/v/release/kallioderso/Phexor?include_prereleases&)](https%3A%2F%2Fgithub.com%2Fkallioderso%2FPhexor%2Freleases)
+[![GitHub Release Date](https://img.shields.io/github/release-date/kallioderso/Phexor?&)](https%3A%2F%2Fgithub.com%2Fkallioderso%2FPhexor%2Freleases)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/kallioderso/Phexor)
-[![GitHub last commit](https://img.shields.io/github/last-commit/kallioderso/Phexor?)]([https%3A%2F%2Fgithub.com%2Fkallioderso%2FPhexor%2Fcommits%2Flatest](https://github.com/kallioderso/Phexor/commits))
-![GitHub commits since latest release](https://img.shields.io/github/commits-since/kallioderso/Phexor/latest)
-[![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/kallioderso/Phexor)](https://github.com/kallioderso/Phexor/Issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/kallioderso/Phexor?)]([https%3A%2F%2Fgithub.com%2Fkallioderso%2FPhexor%2Fcommits%2Flatest](https://github.com/kallioderso/Phexor/commits/master/))
+[![GitHub commits since latest release](https://img.shields.io/github/commits-since/kallioderso/Phexor/latest)](https://github.com/kallioderso/Phexor/commits/master/)
+[![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/kallioderso/Phexor)](https://github.com/kallioderso/Phexor/issues)
 ![GitHub watchers](https://img.shields.io/github/watchers/kallioderso/Phexor)
 ![GitHub Repo stars](https://img.shields.io/github/stars/kallioderso/Phexor)
 ***
@@ -16,11 +16,11 @@
 - Phexor's main goal is to achieve a high level of user-friendliness.
 - In Phexor, you can completely customize your GUI.
 - You don’t have unnecessary features instantly activated.
-- For additional features, you first need to activate them in the [Settings menu](https://github.com/kallioderso/Phexor/edit/master/README.md#settingsmenu).
-- You have a few [Shortcuts](https://github.com/kallioderso/Phexor/edit/master/README.md#shortcuts) for extra modes.
-- You can share your ideas by creating an [Issue](https://github.com/kallioderso/Phexor/Issues).
-- In Phexor Everything getting be [Logged](https://github.com/kallioderso/Phexor/edit/master/README.md#logging) to Archive an easy Error identifikation
-- In Phexors [Logs](https://github.com/kallioderso/Phexor/edit/master/README.md#logging), non Personal Datas like Directory Names or File Names getting be logged to ceep privacy
+- For additional features, you first need to activate them in the [Settings menu](https://github.com/kallioderso/Phexor/tree/master?tab=readme-ov-file#settingsmenu).
+- You have a few [Shortcuts](https://github.com/kallioderso/Phexor/tree/master?tab=readme-ov-file#shortcuts) for extra modes.
+- You can share your ideas by creating an [Issue](https://github.com/kallioderso/Phexor/issues).
+- In Phexor, everything is [Logged](https://github.com/kallioderso/Phexor?tab=readme-ov-file#logging)  to archive and easily identify errors
+- In Phexor's [Logs](https://github.com/kallioderso/Phexor?tab=readme-ov-file#logging), personal data like directory names or file names are not logged, to keep your privacy
 
 ***
 # Features
@@ -29,8 +29,8 @@
 > > * Customizable GUI elements.
 > > * Simple and intuitive GUI.
 > > * Multiple methods for path input.
-> > * Placeholders ([Shortcuts](https://github.com/kallioderso/Phexor/edit/master/README.md#shortcuts)).
-> > * [Logging](https://github.com/kallioderso/Phexor/edit/master/README.md#logging).
+> > * Placeholders ([Shortcuts](https://github.com/kallioderso/Phexor?tab=readme-ov-file#shortcuts)).
+> > * [Logging](https://github.com/kallioderso/Phexor?tab=readme-ov-file#logging).
 >
 > ***Upcoming***
 > > * Settings for files and folders.
@@ -56,7 +56,7 @@
 > Paths from the input field can be entered by pressing *Enter*.<br/>
 
 > **Settings (S)**<br/>
-> The [Settings menu](https://github.com/kallioderso/Phexor/edit/master/README.md#settingsmenu) can be opened by clicking on the **Settings Button**, but also by pressing *S*.<br/>
+> The [Settings menu](https://github.com/kallioderso/Phexor?tab=readme-ov-file#settingsmenu) can be opened by clicking on the **Settings Button**, but also by pressing *S*.<br/>
 > This allows for keyboard-only use of Phexor.<br/>
 
 > **Undo (U)**<br/>
@@ -76,8 +76,8 @@
 > This allows for keyboard-only use of Phexor.<br/>
 ***
 # Logging
-**Logging Exists to make it Easyer for You to tell us what Bugs or Problems you have by telling us what is standing in your logs, but also to make it Easy for you to See what you have ben doing** <br/>
-*You can See your Logs in `%AppData%\Roaming\Phexor\Logs\`*
+**Logging exists to make it easier for you to report bugs or problems by providing information from your logs, as well as allowing you to see your actions in Phexor** <br/>
+*You can find your Logs in `%AppData%\Roaming\Phexor\Logs\`*
 
 ***Logged Things:***
 > *Mainwindow*
