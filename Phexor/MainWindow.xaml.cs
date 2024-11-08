@@ -600,7 +600,7 @@ namespace Phexor
                                     {
                                         fileImageList[FilesDisplayed].Source = new BitmapImage(new Uri("Grafiks/XLS.png", UriKind. Relative)); //Set matching File-Image
                                     }
-                                    else if (file.EndsWith(".ppt") || file.EndsWith("-pptx") || file.EndsWith(".odp")) //Check if file is an Presentation-file
+                                    else if (file.EndsWith(".ppt") || file.EndsWith(".pptx") || file.EndsWith(".odp")) //Check if file is an Presentation-file
                                     {
                                         fileImageList[FilesDisplayed].Source = new BitmapImage(new Uri("Grafiks/PPTX.png", UriKind. Relative)); //Set matching File-Image
                                     }

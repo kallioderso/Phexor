@@ -29,8 +29,9 @@
 > > * Customizable GUI elements.
 > > * Simple and intuitive GUI.
 > > * Multiple methods for path input.
-> > * Placeholders ([Shortcuts](https://github.com/kallioderso/Phexor?tab=readme-ov-file#shortcuts)).
+> > * [Shortcuts](https://github.com/kallioderso/Phexor?tab=readme-ov-file#shortcuts).
 > > * [Logging](https://github.com/kallioderso/Phexor?tab=readme-ov-file#logging).
+> > * [File Images](https://github.com/kallioderso/Phexor?tab=readme-ov-file#File-Images) (***Alpha***).
 >
 > ***Upcoming***
 > > * Settings for files and folders.
@@ -67,11 +68,15 @@
 > The Redo function can be used by clicking on the **Redo Button**, but also by pressing *R*.<br/>
 > This allows for keyboard-only use of Phexor.<br/>
 
-> **Up (˄)**<br/>
+> **Escape (ESC)**<br/>
+> To exit the PathInput in keyboard-only use, you can press **Escape** Button.<br/>
+> This makes it possible to completly use phexor without mouse<br/>
+
+> **Up (˄) (Coming soon)**<br/>
 > To scroll between the files or folders, you can use your **mouse wheel** or *˄*.<br/>
 > This allows for keyboard-only use of Phexor.<br/>
 
-> **Down (˅)**<br/>
+> **Down (˅) (Coming soon)**<br/>
 > To scroll between the files or folders, you can use your **mouse wheel** or *˅*.<br/>
 > This allows for keyboard-only use of Phexor.<br/>
 ***
@@ -122,7 +127,7 @@
 *The following is from ([alpha-v1.0.4](https://github.com/kallioderso/Phexor/releases/alpha-v1.0.4))*
 
 ***Preview*** <br/>
-![SettingsMenu Phexor](https://media.discordapp.net/attachments/1232963421666807890/1303014934140944404/image.png?ex=672a36b9&is=6728e539&hm=c6163d1e6d8a71b3203b2ff2995b05b06e9bf4a4d78b95ab9e5559f4869410fa&=&format=webp&quality=lossless) <br/>
+<img style="float: right;" src="https://media.discordapp.net/attachments/1232963421666807890/1303014934140944404/image.png?ex=672a36b9&is=6728e539&hm=c6163d1e6d8a71b3203b2ff2995b05b06e9bf4a4d78b95ab9e5559f4869410fa&=&format=webp&quality=lossless" alt="drawing" width="300"/> <br/>
 
 **Things you can Change**
 > Amount of Displayed Fields for Files and Directorys. <br/>
@@ -133,6 +138,26 @@
 > > Optional/Special (Button Hover Color and Field Hover Color) <br/>
 
 > Setting Every Color to Standard
+***
+# File-Images
+**File-Images are little Pictures on the right side of every File Field, they get activatet for an matching Filetype in the file field (***alpha***)**<br/>
+
+***Existing Image Types:***<br/>
+> **Text files**<br/>
+> **File Types:** *.txt, .dox, .docx, .odt, .rtf*<br/>
+> <img style="float: right;" src="https://media.discordapp.net/attachments/1232963421666807890/1304470853047816253/TXT.png?ex=672f82a7&is=672e3127&hm=84bda62c8ec308f5805196edb892114c9fb897ae609fc0b7fadbba9cfaefd897&=&format=webp&quality=lossless" alt="drawing" width="100"/>
+
+> **Table files**<br/>
+> **File Types:** *.xls, .xlsx, .ods, .csv*<br/>
+> <img style="float: right;" src="https://media.discordapp.net/attachments/1232963421666807890/1304470853458726943/XLS.png?ex=672f82a7&is=672e3127&hm=d0511b9f56dbb4b9852797836790a9f887552be6a342e58964b16738b125c93e&=&format=webp&quality=lossless" alt="drawing" width="100"/>
+
+> **Presentation files**<br/>
+> **File Types:** *.ppt, .pptx, .odp*<br/>
+> <img style="float: right;" src="https://media.discordapp.net/attachments/1232963421666807890/1304470852712009778/PPTX.png?ex=672f82a7&is=672e3127&hm=0c56dbf8da4af060f9761179b88493c6211fab15bbb63d310e4e144c3724cca7&=&format=webp&quality=lossless" alt="drawing" width="100"/>
+
+> **PDF Files**<br/>
+> **File Types:** *.pdf*<br/>
+> <img style="float: right;" src="https://media.discordapp.net/attachments/1232963421666807890/1304470852422860800/PDF.png?ex=672f82a7&is=672e3127&hm=29634e6ebc04f621e5f6de96faccb7b4d8b9bee893d4b27a3129078d7aeab5f5&=&format=webp&quality=lossless" alt="drawing" width="100"/>
 ***
 ## Information Sources:
 - *YouTube:* [Phexor](https://www.youtube.com/@Phexor-OpenSource).
