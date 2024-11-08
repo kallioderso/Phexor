@@ -172,6 +172,11 @@ namespace Phexor
             {
                 Logging.Log("Using Shortcut I", "MainWindow"); //C. Log Entry
                 Keyboard.Focus(PathInput); //Set the Focus to PathInput Textbox
+                if (Path == "" || Path == null || Path == String.Empty) //checks for an empty Path
+                {
+                    PathInput.Text = ""; //resets PathInputs Text
+                }
+                e.Handled = true; //set Keydownevent to complet
             }
             else if (e.Key == Key.Escape && PathInput.IsKeyboardFocused) //check if pressed Key is ESC (Escape) and Pathinput is Keyboard Focused
             {
@@ -180,6 +185,11 @@ namespace Phexor
                 PathInput.Focusable = false; //Set PathInputs Focusable ability to false
                 Keyboard.Focus(Window); //Focus Every Object in Window (everything)
                 PathInput.Focusable = true; //Set PathInputs Focusable ability to true
+
+                if (Path == "" || Path == null || Path == String.Empty) //checks for an empty path
+                {
+                    PathInput.Text = "Füge Pfad ein..."; //set the Path input Textboxs text
+                }
             }
             else if (e.Key == Key.P && !PathInput.IsKeyboardFocused) //check if pressed Key is P (Placheolders) and PathInput is not Keyboard Focused
             {
@@ -201,7 +211,6 @@ namespace Phexor
             }
             else if (e.Key == Key.U && !PathInput.IsKeyboardFocused) //check if pressed Key is U (Undo) and PathInput is not Keyboard Focused
             {
-
                 Logging.Log("Using Shortcut U", "MainWindow"); //C. Log Entry
                 UndoFunction(null, null); //call UndoFunction M.
             }
@@ -226,7 +235,13 @@ namespace Phexor
                 PathInput.Focusable = false; //Set PathInputs Focusable ability to false
                 Keyboard.Focus(Window); //Focus Every Object in Window (everything)
                 PathInput.Focusable = true; //Set PathInputs Focusable ability to true
+                
+                if (Path == "" || Path == null || Path == String.Empty) //checks for an empty path
+                {
+                    PathInput.Text = "Füge Pfad ein..."; //set the Path input Textboxs text
+                }
             }
+            e.Handled = true; //set Keydownevent to complet
         }
         
         private void PfadInput_OnKeyDown(object sender, KeyEventArgs e) //Start Exploring
@@ -481,6 +496,18 @@ namespace Phexor
         private void LoadAllFields(string myPath) //Set Folder/File-Fields Content
         {
             Logging.Log("Load new Path", "MainWindow"); //C. Log Entry
+            
+            for (int i = 0; i < Fields; i++) //Reset the Input and Color of every Field 
+            {
+                DirectoryList[i].Text = null; //Reset text of Directory Textblock
+                DirectoryList[i].Foreground = foregroundBrush; //Reset Foregroundbrush of Directory Textblock
+                fileList[i].Text = null; //Reset text of File Textblock
+                fileList[i].Foreground = foregroundBrush; //Reset Foregroundbrush of File Textblock
+                fileImageList[i].Source = null; //clear the fileImage Image-source
+                PlaceholderDirectoryList[i].Background = Brushes.Transparent; //Clear the Placeholders Visbility (with Background Color)
+                PlaceholderfileList[i].Background = Brushes.Transparent; //Clear the Placeholders Visbility (with Background Color)
+            }
+            
             if (Directory.Exists(myPath) || File.Exists(myPath)) //check for an not Existing Path
             {
                 string directoryPath = myPath + @"\"; //set the directorypath to the M. input
@@ -494,17 +521,6 @@ namespace Phexor
                 var fileCount = 0; //C. V. for the files
                 var FilesDisplayed = 0; //C. V. for the files
                 var FilesNotDisplayed = 0; //C. V. for the files
-                
-                for (int i = 0; i < Fields; i++) //Reset the Input and Color of every Field 
-                {
-                    DirectoryList[i].Text = null; //Reset text of Directory Textblock
-                    DirectoryList[i].Foreground = foregroundBrush; //Reset Foregroundbrush of Directory Textblock
-                    fileList[i].Text = null; //Reset text of File Textblock
-                    fileList[i].Foreground = foregroundBrush; //Reset Foregroundbrush of File Textblock
-                    fileImageList[i].Source = null; //clear the fileImage Image-source
-                    PlaceholderDirectoryList[i].Background = Brushes.Transparent; //Clear the Placeholders Visbility (with Background Color)
-                    PlaceholderfileList[i].Background = Brushes.Transparent; //Clear the Placeholders Visbility (with Background Color)
-                }
                 
                 try //prevent crashes
                 {
