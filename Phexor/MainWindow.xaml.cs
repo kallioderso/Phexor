@@ -173,6 +173,14 @@ namespace Phexor
                 Logging.Log("Using Shortcut I", "MainWindow"); //C. Log Entry
                 Keyboard.Focus(PathInput); //Set the Focus to PathInput Textbox
             }
+            else if (e.Key == Key.Escape && PathInput.IsKeyboardFocused) //check if pressed Key is ESC (Escape) and Pathinput is Keyboard Focused
+            {
+                Logging.Log("Using Shortcut Esc", "MainWindow"); //C. Log Entry
+                Keyboard.ClearFocus(); //Clear Every Focus from Keyboard
+                PathInput.Focusable = false; //Set PathInputs Focusable ability to false
+                Keyboard.Focus(Window); //Focus Every Object in Window (everything)
+                PathInput.Focusable = true; //Set PathInputs Focusable ability to true
+            }
             else if (e.Key == Key.P && !PathInput.IsKeyboardFocused) //check if pressed Key is P (Placheolders) and PathInput is not Keyboard Focused
             {
                 if (Placeholders == Brushes.Transparent) //If Placheolders beeing Invisibel
