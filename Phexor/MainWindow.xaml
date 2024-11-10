@@ -40,7 +40,7 @@
             <TextBlock Text="" FontSize="17" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
         
-        <TextBox Height="28" Width="400" Background="Transparent" BorderBrush="Transparent" Margin="0,2,400,435" x:Name="PathInput" Text="Füge Pfad ein..." FontSize="15" Foreground="Cornsilk" TextAlignment="Left"  KeyDown="PfadInput_OnKeyDown" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave"/>
+        <TextBox Height="28" Width="400" Background="Transparent" BorderBrush="Transparent" Margin="0,2,400,435" x:Name="PathInput" Text="Füge Pfad ein..." FontSize="15" Foreground="Cornsilk" TextAlignment="Left" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave"/>
         
         <StackPanel x:Name="Directorys" Width="195" Height="380"  Margin="0,125,610,45" MouseWheel="DirectoryScrollingWithMouse">
             

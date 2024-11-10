@@ -72,13 +72,21 @@
 > To exit the PathInput in keyboard-only use, you can press **Escape** Button.<br/>
 > This makes it possible to completly use phexor without mouse<br/>
 
-> **Up (˄) (Coming soon)**<br/>
-> To scroll between the files or folders, you can use your **mouse wheel** or *˄*.<br/>
-> This allows for keyboard-only use of Phexor.<br/>
+> **Directorys (D)**<br/>
+> To Select **D**irectorys for Keyboard only use<br/>
+> After Selecting **Directorys** you can just use the *Up* or *Down* Shortcut to Scroll.<br/>
 
-> **Down (˅) (Coming soon)**<br/>
+> **Directorys (F)**<br/>
+> To Select **F**iles for Keyboard only use<br/>
+> After Selecting **Files** you can just use the *Up* or *Down* Shortcut to Scroll.<br/>
+
+> **Up (˄)**<br/>
+> To scroll between the files or folders, you can use your **mouse wheel** or *˄*.<br/>
+> This allows for keyboard-only use of Phexor (Dont forget to select first Files (F) or Directorys (D).<br/>
+
+> **Down (˅)**<br/>
 > To scroll between the files or folders, you can use your **mouse wheel** or *˅*.<br/>
-> This allows for keyboard-only use of Phexor.<br/>
+> This allows for keyboard-only use of Phexor (Dont forget to select first Files (F) or Directorys (D).<br/>
 ***
 # Logging
 **Logging exists to make it easier for you to report bugs or problems by providing information from your logs, as well as allowing you to see your actions in Phexor** <br/>

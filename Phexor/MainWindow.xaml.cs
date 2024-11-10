@@ -45,6 +45,8 @@ namespace Phexor
         private string LastPath; //C. L. for LoadAllFields M.
         private int FileCount; //C. L. for LoadAllFields M.
         private int FolderCount; //C. L. for LoadAllFields M.
+        private bool FilesSrollActiv = false;
+        private bool DirectoryScrollActiv = false;
 
         public MainWindow()
         {
@@ -224,6 +226,85 @@ namespace Phexor
                 Logging.Log("Using Shortcut S", "MainWindow"); //C. Log Entry
                 SettingsWindow(null, null); // call SettingsWindow M.
             }
+            else if (e.Key == Key.D && !PathInput.IsKeyboardFocused) //check if pressed Key is D (Directorys) and PathInput is not Keyboard Focused
+            {
+                Logging.Log("Using Shortcut D", "MainWindow"); //C. Log Entry
+                if (DirectoryScrollActiv) //check if Directory Scrolling with Keyboard is Active
+                {
+                    DirectoryScrollActiv = false; //set Directory Scrolling with Keyboard to false
+                }
+                else if (!DirectoryScrollActiv) //check if Directory Scrolling with Keyboard is not Active
+                {
+                    FilesSrollActiv = false; //set File Scrolling with Keyboard to false
+                    DirectoryScrollActiv = true; //set Directory Scrolling with Keyboard to true
+                }
+                LoadAllFields(Path); //call LoadAllFields M.
+            }
+            else if (e.Key == Key.F && !PathInput.IsKeyboardFocused) //check if pressed Key is F (Files) and PathInput is not Keyboard Focused
+            {
+                Logging.Log("Using Shortcut F", "MainWindow"); //C. Log Entry
+                if (FilesSrollActiv) //check if File Scrolling with Keyboard is Active
+                {
+                    FilesSrollActiv = false; //set File Scrolling with Keyboard to false
+                }
+                else if (!FilesSrollActiv) //check if File Scrolling with Keyboard is not Active
+                {
+                    DirectoryScrollActiv = false; //set Directory Scrolling with Keyboard to false
+                    FilesSrollActiv = true; //set File Scrolling with Keyboard to true
+                }
+                LoadAllFields(Path); //call LoadAllFields M.
+            }
+            else if (e.Key == Key.Up && !PathInput.IsKeyboardFocused) //check if pressed Key is ⌃ (Scroll Up) and PathInput is not Keyboard Focused
+            {
+                Logging.Log("Using Shortcut ⌃", "MainWindow"); //C. Log Entry
+                if (DirectoryScrollActiv && FolderCount != Settingsfile.Fields) //check if Directory Scrolling with Keyboard is Activ and FolderCount not lower than Field Setting
+                {
+                    FolderCount--; //decrease FolderCount by 1;
+                }
+                else if (FilesSrollActiv && FileCount != Settingsfile.Fields) //check if File Scrolling with Keyboard is Activ and FileCount not lower than Field Setting
+                {
+                    FileCount--; //decrease FileCount by 1;
+                }
+                LoadAllFields(Path); //call LoadAllFields M.
+            }
+            else if (e.Key == Key.Down && !PathInput.IsKeyboardFocused) //check if pressed Key is ⌄ (Scroll Down) and PathInput is not Keyboard Focused
+            {
+                Logging.Log("Using Shortcut ⌄", "MainWindow"); //C. Log Entry
+                if (DirectoryScrollActiv) //check if Directory Scrolling with Keyboard is Activ 
+                {
+                    FolderCount++; //increase FolderCount by 1;
+                }
+                else if (FilesSrollActiv) //check if File Scrolling with Keyboard is Activ
+                {
+                    FileCount++; //increase FileCount by 1;
+                }
+                LoadAllFields(Path); //call LoadAllFields M.
+            }
+            else if (e.Key == Key.Enter) //check if pressed Key is Enter
+            {
+                if (!PathInput.IsKeyboardFocused) //check if PathInput is not Keyboard Focused
+                {
+                    if (DirectoryScrollActiv) //check if Directory Scrolling with Keyboard is Activ
+                    {
+                        Folder_Click(DirectoryList[0], null); //call Folder_Click M. for the first Directory Textblock
+                    }
+                    else if (FilesSrollActiv) //check if File Scrolling with Keyboard is Activ
+                    {
+                        OpenFile(fileList[0], null); //call OpenFile M. for the first File Textblock
+                    }
+                }
+                else if (PathInput.IsKeyboardFocused) //check if PathInput is Keyboard Focused
+                {
+                    Logging.Log("Enter Input", "MainWindow"); //C. Log Entry
+                    setPath(PathInput.Text); //set Path to Path from textbox
+                    LoadAllFields(Path); //start the LoadAllFields M.
+                    Redostring = Path;//Add the Current Path to the Redostring
+                    Keyboard.ClearFocus(); //Clear Every Focus from Keyboard
+                    PathInput.Focusable = false; //Set PathInputs Focusable ability to false
+                    Keyboard.Focus(Window); //Focus Every Object in Window (everything)
+                    PathInput.Focusable = true; //Set PathInputs Focusable ability to true
+                }
+            }
         }
         
         private void MouseShortCuts(object sender, MouseButtonEventArgs e) //M. for Mouseshortcuts
@@ -242,21 +323,6 @@ namespace Phexor
                 }
             }
             e.Handled = true; //set Keydownevent to complet
-        }
-        
-        private void PfadInput_OnKeyDown(object sender, KeyEventArgs e) //Start Exploring
-        {
-            if (e.Key == Key.Enter) //check which Button got pressed
-            {
-                Logging.Log("Enter Input", "MainWindow"); //C. Log Entry
-                setPath(PathInput.Text); //set Path to Path from textbox
-                LoadAllFields(Path); //start the LoadAllFields M.
-                Redostring = Path;//Add the Current Path to the Redostring
-                Keyboard.ClearFocus(); //Clear Every Focus from Keyboard
-                PathInput.Focusable = false; //Set PathInputs Focusable ability to false
-                Keyboard.Focus(Window); //Focus Every Object in Window (everything)
-                PathInput.Focusable = true; //Set PathInputs Focusable ability to true
-            }
         }
         
         private void DirectoryScrollingWithMouse(object sender, MouseWheelEventArgs e) //M. to react to scrolling
@@ -638,7 +704,15 @@ namespace Phexor
             {
                 Logging.CatchLog("Path Not Exists", "Mainwindow"); //use CatchLog M.
             }
-            
+
+            if (DirectoryScrollActiv) //check if Directory Scrolling with Keyboard is Active
+            {
+                DirectoryList[0].Foreground = optionalBrush; //Set the brush for First Directory Textblock to Optional brush
+            }
+            else if (FilesSrollActiv) //check if File Scrolling with Keyboard is Active
+            {
+                fileList[0].Foreground = optionalBrush; //Set the brush for First File Textblock to Optional brush
+            }
         }
 
         private void Field_Setting(object sender, MouseButtonEventArgs e) // Coming Soon
