@@ -76,7 +76,7 @@
 > To Select **D**irectorys for Keyboard only use<br/>
 > After Selecting **Directorys** you can just use the *Up* or *Down* Shortcut to Scroll.<br/>
 
-> **Directorys (F)**<br/>
+> **Files (F)**<br/>
 > To Select **F**iles for Keyboard only use<br/>
 > After Selecting **Files** you can just use the *Up* or *Down* Shortcut to Scroll.<br/>
 
