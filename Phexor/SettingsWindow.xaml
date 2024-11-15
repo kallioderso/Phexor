@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Phexor"
         mc:Ignorable="d"
         Closing="Settings_OnClosing"
-        Title="Phexor Settings" Width="900" Height="550" Icon="Grafiks/Icon.ico">
+        Title="Phexor Settings" Width="900" Height="550" MinWidth="900" MinHeight="550" MaxWidth="900" MaxHeight="550" Icon="Grafiks/Icon.ico">
 
     <Grid Background="#263238">
         <Border BorderBrush="Azure" Background="#223238" Height="480" Width="820" BorderThickness="5" x:Name="Border1"/>

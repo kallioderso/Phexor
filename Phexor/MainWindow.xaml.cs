@@ -41,12 +41,13 @@ namespace Phexor
         private List<Border> PlaceholderDirectoryList = new List<Border>(); //C. L. for LoadAllFields M.
         private List<Border> PlaceholderfileList = new List<Border>(); //C. L. for LoadAllFields M.
         private string Redostring; //C. V. for an Redo path string
-        private string Path; //C. L. for LoadAllFields M.
-        private string LastPath; //C. L. for LoadAllFields M.
-        private int FileCount; //C. L. for LoadAllFields M.
+        private string Path; //C. V. for LoadAllFields M.
+        private string LastPath; //C. V. for LoadAllFields M.
+        private int FileCount; //C. V. for LoadAllFields M.
         private int FolderCount; //C. L. for LoadAllFields M.
-        private bool FilesSrollActiv = false;
-        private bool DirectoryScrollActiv = false;
+        private bool FilesSrollActiv = false; //C. V. for LoadAllFields M.
+        private bool DirectoryScrollActiv = false; //C. V. for LoadAllFields M.
+        private List<StackPanel> ActiveMenus = new List<StackPanel>(); //C. L. for Active Menus
 
         public MainWindow()
         {
@@ -67,8 +68,8 @@ namespace Phexor
             try //try to prevent Crashes
             {
                 SettingsButton.Background = foregroundBrush; //set Xc. Colors
-                BackButton.Background = foregroundBrush; //set Xc. Colors
-                ForeButton.Background = foregroundBrush; //set Xc. Colors
+                UndoButton.Background = foregroundBrush; //set Xc. Colors
+                RedoButton.Background = foregroundBrush; //set Xc. Colors
 
                 foreach (var border in borders) //loop for every Border in Borders
                 {
@@ -102,7 +103,7 @@ namespace Phexor
                 order.MouseEnter += Border_MouseEnter; //set Xc. Event M.
                 order.MouseLeave += Border_MouseLeave; //set Xc. Event M.
                 order.MouseLeftButtonDown += Folder_Click; //set Xc. Event M.
-                order.MouseRightButtonDown += Field_Setting; //set Xc. Event M.
+                order.MouseRightButtonDown += Folder_RightClick; //set Xc. Event M.
                 order.VerticalAlignment = VerticalAlignment.Center; //set Xc. Font Settings
                 DirectoryList.Add(order); //add to L. 
                 Directorys.Children.Add(order); //add to Xc.
@@ -324,7 +325,16 @@ namespace Phexor
             }
             e.Handled = true; //set Keydownevent to complet
         }
-        
+
+        private void RemoveMenus(object sender, MouseEventArgs e) //M. to delete ActiveMenus
+        {
+            if (ActiveMenus.Count > 0) //check if ActiveMenus exists
+            {
+                Grid.Children.Remove(ActiveMenus[0]); //Removes Active Menu from Grid
+                ActiveMenus.RemoveAt(0); //removes Active Menu from the list
+                LoadAllFields(Path); //call LoadAllFields M. to remove the marked Fields mark
+            }
+        }
         private void DirectoryScrollingWithMouse(object sender, MouseWheelEventArgs e) //M. to react to scrolling
         {
             if (e.Delta < 0) //check in which direction got scrolled
@@ -715,16 +725,83 @@ namespace Phexor
             }
         }
 
-        private void Field_Setting(object sender, MouseButtonEventArgs e) // Coming Soon
+        private void Folder_RightClick(object sender, MouseButtonEventArgs e) //M. to create and Folder Option Menu
         {
+            TextBlock Field = sender as TextBlock; //C. V. for sender Textblock
+            if (Field.Text != "" && Field.Text != null) //checks for an empty TextBlock
+            {
+                Field.Foreground = optionalBrush; //marking Textblocks color
+                StackPanel FolderMenu = new StackPanel(); //Create FolderMenu Stackpanel
+                Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
+                FolderMenu.Height = Directorys.Height / Settingsfile.Fields * 4; //Set Stackpanels Height
+                FolderMenu.Width = 100; //Set Stackpanels Width
+                FolderMenu.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //Set Stackpanels Position
+                ActiveMenus.Add(FolderMenu); //Add Stackpanel to ActiveMenus list
+                Grid.Children.Add(FolderMenu); //Add Stackpanel to Grid
+                FolderMenu.MouseDown += RemoveMenus; //Add Remove M. Function to Stackpanel
+                FolderMenu.MouseLeave += RemoveMenus; //Add Remove M. Function to Stackpanel
 
+                Button Open = new Button(); //C. Button for Stackpanel
+                ButtonDesigner(Open, "Open"); //Set Buttons Settings and Text
+                FolderMenu.Children.Add(Open); //Add Button to Stackpanel
+
+                Button Delete = new Button(); //C. Button for Stackpanel
+                ButtonDesigner(Delete, "Delete"); //Set Buttons Settings and Text
+                FolderMenu.Children.Add(Delete); //Add Button to Stackpanel
+
+                Button Copy = new Button(); //C. Button for Stackpanel
+                ButtonDesigner(Copy, "Copy"); //Set Buttons Settings and Text
+                FolderMenu.Children.Add(Copy); //Add Button to Stackpanel
+
+                Button MoveTo = new Button(); //C. Button for Stackpanel
+                ButtonDesigner(MoveTo, "Move To"); //Set Buttons Settings and Text
+                FolderMenu.Children.Add(MoveTo); //Add Button to Stackpanel
+            }
         }
 
         private void File_RightClick(object sender, MouseButtonEventArgs e) // Coming Soon
         {
+            TextBlock Field = sender as TextBlock; //C. V. for sender Textblock
+            if (Field.Text != "" && Field.Text != null) //checks for an empty TextBlock
+            {
+                Field.Foreground = optionalBrush; //marking TextBlocks Color
+                StackPanel FileMenu = new StackPanel(); //Create FileMenu Stackpanel
+                Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
+                FileMenu.Height = Files.Height/Settingsfile.Fields * 4; //Set Stackpanels Height
+                FileMenu.Width = 100; //Set Stackpanels Width
+                FileMenu.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //Set Stackpanels Position
+                ActiveMenus.Add(FileMenu); //Add Stackpanel to ActiveMenus list
+                Grid.Children.Add(FileMenu); //Add Stackpanel to Grid
+                FileMenu.MouseDown += RemoveMenus; //Add Remove M. Function to Stackpanel
+                FileMenu.MouseLeave += RemoveMenus; //Add Remove M. Function to Stackpanel
 
+                Button Open = new Button(); //C. Button for Stackpanel
+                ButtonDesigner(Open, "Open"); //Set Buttons Settings and Text
+                FileMenu.Children.Add(Open); //Add Button to Stackpanel
+            
+                Button Delete = new Button(); //C. Button for Stackpanel
+                ButtonDesigner(Delete, "Delete"); //Set Buttons Settings and Text
+                FileMenu.Children.Add(Delete); //Add Button to Stackpanel
+            
+                Button Copy = new Button(); //C. Button for Stackpanel
+                ButtonDesigner(Copy, "Copy"); //Set Buttons Settings and Text
+                FileMenu.Children.Add(Copy); //Add Button to Stackpanel
+            
+                Button MoveTo = new Button(); //C. Button for Stackpanel
+                ButtonDesigner(MoveTo, "Move To"); //Set Buttons Settings and Text
+                FileMenu.Children.Add(MoveTo); //Add Button to Stackpanel 
+            }
         }
 
+        private void ButtonDesigner(Button Name, string Content) //M. To Create Buttons for Option Menus
+        {
+            Name.Height = Directorys.Height/Settingsfile.Fields; //Set Height of Button
+            Name.Foreground = backgroundBrush; //set Foreground of Button
+            Name.BorderBrush = backgroundBrush; //Set BorderBrush of Button
+            Name.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#263238")); //Set Background of Button
+            Name.Content = Content; //Set Buttons Content
+            Name.FontSize = 10; //Set Buttons Name
+        }
         private void OnClose(object sender, EventArgs e) // Stop Running Prozesees
         {
             Logging.Log("Close Started", "MainWindow"); //C. Log Entry
