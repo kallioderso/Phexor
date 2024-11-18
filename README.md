@@ -32,6 +32,7 @@
 > > * [Shortcuts](https://github.com/kallioderso/Phexor?tab=readme-ov-file#shortcuts).
 > > * [Logging](https://github.com/kallioderso/Phexor?tab=readme-ov-file#logging).
 > > * [File Images](https://github.com/kallioderso/Phexor?tab=readme-ov-file#File-Images) (***Alpha***).
+> > * File and Folder Options (Rightclick on Files or Folder).
 >
 > ***Upcoming***
 > > * Settings for files and folders.
