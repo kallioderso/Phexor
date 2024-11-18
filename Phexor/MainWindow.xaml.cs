@@ -117,6 +117,7 @@ namespace Phexor
                 order.MouseLeave += Border_MouseLeave; //set Xc. Event M.
                 order.MouseLeftButtonDown += Folder_Click; //set Xc. Event M.
                 order.MouseRightButtonDown += Folder_RightClick; //set Xc. Event M.
+                order.MouseDown += RemoveMenus; //Remove Every Menu
                 order.VerticalAlignment = VerticalAlignment.Center; //set Xc. Font Settings
                 DirectoryList.Add(order); //add to L. 
                 Directorys.Children.Add(order); //add to Xc.
@@ -124,6 +125,7 @@ namespace Phexor
                 Border PlaceholderOrder = new Border(); //C. Xc. Object as Placeholder
                 PlaceholderOrder.Height = 1; //set Height of the Xc. Placeholder
                 PlaceholderOrder.Width = (Directorys.Width - 5); //set Width of the Xc. Placeholder
+                PlaceholderOrder.MouseDown += RemoveMenus; //Remove Every Menu
                 PlaceholderDirectoryList.Add(PlaceholderOrder); //Add the Xc. Placeholder to an L.
                 Directorys.Children.Add(PlaceholderOrder); //Add the Xc. Placeholder to the Xc.
                 
@@ -139,6 +141,7 @@ namespace Phexor
                 Datei.MouseLeave += Border_MouseLeave; //set Xc. Event M.
                 Datei.MouseLeftButtonDown += OpenFile; //set Xc. Event M.
                 Datei.MouseRightButtonDown += File_RightClick; //set Xc. Event M.
+                Datei.MouseDown += RemoveMenus; //Remove Every Menu
                 Datei.VerticalAlignment = VerticalAlignment.Center; //set Xc. Font Settings
                 fileList.Add(Datei); //add to L. 
                 Files.Children.Add(Datei); //add to Xc.
@@ -146,6 +149,7 @@ namespace Phexor
                 Border PlaceholderFile = new Border(); //C. Xc. Object as Placeholder
                 PlaceholderFile.Height = 1; //set Height of the Xc. Placeholder
                 PlaceholderFile.Width = (Files.Width - 5); //set Width of the Xc. Placeholder
+                PlaceholderFile.MouseDown += RemoveMenus; //Remove Every Menu
                 PlaceholderfileList.Add(PlaceholderFile); //Add the Xc. Placeholder to an L.
                 Files.Children.Add(PlaceholderFile); //Add the Xc. Placeholder to the Xc.
                 
@@ -299,13 +303,11 @@ namespace Phexor
             {
                 if (FileCreation) //if FileCreation is true
                 {
-                    CreateingFile(null, null); //call CreateingObject M. for final Creation
-                    Grid.Children.Remove(InputName); //Remove InputName as Child of Grid
+                    CreateingFile(null, null); //call CreateingFile M. for final Creation
                 }
                 else if (FolderCreation) //if FolderCreation is True
                 {
-                    CreateingFolder(null, null);
-                    Grid.Children.Remove(InputName);
+                    CreateingFolder(null, null); //call CreateingFolder M. for final Creation
                 }
                 else if (!PathInput.IsKeyboardFocused) //check if PathInput is not Keyboard Focused
                 {
@@ -351,23 +353,56 @@ namespace Phexor
             e.Handled = true; //set Keydownevent to complet
         }
 
-        private void RemoveMenus(object sender, MouseEventArgs e) //M. to delete ActiveMenus
+        private void RemoveMenus(object sender, MouseButtonEventArgs e) //M. to delete ActiveMenus
         {
-            if (ActiveMenus.Count > 0) //check if ActiveMenus exists
+            try //prevent Crashes
             {
-                Grid.Children.Remove(ActiveMenus[0]); //Removes Active Menu from Grid
-                ActiveMenus.RemoveAt(0); //removes Active Menu from the list
-                LoadAllFields(Path); //call LoadAllFields M. to remove the marked Fields mark
-            }
+                if (e == null) //check if e is null
+                {
+                    if (ActiveMenus.Count > 0) //check if ActiveMenus exists
+                    {
+                        Canvas.Children.Remove(ActiveMenus[0]); //Removes Active Menu from Grid
+                        ActiveMenus.RemoveAt(0); //removes Active Menu from the list
+                        LoadAllFields(Path); //call LoadAllFields M. to remove the marked Fields mark
+                    }
             
-            if (FileCreation) //if FileCreation is true
-            {
-                Grid.Children.Remove(InputName); //Remove InputName as Child of Grid
+                    if (FileCreation) //if FileCreation is true
+                    {
+                        Canvas.Children.Remove(InputName); //Remove InputName as Child of Grid
+                        FileCreation = false; //Set FileCreation to False
+                    }
+                    else if (FolderCreation) //if FolderCreation is True
+                    {
+                        Canvas.Children.Remove(InputName);
+                        FolderCreation = false; //Set FolderCreation to False
+                    } 
+                }
+                else if (e.ChangedButton != MouseButton.Right) //check if e is not an Rightclick
+                {
+                    if (ActiveMenus.Count > 0) //check if ActiveMenus exists
+                    {
+                        Canvas.Children.Remove(ActiveMenus[0]); //Removes Active Menu from Grid
+                        ActiveMenus.RemoveAt(0); //removes Active Menu from the list
+                        LoadAllFields(Path); //call LoadAllFields M. to remove the marked Fields mark
+                    }
+            
+                    if (FileCreation) //if FileCreation is true
+                    {
+                        Canvas.Children.Remove(InputName); //Remove InputName as Child of Grid
+                        FileCreation = false; //Set FileCreation to False
+                    }
+                    else if (FolderCreation) //if FolderCreation is True
+                    {
+                        Canvas.Children.Remove(InputName);
+                        FolderCreation = false; //Set FolderCreation to False
+                    } 
+                }
             }
-            else if (FolderCreation) //if FolderCreation is True
+            catch (Exception exception) //Catch Crash
             {
-                Grid.Children.Remove(InputName);
+                Logging.CatchLog("MouseButton was null", "MainWindow"); //C. Catch Log Entry
             }
+                
         }
         private void DirectoryScrollingWithMouse(object sender, MouseWheelEventArgs e) //M. to react to scrolling
         {
@@ -442,7 +477,6 @@ namespace Phexor
             {
                 Logging.CatchLog("Underfolder cant be Selected (Empty)", "MainWindow"); //C. Log Entry
             }
-            RemoveMenus(null, null); //call RemoveMenus M.
         }
         
         private void OpenFile(object sender, MouseButtonEventArgs e) //Open File on Click event
@@ -806,12 +840,12 @@ namespace Phexor
             }
             
             //Finish the Process
-            Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
+            Point clickPosition = e.GetPosition(Canvas); //Get Position of Mouse
             FolderMenu.Height = Directorys.Height / Settingsfile.Fields * FolderMenu.Children.Count; //Set Stackpanels Height
             FolderMenu.Width = 100; //Set Stackpanels Width
             FolderMenu.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //Set Stackpanels Position
             ActiveMenus.Add(FolderMenu); //Add Stackpanel to ActiveMenus list
-            Grid.Children.Add(FolderMenu); //Add Stackpanel to Grid
+            Canvas.Children.Add(FolderMenu); //Add Stackpanel to Grid
         }
 
         private void File_RightClick(object sender, MouseButtonEventArgs e) //M. to Create an File Option Menu
@@ -843,26 +877,25 @@ namespace Phexor
             }
             
             //Finish the Process
-            Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
+            Point clickPosition = e.GetPosition(Canvas); //Get Position of Mouse
             FileMenu.Height = Files.Height/Settingsfile.Fields * FileMenu.Children.Count; //Set Stackpanels Height
             FileMenu.Width = 100; //Set Stackpanels Width
             FileMenu.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //Set Stackpanels Position
             ActiveMenus.Add(FileMenu); //Add Stackpanel to ActiveMenus list
-            Grid.Children.Add(FileMenu); //Add Stackpanel to Grid
+            Canvas.Children.Add(FileMenu); //Add Stackpanel to Grid
         }
 
         private void AskFileName(object sender, MouseButtonEventArgs e) //M. to Ask for a File name to Create
         {
-            RemoveMenus(null, null); //call RemoveMenus M.
             if (Path != null && Path != "") //if Path is not Empty
             {
                 if (!FileCreation) //if FileCreation is false
                 {
                     InputNameText.Text = "Füge Namen Ein"; //Set InputNameTexts Text
             
-                    Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
+                    Point clickPosition = e.GetPosition(Canvas); //Get Position of Mouse
+                    Canvas.Children.Add(InputName); //Add InputName to the Grid
                     InputName.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //set InptName to Mouse Positon
-                    Grid.Children.Add(InputName); //Add InputName to the Grid
                     FileCreation = true; //Set FileCreation to True
                 }
             }
@@ -877,16 +910,15 @@ namespace Phexor
         
         private void AskFolderName(object sender, MouseButtonEventArgs e) //M. to Ask for a Folder name to Create
         {
-            RemoveMenus(null, null); //call RemoveMenus M.
             if (Path != null && Path != "") //if Path is not Empty
             {
                 if (!FolderCreation) //if FolderCreation is false
                 {
                     InputNameText.Text = "Füge Namen Ein"; //Set InputNameTexts Text
             
-                    Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
+                    Point clickPosition = e.GetPosition(Canvas); //Get Position of Mouse
+                    Canvas.Children.Add(InputName); //Add InputName to the Grid
                     InputName.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //set InptName to Mouse Positon
-                    Grid.Children.Add(InputName); //Add InputName to the Grid
                     FolderCreation = true; //Set FolderCreation to True
                 }
             }

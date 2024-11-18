@@ -8,7 +8,7 @@
         PreviewKeyDown="ShortCuts"
         MouseDown="MouseShortCuts"
       Title="Phexor" MinWidth="900" MinHeight="550" Width="900" Height="550" Icon="Grafiks/Icon.ico" x:Name="Window">
-    <Canvas Background="#263238" x:Name="Grid">
+    <Canvas Background="#263238" x:Name="Canvas">
         
         <Border BorderBrush="Azure" Background="#223238" Height="460" Width="830" Margin="25,25,25,25" BorderThickness="5" x:Name="Border1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Border BorderBrush="Azure" BorderThickness="5" Height="420" Width="830" Margin="25,65,25,25" x:Name="Border2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
