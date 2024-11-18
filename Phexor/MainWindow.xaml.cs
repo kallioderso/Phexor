@@ -48,6 +48,10 @@ namespace Phexor
         private bool FilesSrollActiv = false; //C. V. for LoadAllFields M.
         private bool DirectoryScrollActiv = false; //C. V. for LoadAllFields M.
         private List<StackPanel> ActiveMenus = new List<StackPanel>(); //C. L. for Active Menus
+        private bool FileCreation = false; //C. V. for CreateingObject M.
+        private bool FolderCreation = false; //C. V. for CreateingObject M.
+        Button InputName = new Button(); //C. V. for CreateingObject M.
+        TextBox InputNameText = new TextBox(); //C. V. for CreateingObject M.
 
         public MainWindow()
         {
@@ -64,6 +68,15 @@ namespace Phexor
             Fields = Settingsfile.Fields; //set V. for C#c.
             FileCount = Fields; //set V. for LoadAllFields
             FolderCount = Fields; //set V. for LoadAllFields
+            
+            ButtonDesigner(InputName, null); //Design InputName Button
+            InputName.Width = 200; //Set With of InputName Button
+            
+            InputNameText.Foreground = optionalBrush; //Set InputNameTexts ForegroundBrush
+            InputNameText.Width = 200; //Set InputNameTexts Width
+            InputNameText.Height = Directorys.Height/Settingsfile.Fields; //Set InputNameTexts Height
+            InputNameText.Background = null; //Set InputNameTexts Background to null
+            InputName.Content = InputNameText; //Set InputNameText as Content of InputName Button
             
             try //try to prevent Crashes
             {
@@ -171,7 +184,7 @@ namespace Phexor
         
         private void ShortCuts(object sender, KeyEventArgs e) //ShortCut M.
         {
-            if (e.Key == Key.I && !PathInput.IsKeyboardFocused) //check if pressed Key is I (Input) and PathInput is not Keyboard Focused
+            if (e.Key == Key.I && !PathInput.IsKeyboardFocused && !FileCreation && !FolderCreation) //check if pressed Key is I (Input) and PathInput is not Keyboard Focused and no File or Folder gets Created
             {
                 Logging.Log("Using Shortcut I", "MainWindow"); //C. Log Entry
                 Keyboard.Focus(PathInput); //Set the Focus to PathInput Textbox
@@ -181,7 +194,7 @@ namespace Phexor
                 }
                 e.Handled = true; //set Keydownevent to complet
             }
-            else if (e.Key == Key.Escape && PathInput.IsKeyboardFocused) //check if pressed Key is ESC (Escape) and Pathinput is Keyboard Focused
+            else if (e.Key == Key.Escape && PathInput.IsKeyboardFocused && !FileCreation && !FolderCreation) //check if pressed Key is ESC (Escape) and Pathinput is Keyboard Focused and no File or Folder gets Created
             {
                 Logging.Log("Using Shortcut Esc", "MainWindow"); //C. Log Entry
                 Keyboard.ClearFocus(); //Clear Every Focus from Keyboard
@@ -194,7 +207,7 @@ namespace Phexor
                     PathInput.Text = "Füge Pfad ein..."; //set the Path input Textboxs text
                 }
             }
-            else if (e.Key == Key.P && !PathInput.IsKeyboardFocused) //check if pressed Key is P (Placheolders) and PathInput is not Keyboard Focused
+            else if (e.Key == Key.P && !PathInput.IsKeyboardFocused && !FileCreation && !FolderCreation) //check if pressed Key is P (Placheolders) and PathInput is not Keyboard Focused and no File or Folder gets Created
             {
                 if (Placeholders == Brushes.Transparent) //If Placheolders beeing Invisibel
                 {
@@ -212,22 +225,22 @@ namespace Phexor
                     LoadAllFields(Path); //call LoadALlFields M.
                 } 
             }
-            else if (e.Key == Key.U && !PathInput.IsKeyboardFocused) //check if pressed Key is U (Undo) and PathInput is not Keyboard Focused
+            else if (e.Key == Key.U && !PathInput.IsKeyboardFocused && !FileCreation && !FolderCreation) //check if pressed Key is U (Undo) and PathInput is not Keyboard Focused and no File or Folder gets Created
             {
                 Logging.Log("Using Shortcut U", "MainWindow"); //C. Log Entry
                 UndoFunction(null, null); //call UndoFunction M.
             }
-            else if (e.Key == Key.R && !PathInput.IsKeyboardFocused) //check if pressed Key is R (Redo) and PathInput is not Keyboard Focused
+            else if (e.Key == Key.R && !PathInput.IsKeyboardFocused && !FileCreation && !FolderCreation) //check if pressed Key is R (Redo) and PathInput is not Keyboard Focused and no File or Folder gets Created
             {
                 Logging.Log("Using Shortcut R", "MainWindow"); //C. Log Entry
                 RedoFunction(null, null); //call RedoFunction M.
             }
-            else if (e.Key == Key.S && !PathInput.IsKeyboardFocused) //check if pressed Key is S (Settings) and PathInput is not Keyboard Focused
+            else if (e.Key == Key.S && !PathInput.IsKeyboardFocused && !FileCreation && !FolderCreation) //check if pressed Key is S (Settings) and PathInput is not Keyboard Focused and no File or Folder gets Created
             {
                 Logging.Log("Using Shortcut S", "MainWindow"); //C. Log Entry
                 SettingsWindow(null, null); // call SettingsWindow M.
             }
-            else if (e.Key == Key.D && !PathInput.IsKeyboardFocused) //check if pressed Key is D (Directorys) and PathInput is not Keyboard Focused
+            else if (e.Key == Key.D && !PathInput.IsKeyboardFocused && !FileCreation && !FolderCreation) //check if pressed Key is D (Directorys) and PathInput is not Keyboard Focused and no File or Folder gets Created
             {
                 Logging.Log("Using Shortcut D", "MainWindow"); //C. Log Entry
                 if (DirectoryScrollActiv) //check if Directory Scrolling with Keyboard is Active
@@ -241,7 +254,7 @@ namespace Phexor
                 }
                 LoadAllFields(Path); //call LoadAllFields M.
             }
-            else if (e.Key == Key.F && !PathInput.IsKeyboardFocused) //check if pressed Key is F (Files) and PathInput is not Keyboard Focused
+            else if (e.Key == Key.F && !PathInput.IsKeyboardFocused && !FileCreation && !FolderCreation) //check if pressed Key is F (Files) and PathInput is not Keyboard Focused and no File or Folder gets Created
             {
                 Logging.Log("Using Shortcut F", "MainWindow"); //C. Log Entry
                 if (FilesSrollActiv) //check if File Scrolling with Keyboard is Active
@@ -255,7 +268,7 @@ namespace Phexor
                 }
                 LoadAllFields(Path); //call LoadAllFields M.
             }
-            else if (e.Key == Key.Up && !PathInput.IsKeyboardFocused) //check if pressed Key is ⌃ (Scroll Up) and PathInput is not Keyboard Focused
+            else if (e.Key == Key.Up && !PathInput.IsKeyboardFocused && !FileCreation && !FolderCreation) //check if pressed Key is ⌃ (Scroll Up) and PathInput is not Keyboard Focused and no File or Folder gets Created
             {
                 Logging.Log("Using Shortcut ⌃", "MainWindow"); //C. Log Entry
                 if (DirectoryScrollActiv && FolderCount != Settingsfile.Fields) //check if Directory Scrolling with Keyboard is Activ and FolderCount not lower than Field Setting
@@ -268,9 +281,10 @@ namespace Phexor
                 }
                 LoadAllFields(Path); //call LoadAllFields M.
             }
-            else if (e.Key == Key.Down && !PathInput.IsKeyboardFocused) //check if pressed Key is ⌄ (Scroll Down) and PathInput is not Keyboard Focused
+            else if (e.Key == Key.Down && !PathInput.IsKeyboardFocused && !FileCreation && !FolderCreation) //check if pressed Key is ⌄ (Scroll Down) and PathInput is not Keyboard Focused and no File or Folder gets Created
             {
                 Logging.Log("Using Shortcut ⌄", "MainWindow"); //C. Log Entry
+                
                 if (DirectoryScrollActiv) //check if Directory Scrolling with Keyboard is Activ 
                 {
                     FolderCount++; //increase FolderCount by 1;
@@ -283,7 +297,17 @@ namespace Phexor
             }
             else if (e.Key == Key.Enter) //check if pressed Key is Enter
             {
-                if (!PathInput.IsKeyboardFocused) //check if PathInput is not Keyboard Focused
+                if (FileCreation) //if FileCreation is true
+                {
+                    CreateingFile(null, null); //call CreateingObject M. for final Creation
+                    Grid.Children.Remove(InputName); //Remove InputName as Child of Grid
+                }
+                else if (FolderCreation) //if FolderCreation is True
+                {
+                    CreateingFolder(null, null);
+                    Grid.Children.Remove(InputName);
+                }
+                else if (!PathInput.IsKeyboardFocused) //check if PathInput is not Keyboard Focused
                 {
                     if (DirectoryScrollActiv) //check if Directory Scrolling with Keyboard is Activ
                     {
@@ -310,7 +334,7 @@ namespace Phexor
         
         private void MouseShortCuts(object sender, MouseButtonEventArgs e) //M. for Mouseshortcuts
         {
-            if (e.ChangedButton == MouseButton.Left && PathInput.IsKeyboardFocused) //Check if Pressed Mousebutton is Leftclick and PathInput is not Keyboard Focused
+            if (e.ChangedButton == MouseButton.Left && PathInput.IsKeyboardFocused && !FileCreation && !FolderCreation) //Check if Pressed Mousebutton is Leftclick and PathInput is not Keyboard Focused and no File or Folder gets Created
             {
                 Logging.Log("Using Shortcut LeftClick", "MainWindow"); //C. Log Entry
                 Keyboard.ClearFocus(); //Clear Every Focus from Keyboard
@@ -322,6 +346,7 @@ namespace Phexor
                 {
                     PathInput.Text = "Füge Pfad ein..."; //set the Path input Textboxs text
                 }
+                RemoveMenus(null, null); //call RemoveMenus M.
             }
             e.Handled = true; //set Keydownevent to complet
         }
@@ -333,6 +358,15 @@ namespace Phexor
                 Grid.Children.Remove(ActiveMenus[0]); //Removes Active Menu from Grid
                 ActiveMenus.RemoveAt(0); //removes Active Menu from the list
                 LoadAllFields(Path); //call LoadAllFields M. to remove the marked Fields mark
+            }
+            
+            if (FileCreation) //if FileCreation is true
+            {
+                Grid.Children.Remove(InputName); //Remove InputName as Child of Grid
+            }
+            else if (FolderCreation) //if FolderCreation is True
+            {
+                Grid.Children.Remove(InputName);
             }
         }
         private void DirectoryScrollingWithMouse(object sender, MouseWheelEventArgs e) //M. to react to scrolling
@@ -408,6 +442,7 @@ namespace Phexor
             {
                 Logging.CatchLog("Underfolder cant be Selected (Empty)", "MainWindow"); //C. Log Entry
             }
+            RemoveMenus(null, null); //call RemoveMenus M.
         }
         
         private void OpenFile(object sender, MouseButtonEventArgs e) //Open File on Click event
@@ -426,8 +461,25 @@ namespace Phexor
             {
                 Logging.CatchLog(Convert.ToString(e), "Mainwindow"); //use CatchLog M.
             }
+            RemoveMenus(null, null); //call RemoveMenus M.
         }
 
+        private void Deleter(object sender, MouseButtonEventArgs e) //Delete File or Directory
+        {
+            TextBlock RemoveObject = sender as TextBlock; //use Sender as TextBlock
+            if (Directory.Exists(Path + @"\" + RemoveObject.Text)) //check if sender Field is referenz to a Directory
+            {
+                Directory.Delete(Path + @"\" + RemoveObject.Text, true); //Delete the referenz Directory
+            }
+            else if (File.Exists(Path + @"\" + RemoveObject.Text)) //check if sender Field is referenz to a File
+            {
+                File.Delete(Path + @"\" + RemoveObject.Text); //Delete the referenz File
+            }
+            LoadAllFields(Path); //call LoadAllFields M.
+            RemoveMenus(null, null); //call RemoveMenus M.
+        }
+            
+            
         private void Border_MouseEnter(object sender, MouseEventArgs mouseEventArgs) //M. to make an event if an Refered Object got an MousEnter event
         {
             if (sender is Border) //check the Type of Sender
@@ -556,7 +608,7 @@ namespace Phexor
                 Logging.CatchLog("Cant Redo (Nothing to Redo)", "MainWindow"); //C. Log Entry
             }
         }
-
+        
         private void setPath(string Input) //Path setting M.
         {
             Logging.Log("Set new Path", "MainWindow"); //C. Log Entry
@@ -724,83 +776,138 @@ namespace Phexor
                 fileList[0].Foreground = optionalBrush; //Set the brush for First File Textblock to Optional brush
             }
         }
-
-        private void Folder_RightClick(object sender, MouseButtonEventArgs e) //M. to create and Folder Option Menu
+        
+        private void Folder_RightClick(object sender, MouseButtonEventArgs e) //M. to create an Folder Option Menu
         {
+            RemoveMenus(null, null); //call RemoveMenus M.
             TextBlock Field = sender as TextBlock; //C. V. for sender Textblock
-            if (Field.Text != "" && Field.Text != null) //checks for an empty TextBlock
-            {
-                Field.Foreground = optionalBrush; //marking Textblocks color
-                StackPanel FolderMenu = new StackPanel(); //Create FolderMenu Stackpanel
-                Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
-                FolderMenu.Height = Directorys.Height / Settingsfile.Fields * 4; //Set Stackpanels Height
-                FolderMenu.Width = 100; //Set Stackpanels Width
-                FolderMenu.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //Set Stackpanels Position
-                ActiveMenus.Add(FolderMenu); //Add Stackpanel to ActiveMenus list
-                Grid.Children.Add(FolderMenu); //Add Stackpanel to Grid
-                FolderMenu.MouseDown += RemoveMenus; //Add Remove M. Function to Stackpanel
-                FolderMenu.MouseLeave += RemoveMenus; //Add Remove M. Function to Stackpanel
+            Field.Foreground = optionalBrush; //marking Textblocks color
+            StackPanel FolderMenu = new StackPanel(); //Create FolderMenu Stackpanel
 
+            //Start to Create all Buttons
+            if (Field.Text != "" && Field.Text != null) //checks if TextBlock is not Empty
+            {
                 Button Open = new Button(); //C. Button for Stackpanel
                 ButtonDesigner(Open, "Open"); //Set Buttons Settings and Text
+                Open.Click += (s, args) => Folder_Click(sender, e); //Call on Mouse the Click Folder_Click M.
                 FolderMenu.Children.Add(Open); //Add Button to Stackpanel
 
                 Button Delete = new Button(); //C. Button for Stackpanel
                 ButtonDesigner(Delete, "Delete"); //Set Buttons Settings and Text
+                Delete.Click += (s, args) => Deleter(sender, e); //Call on Mouse Click the Deleter M.
                 FolderMenu.Children.Add(Delete); //Add Button to Stackpanel
-
-                Button Copy = new Button(); //C. Button for Stackpanel
-                ButtonDesigner(Copy, "Copy"); //Set Buttons Settings and Text
-                FolderMenu.Children.Add(Copy); //Add Button to Stackpanel
-
-                Button MoveTo = new Button(); //C. Button for Stackpanel
-                ButtonDesigner(MoveTo, "Move To"); //Set Buttons Settings and Text
-                FolderMenu.Children.Add(MoveTo); //Add Button to Stackpanel
             }
+            else if (Path != null && Path != "") //if TextBlock is Empty and Path not Empty
+            {
+                Button Create = new Button(); //C. Button for Stackpanel
+                ButtonDesigner(Create, "Create"); //Set Buttons Settings and Text
+                Create.Click += (sender, args) => AskFolderName(sender, e); //call on Mouse click AskFolderName M.
+                FolderMenu.Children.Add(Create); //Add Button to Stackpanel
+            }
+            
+            //Finish the Process
+            Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
+            FolderMenu.Height = Directorys.Height / Settingsfile.Fields * FolderMenu.Children.Count; //Set Stackpanels Height
+            FolderMenu.Width = 100; //Set Stackpanels Width
+            FolderMenu.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //Set Stackpanels Position
+            ActiveMenus.Add(FolderMenu); //Add Stackpanel to ActiveMenus list
+            Grid.Children.Add(FolderMenu); //Add Stackpanel to Grid
         }
 
-        private void File_RightClick(object sender, MouseButtonEventArgs e) // Coming Soon
+        private void File_RightClick(object sender, MouseButtonEventArgs e) //M. to Create an File Option Menu
         {
+            RemoveMenus(null, null); //call RemoveMenus M.
             TextBlock Field = sender as TextBlock; //C. V. for sender Textblock
-            if (Field.Text != "" && Field.Text != null) //checks for an empty TextBlock
+            Field.Foreground = optionalBrush; //marking TextBlocks Color
+            StackPanel FileMenu = new StackPanel(); //Create FileMenu Stackpanel
+            
+            //Start to Create all Buttons
+            if (Field.Text != "" && Field.Text != null) //checks if TextBlock is not Empty
             {
-                Field.Foreground = optionalBrush; //marking TextBlocks Color
-                StackPanel FileMenu = new StackPanel(); //Create FileMenu Stackpanel
-                Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
-                FileMenu.Height = Files.Height/Settingsfile.Fields * 4; //Set Stackpanels Height
-                FileMenu.Width = 100; //Set Stackpanels Width
-                FileMenu.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //Set Stackpanels Position
-                ActiveMenus.Add(FileMenu); //Add Stackpanel to ActiveMenus list
-                Grid.Children.Add(FileMenu); //Add Stackpanel to Grid
-                FileMenu.MouseDown += RemoveMenus; //Add Remove M. Function to Stackpanel
-                FileMenu.MouseLeave += RemoveMenus; //Add Remove M. Function to Stackpanel
-
                 Button Open = new Button(); //C. Button for Stackpanel
                 ButtonDesigner(Open, "Open"); //Set Buttons Settings and Text
+                Open.Click += (s, args) => OpenFile(sender, e); //Call on Mouse Click the OpenFile M.
                 FileMenu.Children.Add(Open); //Add Button to Stackpanel
             
                 Button Delete = new Button(); //C. Button for Stackpanel
                 ButtonDesigner(Delete, "Delete"); //Set Buttons Settings and Text
+                Delete.Click += (s, args) => Deleter(sender, e); //Call on Mouse Click the Deleter M.
                 FileMenu.Children.Add(Delete); //Add Button to Stackpanel
+            }
+            else if (Path != null && Path != "") //If TextBlock is empty and Path is not Empty
+            {
+                Button Create = new Button(); //C. Button for Stackpanel
+                ButtonDesigner(Create, "Create"); //Set Buttons Settings and Text
+                Create.Click += (sender, args) => AskFileName(sender, e); //call on Mouse click AskFileName M.
+                FileMenu.Children.Add(Create); //Add Button to Stackpanel
+            }
             
-                Button Copy = new Button(); //C. Button for Stackpanel
-                ButtonDesigner(Copy, "Copy"); //Set Buttons Settings and Text
-                FileMenu.Children.Add(Copy); //Add Button to Stackpanel
+            //Finish the Process
+            Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
+            FileMenu.Height = Files.Height/Settingsfile.Fields * FileMenu.Children.Count; //Set Stackpanels Height
+            FileMenu.Width = 100; //Set Stackpanels Width
+            FileMenu.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //Set Stackpanels Position
+            ActiveMenus.Add(FileMenu); //Add Stackpanel to ActiveMenus list
+            Grid.Children.Add(FileMenu); //Add Stackpanel to Grid
+        }
+
+        private void AskFileName(object sender, MouseButtonEventArgs e) //M. to Ask for a File name to Create
+        {
+            RemoveMenus(null, null); //call RemoveMenus M.
+            if (Path != null && Path != "") //if Path is not Empty
+            {
+                if (!FileCreation) //if FileCreation is false
+                {
+                    InputNameText.Text = "Füge Namen Ein"; //Set InputNameTexts Text
             
-                Button MoveTo = new Button(); //C. Button for Stackpanel
-                ButtonDesigner(MoveTo, "Move To"); //Set Buttons Settings and Text
-                FileMenu.Children.Add(MoveTo); //Add Button to Stackpanel 
+                    Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
+                    InputName.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //set InptName to Mouse Positon
+                    Grid.Children.Add(InputName); //Add InputName to the Grid
+                    FileCreation = true; //Set FileCreation to True
+                }
             }
         }
 
+        private void CreateingFile(object sender, MouseButtonEventArgs e) //M. to C. an File
+        {
+            RemoveMenus(null, null); //call RemoveMenus M.
+            File.Create(Path + @"\" + InputNameText.Text); //Create File
+            LoadAllFields(Path); //cal LoadAllFields M.
+        }
+        
+        private void AskFolderName(object sender, MouseButtonEventArgs e) //M. to Ask for a Folder name to Create
+        {
+            RemoveMenus(null, null); //call RemoveMenus M.
+            if (Path != null && Path != "") //if Path is not Empty
+            {
+                if (!FolderCreation) //if FolderCreation is false
+                {
+                    InputNameText.Text = "Füge Namen Ein"; //Set InputNameTexts Text
+            
+                    Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
+                    InputName.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //set InptName to Mouse Positon
+                    Grid.Children.Add(InputName); //Add InputName to the Grid
+                    FolderCreation = true; //Set FolderCreation to True
+                }
+            }
+        }
+
+        private void CreateingFolder(object sender, MouseButtonEventArgs e) //M. to C. an Folder
+        {
+            RemoveMenus(null, null); //call RemoveMenus M.
+            Directory.CreateDirectory(Path + @"\" + InputNameText.Text); //Create Folder
+            LoadAllFields(Path); //cal LoadAllFields M.
+        }
+        
         private void ButtonDesigner(Button Name, string Content) //M. To Create Buttons for Option Menus
         {
             Name.Height = Directorys.Height/Settingsfile.Fields; //Set Height of Button
             Name.Foreground = backgroundBrush; //set Foreground of Button
             Name.BorderBrush = backgroundBrush; //Set BorderBrush of Button
+            Name.BorderThickness = new Thickness(2);
             Name.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#263238")); //Set Background of Button
             Name.Content = Content; //Set Buttons Content
-            Name.FontSize = 10; //Set Buttons Name
+            Name.FontSize = 8; //Set Buttons Name
         }
         private void OnClose(object sender, EventArgs e) // Stop Running Prozesees
         {
