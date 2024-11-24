@@ -91,7 +91,8 @@
 ***
 # Logging
 **Logging exists to make it easier for you to report bugs or problems by providing information from your logs, as well as allowing you to see your actions in Phexor** <br/>
-*You can find your Logs in `%AppData%\Roaming\Phexor\Logs\`*
+*You can find your Logs in `%AppData%\Roaming\Phexor\Logs\`*<br/>
+*You can Set how many Log Files should ben safed (SettingsWindow)*<br/>
 
 ***Logged Things:***
 > *Mainwindow*
@@ -140,6 +141,8 @@
 
 **Things you can Change**
 > Amount of Displayed Fields for Files and Directorys. <br/>
+
+> Amount of Log Files that should ben Safed. <br/>
 
 > *Phexors GUI Colors:*
 > > Foreground (Text and Buttons) <br/>
