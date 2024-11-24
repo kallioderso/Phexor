@@ -176,7 +176,7 @@ namespace Phexor
             Logging.Log("Check for Settings", "MainWindow"); //C. Log Entry
             if (!File.Exists(Settingsfile.SettingsFiles)) //check for File existens
             {
-                Settingsfile.SetSettings("#FFFFF8DC", "#FFF0FFFF", "#FFE6E6FA", 20); //set settings in txt
+                Settingsfile.SetSettings("#FFFFF8DC", "#FFF0FFFF", "#FFE6E6FA", 20, 7); //set settings in txt
                 Settingsfile.GetSettings(); //get Settings from txt
                 this.Hide(); //vanish this Window
             }

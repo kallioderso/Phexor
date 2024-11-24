@@ -26,6 +26,7 @@ public partial class SettingsWindow : Window
     private static string Background; //C. V. for Background Color
     private static string Special; //C. V. for Special Color
     private int _fields; //C. V. for Field Amount (MainWindow)
+    private int _logCount; //C. V. for Log File Amount 
     private SolidColorBrush ForegroundBrush; //C. ColorBrush V.
     private SolidColorBrush BackgroundBrush; //C. ColorBrush V.
     private SolidColorBrush SpecialBrush; //C. ColorBrush V.
@@ -37,13 +38,14 @@ public partial class SettingsWindow : Window
         this.Icon = new BitmapImage(new Uri("pack://application:,,,/Grafiks/Icon.ico")); //set icon for Xc.
         InitializeComponent(); //Initialize Xc. Objects
         DrawColorWheels(); //C. the CW. in Xc.
-        var borders = new Border[] { Border1, Border2, Border3, Border4, Border5, Border6, Border7, Border8, Border10}; //C. L. with Xc. Objects
-        var TextBlocks = new TextBlock[] { TextBlock1, TextBlock2, TextBlock3, TextBlock4, TextBlock5, TextBlock7}; //C. L. with Xc. Objects
+        var borders = new Border[] { Border1, Border2, Border3, Border4, Border5, Border6, Border7, Border8, Border9, Border10, Border11}; //C. L. with Xc. Objects
+        var TextBlocks = new TextBlock[] { TextBlock1, TextBlock2, TextBlock3, TextBlock4, TextBlock5, TextBlock6, TextBlock7}; //C. L. with Xc. Objects
         GetSettings(); //start M. to get saved Settings
         Foreground = ForegroundColor; //Set Foreground  from ForegroundColor V. (Settingsfile)
         Background = BackgroundColor; //Set Background from BackgroundColor V. (Settingsfile)
         Special = SpecialColor; //Set Special from SpecialColor V. (Settingsfile) 
         _fields = Fields; //Set fields Amount from Fields V. (Settingsfile)
+        _logCount = LogCount; //Set _logCount Amoung from LogCount V. (Settingsfile)
         ForegroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(ForegroundColor)!); //Set ColorBrush from ForegroundColor V.
         BackgroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(BackgroundColor)!); //Set ColorBrush from BackgroundColor V.
         SpecialBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(SpecialColor)!); //Set ColorBrush from SpecialColor V.
@@ -51,6 +53,7 @@ public partial class SettingsWindow : Window
         TextColorWheel2.Text = BackgroundColor; //Set CW. 2 Text to ForegroundColor V.
         TextColorWheel3.Text = SpecialColor; //Set CW. 3 Text to ForegroundColor V.
         FelderInput.Value = _fields; //Set Field Slider Value from Fields Amount
+        LogCountInput.Value = _logCount; //Set LogCountInput Slider Value from _logCount Amount
         SelectedColorDisplay1.Background = ForegroundBrush; //Set the Color for the SelectedColorDisplay 1 to ForegroundBrush 
         SelectedColorDisplay2.Background = BackgroundBrush; //Set the Color for the SelectedColorDisplay 2 to BackgroundBrush
         SelectedColorDisplay3.Background = SpecialBrush; //Set the Color for the SelectedColorDisplay 3 to SpecialBrush
@@ -76,7 +79,7 @@ public partial class SettingsWindow : Window
     private void Save(object sender, MouseButtonEventArgs mouseButtonEventArgs) //M. for Saving the Settings and Close this window
     {
         Logging.Log("Saving Settings", "SettingsWindow"); //C. Log Entry
-        SetSettings(Foreground, Background, Special, FelderInput.Value); //Start Settings Save M.
+        SetSettings(Foreground, Background, Special, FelderInput.Value, LogCountInput.Value); //Start Settings Save M.
         this.Close(); //Start Closing Prozess
     }
 

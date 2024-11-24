@@ -21,7 +21,7 @@ public class Settingsfile
     public static string BackgroundColor = ""; //C. V. for BackgroundColor
     public static string SpecialColor = ""; //C. V. for SpecialColor
     public static int Fields;  //C. V. for Field Amount
-    private static int settingCount = 0;  //C. V. for ForegroundColor
+    public static int LogCount; //C. V. for LogCount;
 
     public static string AppdataFolder = Path.Combine((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)), "Phexor"); //C. V. and get Locatin of Appdata Folder for Phexor
     public static string SettingsOrdner = Path.Combine(AppdataFolder, "Settings"); //C. V. and get Locatin of Settings in Appdata Folder for Phexor
@@ -39,6 +39,8 @@ public class Settingsfile
             if (setting.Length >= 2) BackgroundColor = setting[1]; //Get Background Setting
             if (setting.Length >= 3) SpecialColor = setting[2]; //Get Special Color Setting
             if (setting.Length >= 4) Fields = Convert.ToInt32(setting[3]); //Get Field Amount Setting
+            if (setting.Length >= 5) LogCount = Convert.ToInt32(setting[4]); //Get LogCount Ammount
+            Logging.LogCount = LogCount; //Set LogCount from Logging to local LogCount
         }
         catch (Exception e) //Used for Logs
         {
@@ -46,7 +48,7 @@ public class Settingsfile
         }
     }
     
-    public static void SetSettings(string Foreground, string Background, string Optional, double Fields) //M. to Save all Settings
+    public static void SetSettings(string Foreground, string Background, string Optional, double Fields, double LogCount) //M. to Save all Settings
     {
         Logging.Log("SetSettings", "SettingsFile"); //C. Log Entry
         try //prevent Crashes
@@ -69,7 +71,7 @@ public class Settingsfile
             using (StreamWriter writer = new StreamWriter(SettingsFiles, false, Encoding.UTF8)) //C. and Accesses the SettingsFile
             {
                 
-                string SettingsText = ( Foreground + "@" + Background + "@" + Optional + "@" + Fields); //C. string for write into the Settingsfile
+                string SettingsText = ( Foreground + "@" + Background + "@" + Optional + "@" + Fields + "@" + LogCount); //C. string for write into the Settingsfile
                 writer.WriteLine(SettingsText); //Writes all the Settings into the SettingsFile
             }
         }

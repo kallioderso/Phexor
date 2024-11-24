@@ -17,7 +17,7 @@ public class Logging
     public static string AppdataFolder = Path.Combine((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)), "Phexor"); //C. V. and get Locatin of Appdata Folder for Phexor
     public static string LogDirectory = Path.Combine(AppdataFolder, "Logs"); //C. V. and get Locatin of LogDirectory in Appdata Folder for Phexor
     public static string DailyLogFile = Path.Combine(AppdataFolder, LogDirectory + @"\" + DateTime.Today.ToString("d") + ".log"); //C. V. and get Locatin of DailyLogFile in LogDirectory in Appdata Folder for Phexor
-    public static int LogCount = 7; //C. V. for RemoveOldLogFile M.
+    public static int LogCount; //C. V. for RemoveOldLogFile M.
     public static void Log(string Log, string Identifikator) //M. To Add a line to the Logs
     {
         if (!Directory.Exists(LogDirectory)) //check if Log Directory Exists
