@@ -1,9 +1,9 @@
 ---
 name: "\U0001F525Bug-report\U0001F525"
 about: Report Bugs to help us Find and fix them
-title: 'Enter Bug'
-labels: ''
-assignees: ''
+title: Enter Bug
+labels: bug
+assignees: kallioderso
 
 ---
 
@@ -11,9 +11,8 @@ assignees: ''
 - [ ] Can you Reproduce the bug?
 - [ ] Exists an Screenshot from the Bug?
 - [ ] Exists Logs from the Bug?
-- [ ] Is the Bug Dangerous for Phenix?
+- [ ] Is the Bug Dangerous for Phexor?
 ***
-# (Bug Title)
 - ***Version:*** ___
 - ***last commit:*** ___
 - ***Bug Description***
