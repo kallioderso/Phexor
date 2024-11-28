@@ -357,27 +357,7 @@ namespace Phexor
         {
             try //prevent Crashes
             {
-                if (e == null) //check if e is null
-                {
-                    if (ActiveMenus.Count > 0) //check if ActiveMenus exists
-                    {
-                        Canvas.Children.Remove(ActiveMenus[0]); //Removes Active Menu from Grid
-                        ActiveMenus.RemoveAt(0); //removes Active Menu from the list
-                        LoadAllFields(Path); //call LoadAllFields M. to remove the marked Fields mark
-                    }
-            
-                    if (FileCreation) //if FileCreation is true
-                    {
-                        Canvas.Children.Remove(InputName); //Remove InputName as Child of Grid
-                        FileCreation = false; //Set FileCreation to False
-                    }
-                    else if (FolderCreation) //if FolderCreation is True
-                    {
-                        Canvas.Children.Remove(InputName);
-                        FolderCreation = false; //Set FolderCreation to False
-                    } 
-                }
-                else if (e.ChangedButton != MouseButton.Right) //check if e is not an Rightclick
+                if (e == null || e.ChangedButton != MouseButton.Right) //check if e is null or if e is not an Rightclick
                 {
                     if (ActiveMenus.Count > 0) //check if ActiveMenus exists
                     {
@@ -472,6 +452,7 @@ namespace Phexor
                 FileCount = Fields; //reset the Filecount
                 LoadAllFields(Path + textBlock.Text); //start LoadAllFields M.
                 Redostring = Path; //Add the Current Path to the Redostring
+                RemoveMenus(null, null); //call RemoveMenus M.
             }
             else
             {
@@ -657,6 +638,7 @@ namespace Phexor
 
         private void LoadAllFields(string myPath) //Set Folder/File-Fields Content
         {
+            Console.WriteLine("Test");
             Logging.Log("Load new Path", "MainWindow"); //C. Log Entry
             
             for (int i = 0; i < Fields; i++) //Reset the Input and Color of every Field 
