@@ -94,11 +94,6 @@
         <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Grafiks\Icon.ico">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Resource>
-    </ItemGroup>
-    <ItemGroup>
       <Resource Include="Grafiks\Undo.png" />
     </ItemGroup>
     <ItemGroup>
@@ -112,6 +107,9 @@
       <Resource Include="Grafiks\PPTX.png" />
       <Resource Include="Grafiks\TXT.png" />
       <Resource Include="Grafiks\XLS.png" />
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="Grafiks\Icon.ico" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

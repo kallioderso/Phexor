@@ -275,11 +275,13 @@ namespace Phexor
                 Logging.Log("Using Shortcut ⌃", "MainWindow"); //C. Log Entry
                 if (DirectoryScrollActiv && FolderCount != Settingsfile.Fields) //check if Directory Scrolling with Keyboard is Activ and FolderCount not lower than Field Setting
                 {
-                    FolderCount--; //decrease FolderCount by 1;
+                    FolderCount--; //decrease the Foldercount for LoadAllFields
+                    LoadAllFields(PathInput.Text); //start LoadAllFields M.   
                 }
                 else if (FilesSrollActiv && FileCount != Settingsfile.Fields) //check if File Scrolling with Keyboard is Activ and FileCount not lower than Field Setting
                 {
-                    FileCount--; //decrease FileCount by 1;
+                    FileCount--; //decrease the Foldercount for LoadAllFields
+                    LoadAllFields(PathInput.Text); //start LoadAllFields M.   
                 }
                 LoadAllFields(Path); //call LoadAllFields M.
             }
@@ -289,11 +291,13 @@ namespace Phexor
                 
                 if (DirectoryScrollActiv) //check if Directory Scrolling with Keyboard is Activ 
                 {
-                    FolderCount++; //increase FolderCount by 1;
+                    FolderCount++; //Increase  the Foldercount for LoadAllFields
+                    LoadAllFields(PathInput.Text); //start LoadAllFields M.
                 }
                 else if (FilesSrollActiv) //check if File Scrolling with Keyboard is Activ
                 {
-                    FileCount++; //increase FileCount by 1;
+                    FileCount++; //Increase  the Foldercount for LoadAllFields
+                    LoadAllFields(PathInput.Text); //start LoadAllFields M.
                 }
                 LoadAllFields(Path); //call LoadAllFields M.
             }
@@ -402,7 +406,7 @@ namespace Phexor
                 if (FolderCount != Settingsfile.Fields) //check if FolderCount goes to low
                 {
                     FolderCount--; //decrease the Foldercount for LoadAllFields
-                    LoadAllFields(PathInput.Text); //start LoadAllFields M.
+                    LoadAllFields(PathInput.Text); //start LoadAllFields M.   
                 }
                 else
                 {
