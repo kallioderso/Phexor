@@ -1,4 +1,4 @@
-[![image](https://github.com/user-attachments/assets/9c8d7e5b-9720-45de-a948-3436408e7698)](https://github.com/kallioderso/Phexor/releases)
+[![image](https://github.com/user-attachments/assets/6321fba9-4d07-4f42-a635-2055dcac312a)](https://github.com/kallioderso/Phexor/releases)
 ![GitHub Created At](https://img.shields.io/github/created-at/kallioderso/Phexor)
 [![GitHub License](https://img.shields.io/github/license/kallioderso/Phexor?)]([https%3A%2F%2Fgithub.com%2Fkallioderso%2FPhexor%2FLicense](https://github.com/kallioderso/Phexor?tab=GPL-3.0-1-ov-file))
 [![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/kallioderso/Phexor/total?)](https%3A%2F%2Fgithub.com%2Fkallioderso%2FPhexor%2Freleases)
