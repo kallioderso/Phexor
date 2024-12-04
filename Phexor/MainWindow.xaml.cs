@@ -303,6 +303,7 @@ namespace Phexor
             }
             else if (e.Key == Key.Enter) //check if pressed Key is Enter
             {
+                Logging.Log("Using Shortcut Enter", "MainWindow"); //C. Log Entry
                 if (FileCreation) //if FileCreation is true
                 {
                     CreateingFile(null, null); //call CreateingFile M. for final Creation
@@ -359,6 +360,7 @@ namespace Phexor
         {
             try //prevent Crashes
             {
+                Logging.Log("RemoveMenus M.", "MainWindow"); //C. Log Entry
                 if (e == null || e.ChangedButton != MouseButton.Right) //check if e is null or if e is not an Rightclick
                 {
                     if (ActiveMenus.Count > 0 ) //check if ActiveMenus exists
@@ -476,20 +478,23 @@ namespace Phexor
             }
             catch (Exception exception) //used for logs
             {
-                Logging.CatchLog(Convert.ToString(e), "Mainwindow"); //use CatchLog M.
+                Logging.CatchLog(Convert.ToString(e), "MainWindow"); //use CatchLog M.
             }
             RemoveMenus(null, null); //call RemoveMenus M.
         }
 
         private void Deleter(object sender, MouseButtonEventArgs e) //Delete File or Directory
         {
+            Logging.Log("Delete Started", "MainWindow"); //C. Log Entry
             TextBlock RemoveObject = sender as TextBlock; //use Sender as TextBlock
             if (Directory.Exists(Path + @"\" + RemoveObject.Text)) //check if sender Field is referenz to a Directory
             {
+                Logging.Log("Delete Folder", "MainWindow"); //C. Log Entry
                 Directory.Delete(Path + @"\" + RemoveObject.Text, true); //Delete the referenz Directory
             }
             else if (File.Exists(Path + @"\" + RemoveObject.Text)) //check if sender Field is referenz to a File
             {
+                Logging.Log("Delete File", "MainWindow"); //C. Log Entry
                 File.Delete(Path + @"\" + RemoveObject.Text); //Delete the referenz File
             }
             LoadAllFields(Path); //call LoadAllFields M.
@@ -799,6 +804,7 @@ namespace Phexor
         
         private void Folder_RightClick(object sender, MouseButtonEventArgs e) //M. to create an Folder Option Menu
         {
+            Logging.Log("Open Folder-Settings-Menu", "MainWindow"); //C. Log Entry
             RemoveMenus(null, null); //call RemoveMenus M.
             TextBlock Field = sender as TextBlock; //C. V. for sender Textblock
             Field.Foreground = optionalBrush; //marking Textblocks color
@@ -838,6 +844,7 @@ namespace Phexor
 
         private void File_RightClick(object sender, MouseButtonEventArgs e) //M. to Create an File Option Menu
         {
+            Logging.Log("Open File-Settings-Menu", "MainWindow"); //C. Log Entry
             RemoveMenus(null, null); //call RemoveMenus M.
             TextBlock Field = sender as TextBlock; //C. V. for sender Textblock
             Field.Foreground = optionalBrush; //marking TextBlocks Color
@@ -877,6 +884,7 @@ namespace Phexor
 
         private void AskFileName(object sender, MouseButtonEventArgs e) //M. to Ask for a File name to Create
         {
+            Logging.Log("Create File-Name Field", "MainWindow"); //C. Log Entry
             if (Path != null && Path != "") //if Path is not Empty
             {
                 if (!FileCreation) //if FileCreation is false
@@ -893,6 +901,7 @@ namespace Phexor
 
         private void CreateingFile(object sender, MouseButtonEventArgs e) //M. to C. an File
         {
+            Logging.Log("Create File", "MainWindow"); //C. Log Entry
             RemoveMenus(null, null); //call RemoveMenus M.
             File.Create(Path + @"\" + InputNameText.Text); //Create File
             LoadAllFields(Path); //cal LoadAllFields M.
@@ -900,6 +909,7 @@ namespace Phexor
         
         private void AskFolderName(object sender, MouseButtonEventArgs e) //M. to Ask for a Folder name to Create
         {
+            Logging.Log("Create Folder-Name Field", "MainWindow"); //C. Log Entry
             if (Path != null && Path != "") //if Path is not Empty
             {
                 if (!FolderCreation) //if FolderCreation is false
@@ -916,6 +926,7 @@ namespace Phexor
 
         private void CreateingFolder(object sender, MouseButtonEventArgs e) //M. to C. an Folder
         {
+            Logging.Log("Create Folder", "MainWindow"); //C. Log Entry
             RemoveMenus(null, null); //call RemoveMenus M.
             Directory.CreateDirectory(Path + @"\" + InputNameText.Text); //Create Folder
             LoadAllFields(Path); //cal LoadAllFields M.

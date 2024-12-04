@@ -56,6 +56,8 @@
 
 > **Enter Paths (Enter)**<br/>
 > Paths from the input field can be entered by pressing *Enter*.<br/>
+> While File or Folderscrolling Selected Files or Folders can be Entered,
+> by Pressing *Enter*
 
 > **Settings (S)**<br/>
 > The [Settings menu](https://github.com/kallioderso/Phexor?tab=readme-ov-file#settingsmenu) can be opened by clicking on the **Settings Button**, but also by pressing *S*.<br/>
@@ -104,6 +106,15 @@
 > > `00:00:00 [MainWindow] : Using Shortcut P (Activate)`<br/>
 > > `00:00:00 [MainWindow] : Using Shortcut P (Deactivate)`<br/>
 > > `00:00:00 [MainWindow] : Using Shortcut LeftClick`<br/>
+> > `00:00:00 [MainWindow] : Using Shortcut Enter`<br/>
+> > `00:00:00 [MainWindow] : Using Shortcut F`<br/>
+> > `00:00:00 [MainWindow] : Using Shortcut D`<br/>
+> > `00:00:00 [MainWindow] : Using Shortcut S`<br/>
+> > `00:00:00 [MainWindow] : Using Shortcut R`<br/>
+> > `00:00:00 [MainWindow] : Using Shortcut U`<br/>
+> > `00:00:00 [MainWindow] : Using Shortcut Esc`<br/>
+> > `00:00:00 [MainWindow] : Using Shortcut ⌃`<br/>
+> > `00:00:00 [MainWindow] : Using Shortcut ⌄`<br/>
 > > `00:00:00 [MainWindow] : Directory Scrolling (+)`<br/>
 > > `00:00:00 [MainWindow] : Directory Scrolling (-)`<br/>
 > > `00:00:00 [MainWindow] : File Scrolling (+)`<br/>
@@ -114,6 +125,18 @@
 > > `00:00:00 [MainWindow] : Undo M.`<br/>
 > > `00:00:00 [MainWindow] : Redo M.`<br/>
 > > `00:00:00 [MainWindow] : Set new Path`<br/>
+> > `00:00:00 [MainWindow] : RemoveMenus M.`<br/>
+> > `00:00:00 [MainWindow] : Delete Started`<br/>
+> > `00:00:00 [MainWindow] : Delete Folder`<br/>
+> > `00:00:00 [MainWindow] : Delete File`<br/>
+> > `00:00:00 [MainWindow] : Load new Path`<br/>
+> > `00:00:00 [MainWindow] : Open Folder-Settings-Menu`<br/>
+> > `00:00:00 [MainWindow] : Open File-Settings-Menu`<br/>
+> > `00:00:00 [MainWindow] : Create File-Name Field`<br/>
+> > `00:00:00 [MainWindow] : Create File`<br/>
+> > `00:00:00 [MainWindow] : Create Folder-Name Field`<br/>
+> > `00:00:00 [MainWindow] : Create Folder`<br/>
+> > `00:00:00 [MainWindow] : Create Button`<br/>
 > > `00:00:00 [MainWindow] : Close Started`<br/>
 > > `00:00:00 [MainWindow] | Catch | : "Catchlog"`<br/>
 >
