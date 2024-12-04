@@ -32,7 +32,7 @@ The following actions will not be tolerated in our community:
 ## **Reporting Issues**  
 If you witness or experience a violation of this Code of Conduct, you can report it through one of the following channels:  
 
-1. **Discord:** Direct message the moderation team on our [Discord server](#).  
+1. **Discord:** Direct message the moderation team on our [Discord server](https://discord.gg/epket7GBS7).  
 2. **Email:** Send a confidential email to `opensource.phexor@gmail.com`.  
 3. **GitHub Issues:** Alternatively, you can report issues on our [Issues page](https://github.com/kallioderso/Phexor/issues). However, for privacy and confidentiality, the other methods are preferred.  
 
