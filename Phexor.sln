@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phexor", "Phexor\Phexor.csproj", "{A6F9F602-8CA1-4187-8373-2BC6369D5C2F}"
 EndProject
 Global
@@ -12,5 +15,8 @@ Global
 		{A6F9F602-8CA1-4187-8373-2BC6369D5C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6F9F602-8CA1-4187-8373-2BC6369D5C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6F9F602-8CA1-4187-8373-2BC6369D5C2F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

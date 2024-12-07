@@ -1,0 +1,17 @@
+C:\Users\denni\Desktop\Phexor\Phexor\bin\Debug\Phexor.exe.config
+C:\Users\denni\Desktop\Phexor\Phexor\bin\Debug\Phexor.exe
+C:\Users\denni\Desktop\Phexor\Phexor\bin\Debug\Phexor.pdb
+C:\Users\denni\Desktop\Phexor\Phexor\obj\Debug\Phexor.csproj.AssemblyReference.cache
+C:\Users\denni\Desktop\Phexor\Phexor\obj\Debug\MainWindow.baml
+C:\Users\denni\Desktop\Phexor\Phexor\obj\Debug\MainWindow.g.cs
+C:\Users\denni\Desktop\Phexor\Phexor\obj\Debug\SettingsWindow.g.cs
+C:\Users\denni\Desktop\Phexor\Phexor\obj\Debug\App.g.cs
+C:\Users\denni\Desktop\Phexor\Phexor\obj\Debug\Phexor_MarkupCompile.cache
+C:\Users\denni\Desktop\Phexor\Phexor\obj\Debug\Phexor_MarkupCompile.lref
+C:\Users\denni\Desktop\Phexor\Phexor\obj\Debug\SettingsWindow.baml
+C:\Users\denni\Desktop\Phexor\Phexor\obj\Debug\Phexor.g.resources
+C:\Users\denni\Desktop\Phexor\Phexor\obj\Debug\Phexor.Properties.Resources.resources
+C:\Users\denni\Desktop\Phexor\Phexor\obj\Debug\Phexor.csproj.GenerateResource.cache
+C:\Users\denni\Desktop\Phexor\Phexor\obj\Debug\Phexor.csproj.CoreCompileInputs.cache
+C:\Users\denni\Desktop\Phexor\Phexor\obj\Debug\Phexor.exe
+C:\Users\denni\Desktop\Phexor\Phexor\obj\Debug\Phexor.pdb
