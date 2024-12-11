@@ -16,8 +16,7 @@ public static class Logging
 {
     public static string AppdataFolder = Path.Combine((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)), "Phexor"); //C. V. and get Locatin of Appdata Folder for Phexor
     public static string LogDirectory = Path.Combine(AppdataFolder, "Logs"); //C. V. and get Locatin of LogDirectory in Appdata Folder for Phexor
-    public static string DailyLogFilePath = Path.Combine(AppdataFolder, LogDirectory); //C. V. and get Locatin of DailyLogFile in LogDirectory in Appdata Folder for Phexor
-    private static string DailyLogFileName = string.Concat(DailyLogFilePath, "\\",DateTime.Today.ToString("d").Replace("/",".")) + ".log";
+    private static string DailyLogFileName = string.Concat(LogDirectory, @"\",DateTime.Today.ToString("d").Replace(@"/", ".")) + ".log";
     public static int LogCount; //C. V. for RemoveOldLogFile M.
     public static void Log(string Log, string Identifikator) //M. To Add a line to the Logs
     {
@@ -57,7 +56,7 @@ public static class Logging
                 bool LogInRanche = false; //C. V. to check if file should exist
                 for (int i = 0; i < LogCount; i++) //loop to check if File is in allowed time span
                 {
-                    if (Logs.Substring(LogDirectory.Length + 1) == DateTime.Today.AddDays(-i).ToString("d") + ".log") //if Logs is in Time Span
+                    if (Logs.Substring(LogDirectory.Length + 1) == DateTime.Today.AddDays(-i).ToString("d").Replace(@"/", ".") + ".log") //if Logs is in Time Span
                     {
                         LogInRanche = true; //set LogInRanche bool to True
                     }
