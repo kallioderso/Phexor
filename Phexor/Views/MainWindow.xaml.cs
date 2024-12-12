@@ -39,10 +39,9 @@ namespace Phexor.Views
         {
             if (e.Key == Key.Enter)
             {
-                var viewModel = DataContext as MainViewModel;
-                if (viewModel != null)
+                if (DataContext is MainViewModel viewModel)
                 {
-                    viewModel.CurrentPath = (sender as TextBox)?.Text;
+                    viewModel.CurrentPath = (sender as TextBox)?.Text!;
                 }
             }
         }

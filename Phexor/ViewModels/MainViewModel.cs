@@ -16,8 +16,8 @@ public class MainViewModel : ViewModelBase
     private readonly IServiceProvider _serviceProvider;
 
     private string _currentPath = string.Empty;
-    private ObservableCollection<string> _directories = new();
-    private ObservableCollection<string> _files = new();
+    private ObservableCollection<string?> _directories = new();
+    private ObservableCollection<string?> _files = new();
 
     private readonly Stack<string> _undoStack = new(); // Historie für Rückwärtsnavigierung
     private readonly Stack<string> _redoStack = new(); // Historie für Vorwärtsnavigierung
@@ -41,13 +41,13 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public ObservableCollection<string> Directories
+    public ObservableCollection<string?> Directories
     {
         get => _directories;
         private set => SetProperty(ref _directories, value);
     }
 
-    public ObservableCollection<string> Files
+    public ObservableCollection<string?> Files
     {
         get => _files;
         private set => SetProperty(ref _files, value);
@@ -86,15 +86,15 @@ public class MainViewModel : ViewModelBase
     {
         if (string.IsNullOrWhiteSpace(CurrentPath) || !Directory.Exists(CurrentPath))
         {
-            Directories = new ObservableCollection<string>();
-            Files = new ObservableCollection<string>();
+            Directories = new ObservableCollection<string?>();
+            Files = new ObservableCollection<string?>();
             return;
         }
 
-        Directories = new ObservableCollection<string>(
+        Directories = new ObservableCollection<string?>(
             Directory.GetDirectories(CurrentPath).Select(Path.GetFileName));
 
-        Files = new ObservableCollection<string>(
+        Files = new ObservableCollection<string?>(
             Directory.GetFiles(CurrentPath).Select(Path.GetFileName));
     }
 

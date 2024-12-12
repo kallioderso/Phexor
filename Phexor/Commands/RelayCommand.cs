@@ -6,22 +6,22 @@ namespace Phexor.Commands;
 public class RelayCommand<T> : ICommand
 {
     private readonly Action<T> _execute;
-    private readonly Func<T, bool> _canExecute;
+    private readonly Func<T, bool>? _canExecute;
 
     // Generischer Konstruktor
-    public RelayCommand(Action<T> execute, Func<T, bool> canExecute = null)
+    public RelayCommand(Action<T> execute, Func<T, bool>? canExecute = null)
     {
         _execute = execute ?? throw new ArgumentNullException(nameof(execute));
         _canExecute = canExecute;
     }
 
     // Nicht-generischer Konstruktor für Komfort
-    public RelayCommand(Action execute, Func<bool> canExecute = null)
+    public RelayCommand(Action execute, Func<bool>? canExecute = null)
         : this(_ => execute(), _ => canExecute == null || canExecute())
     {
     }
 
-    public bool CanExecute(object parameter)
+    public bool CanExecute(object? parameter)
     {
         if (parameter == null && typeof(T).IsValueType && Nullable.GetUnderlyingType(typeof(T)) == null)
         {
@@ -33,7 +33,7 @@ public class RelayCommand<T> : ICommand
         return _canExecute?.Invoke(typedParameter) ?? true;
     }
 
-    public void Execute(object parameter)
+    public void Execute(object? parameter)
     {
         if (parameter == null && typeof(T).IsValueType && Nullable.GetUnderlyingType(typeof(T)) == null)
         {

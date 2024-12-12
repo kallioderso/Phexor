@@ -13,8 +13,8 @@ namespace Phexor
     /// </summary>
     public partial class App
     {
-        public static ServiceProvider ServiceProvider { get; private set; }
-        
+        public static ServiceProvider ServiceProvider { get; private set; } = null!;
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);

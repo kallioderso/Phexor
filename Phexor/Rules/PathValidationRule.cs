@@ -5,9 +5,9 @@ namespace Phexor.Rules;
 
 public class PathValidationRule : ValidationRule
 {
-    public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
+    public override ValidationResult Validate(object? value, System.Globalization.CultureInfo cultureInfo)
     {
-        string path = value as string;
+        string? path = value as string;
 
         if (string.IsNullOrWhiteSpace(path) || !Directory.Exists(path))
         {
