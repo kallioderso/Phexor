@@ -10,7 +10,7 @@
         <SolidColorBrush x:Key="ControlBackground" Color="#223238" />
         <SolidColorBrush x:Key="TextForeground" Color="Cornsilk" />
         <SolidColorBrush x:Key="BorderColor" Color="Azure" />
-        
+
         <Style TargetType="TextBox">
             <Setter Property="Template">
                 <Setter.Value>
@@ -153,7 +153,24 @@
                            Foreground="{StaticResource TextForeground}" />
 
                 <ListBox Grid.Row="1" Margin="10" Background="{StaticResource ControlBackground}"
-                         Foreground="{StaticResource TextForeground}" ItemsSource="{Binding Files}" />
+                         Foreground="{StaticResource TextForeground}" ItemsSource="{Binding Files}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}"
+                                       Foreground="{StaticResource TextForeground}"
+                                       FontSize="14"
+                                       Margin="5"
+                                       Cursor="Hand">
+                                <TextBlock.InputBindings>
+                                    <MouseBinding
+                                        Command="{Binding DataContext.OpenFileCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                        CommandParameter="{Binding}"
+                                        MouseAction="LeftDoubleClick" />
+                                </TextBlock.InputBindings>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Grid>
         </Border>
     </Grid>

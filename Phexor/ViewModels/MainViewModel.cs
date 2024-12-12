@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
@@ -54,8 +55,9 @@ public class MainViewModel : ViewModelBase
     public ICommand OpenSettingsCommand { get; }
     public ICommand UndoCommand { get; }
     public ICommand RedoCommand { get; }
-    
+
     public ICommand OpenDirectoryCommand { get; }
+    public ICommand OpenFileCommand { get; }
 
     public MainViewModel(IServiceProvider serviceProvider)
     {
@@ -65,6 +67,7 @@ public class MainViewModel : ViewModelBase
         UndoCommand = new RelayCommand(UndoPath, CanUndo);
         RedoCommand = new RelayCommand(RedoPath, CanRedo);
         OpenDirectoryCommand = new RelayCommand<string>(OpenDirectory, CanOpenDirectory);
+        OpenFileCommand = new RelayCommand<string>(OpenFile);
 
         CurrentPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
     }
@@ -101,6 +104,7 @@ public class MainViewModel : ViewModelBase
     }
 
     private bool CanUndo() => _undoStack.Count > 1;
+
     private void UndoPath()
     {
         if (_undoStack.Count > 1)
@@ -114,6 +118,7 @@ public class MainViewModel : ViewModelBase
     }
 
     private bool CanRedo() => _redoStack.Count > 0;
+
     private void RedoPath()
     {
         if (_redoStack.Count > 0)
@@ -125,11 +130,12 @@ public class MainViewModel : ViewModelBase
             _isNavigating = false; // Navigation beendet
         }
     }
-    
+
     private bool CanOpenDirectory(string directoryName)
     {
         return !string.IsNullOrWhiteSpace(directoryName) && Directory.Exists(Path.Combine(CurrentPath, directoryName));
     }
+
     private void OpenDirectory(string directoryName)
     {
         if (!string.IsNullOrWhiteSpace(directoryName))
@@ -138,9 +144,32 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    
+    private bool CanOpenFile(string fileName)
+    {
+        return !string.IsNullOrWhiteSpace(fileName) && File.Exists(Path.Combine(CurrentPath, fileName));
+    }
 
-    
+    private void OpenFile(string fileName)
+    {
+        if (string.IsNullOrWhiteSpace(fileName))
+            return;
 
-   
+        var filePath = Path.Combine(CurrentPath, fileName);
+        if (File.Exists(filePath))
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = filePath,
+                    UseShellExecute = true // Öffnet die Datei mit dem Standardprogramm
+                });
+            }
+            catch (Exception ex)
+            {
+                // Fehlerbehandlung, z. B. Log oder Meldung an den Benutzer
+                Debug.WriteLine($"Fehler beim Öffnen der Datei: {ex.Message}");
+            }
+        }
+    }
 }
