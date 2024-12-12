@@ -14,15 +14,6 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
-    <Resource Include="Ressources\Undo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Ressources\Settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Ressources\Redo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Ressources\PDF.png" />
     <Resource Include="Ressources\PPTX.png" />
     <Resource Include="Ressources\TXT.png" />

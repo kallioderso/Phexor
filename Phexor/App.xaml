@@ -6,5 +6,6 @@
     <Application.Resources>
         <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
         <converters:EmptyStringToVisibilityConverter x:Key="EmptyStringToVisibilityConverter"/>
+        <converters:FileTypeToSymbolConverter x:Key="FileTypeToSymbolConverter"/>
     </Application.Resources>
 </Application>
