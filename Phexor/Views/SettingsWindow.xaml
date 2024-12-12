@@ -5,8 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Phexor"
         mc:Ignorable="d"
-        Closing="Settings_OnClosing"
-        Title="Phexor Settings" Width="900" Height="550" MinWidth="900" MinHeight="550" MaxWidth="900" MaxHeight="550" Icon="Grafiks/Icon.ico">
+        Title="Phexor Settings" Width="900" Height="550" MinWidth="900" MinHeight="550" MaxWidth="900" MaxHeight="550" Icon="..\Ressources\Icon.ico">
 
     <Grid Background="#263238">
         <Border BorderBrush="Azure" Background="#223238" Height="480" Width="820" BorderThickness="5" x:Name="Border1"/>
@@ -21,28 +20,28 @@
         <Border BorderBrush="Azure" Height="50" Width="820" BorderThickness="5" Margin="0,40,0,0" x:Name="Border10"/>
         <Border BorderBrush="Azure" Height="50" Width="135" BorderThickness="5" Margin="0,40,685,0" x:Name="Border11"/>
         
-        <TextBlock Height="30" Width="800" Text="Safe:" FontSize="20" Foreground="Cornsilk" Margin="0,430,0,0" x:Name="TextBlock1" TextAlignment="Center" MouseLeftButtonDown="Save" MouseRightButtonDown="Save"/>
+        <!-- <TextBlock Height="30" Width="800" Text="Safe:" FontSize="20" Foreground="Cornsilk" Margin="0,430,0,0" x:Name="TextBlock1" TextAlignment="Center" MouseLeftButtonDown="Save" MouseRightButtonDown="Save"/> -->
         <TextBlock Height="30" Width="170" Text="Fordergrund Farbe:" FontSize="20" Foreground="Cornsilk" Margin="0,0,630,340" x:Name="TextBlock2"/>
         <TextBlock Height="30" Width="170" Text="Hintergrund Farbe:" FontSize="20" Foreground="Cornsilk" Margin="0,0,100,340" x:Name="TextBlock3"/>
         <TextBlock Height="30" Width="170" Text="Zusätzliche Farbe:" FontSize="20" Foreground="Cornsilk" Margin="475,0,0,340" x:Name="TextBlock4"/>
         <TextBlock Height="25" Width="100" Text="Felder:" FontSize="20" Foreground="Cornsilk" Margin="0,0,700,430" x:Name="TextBlock5"/>
-        <TextBlock Height="30" Width="160" Text="Orignal Deisgn" FontSize="20" Foreground="Cornsilk" Margin="0,0,642,51" x:Name="TextBlock6" MouseDown="SetOriginalDesign" TextAlignment="Center"/>
+        <!-- <TextBlock Height="30" Width="160" Text="Orignal Deisgn" FontSize="20" Foreground="Cornsilk" Margin="0,0,642,51" x:Name="TextBlock6" MouseDown="SetOriginalDesign" TextAlignment="Center"/> -->
         <TextBlock Height="25" Width="100" Text="Log Files:" FontSize="20" Foreground="Cornsilk" Margin="0,40,700,0" x:Name="TextBlock7"/>
         
         <Slider x:Name="LogCountInput" Width="670" Height="30" IsSnapToTickEnabled="True" Margin="128,40,0,0" Maximum="30" Minimum="1" AutoToolTipPlacement="BottomRight" AutoToolTipPrecision="1" TickPlacement="BottomRight"/>
         <Slider x:Name="FelderInput" Width="670" Height="30" IsSnapToTickEnabled="True" Margin="128,0,0,430" Maximum="30" Minimum="5" AutoToolTipPlacement="BottomRight" AutoToolTipPrecision="1" TickPlacement="BottomRight"/>
         
-        <Canvas Name="ColorWheel1" Width="90" Height="90" Margin="0,0,715,195" MouseMove="ColorWheel_MouseMove" MouseDown="ColorWheel_MouseDown" MouseLeave="ColorWheel_MouseLeave"/>
-        <Canvas Name="ColorWheel2" Width="90" Height="90" Margin="0,0,185,195" MouseMove="ColorWheel_MouseMove" MouseDown="ColorWheel_MouseDown" MouseLeave="ColorWheel_MouseLeave"/>
-        <Canvas Name="ColorWheel3" Width="90" Height="90" Margin="385,0,0,195" MouseMove="ColorWheel_MouseMove" MouseDown="ColorWheel_MouseDown" MouseLeave="ColorWheel_MouseLeave"/>
-        
+        <!-- <Canvas Name="ColorWheel1" Width="90" Height="90" Margin="0,0,715,195" MouseMove="ColorWheel_MouseMove" MouseDown="ColorWheel_MouseDown" MouseLeave="ColorWheel_MouseLeave"/> -->
+        <!-- <Canvas Name="ColorWheel2" Width="90" Height="90" Margin="0,0,185,195" MouseMove="ColorWheel_MouseMove" MouseDown="ColorWheel_MouseDown" MouseLeave="ColorWheel_MouseLeave"/> -->
+        <!-- <Canvas Name="ColorWheel3" Width="90" Height="90" Margin="385,0,0,195" MouseMove="ColorWheel_MouseMove" MouseDown="ColorWheel_MouseDown" MouseLeave="ColorWheel_MouseLeave"/> -->
+        <!-- -->
         <Border Name="SelectedColorDisplay1" Width="90" Height="90" BorderBrush="Black" BorderThickness="1" Margin="0,0,385,195"/>
         <Border Name="SelectedColorDisplay2" Width="90" Height="90" BorderBrush="Black" BorderThickness="1" Margin="185,0,0,195"/>
         <Border Name="SelectedColorDisplay3" Width="90" Height="90" BorderBrush="Black" BorderThickness="1" Margin="715,0,0,195"/>
         
-        <TextBox x:Name="TextColorWheel1" Width="80" Height="30" Margin="0,0,385,200" Foreground="Black" Background="Transparent" BorderBrush="Transparent" FontSize="18" KeyDown="ColorText_KeyDown"/>
-        <TextBox x:Name="TextColorWheel2" Width="80" Height="30" Margin="185,0,0,200" Foreground="Black" Background="Transparent" BorderBrush="Transparent" FontSize="18" KeyDown="ColorText_KeyDown"/>
-        <TextBox x:Name="TextColorWheel3" Width="80" Height="30" Margin="715,0,0,200" Foreground="Black" Background="Transparent" BorderBrush="Transparent" FontSize="18" KeyDown="ColorText_KeyDown"/>
+        <!-- <TextBox x:Name="TextColorWheel1" Width="80" Height="30" Margin="0,0,385,200" Foreground="Black" Background="Transparent" BorderBrush="Transparent" FontSize="18" KeyDown="ColorText_KeyDown"/> -->
+        <!-- <TextBox x:Name="TextColorWheel2" Width="80" Height="30" Margin="185,0,0,200" Foreground="Black" Background="Transparent" BorderBrush="Transparent" FontSize="18" KeyDown="ColorText_KeyDown"/> -->
+        <!-- <TextBox x:Name="TextColorWheel3" Width="80" Height="30" Margin="715,0,0,200" Foreground="Black" Background="Transparent" BorderBrush="Transparent" FontSize="18" KeyDown="ColorText_KeyDown"/> -->
         
     </Grid>
 </Window>
