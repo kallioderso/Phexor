@@ -25,6 +25,7 @@ namespace Phexor
 
             // Zeige das MainWindow an
             var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            LoadSettings();
             mainWindow.Show();
         }
         
@@ -37,6 +38,8 @@ namespace Phexor
             services.AddTransient<SettingsViewModel>();
             services.AddSingleton<MainWindow>();
             services.AddTransient<SettingsWindow>();
+
+            Application.Current.Resources["ApplicationSettings"] = appSettings;
         }
 
         protected override void OnExit(ExitEventArgs e)
@@ -50,6 +53,12 @@ namespace Phexor
         {
             var settingsService = ServiceProvider.GetRequiredService<SettingsService>();
             settingsService.SaveSettings();
+        }
+
+        private void LoadSettings()
+        {
+            var settingsService = ServiceProvider.GetRequiredService<SettingsService>();
+            settingsService.LoadSettings();
         }
     }
 }

@@ -14,7 +14,6 @@ public class SettingsService
     {
         _settings = settings;
         AppPaths.EnsureAppDataFolderExists();
-        LoadSettings();
     }
 
     public void SaveSettings()

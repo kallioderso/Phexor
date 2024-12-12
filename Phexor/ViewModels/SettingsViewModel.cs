@@ -17,24 +17,7 @@ public class SettingsViewModel
 
         SaveCommand = new RelayCommand(SaveSettings);
     }
-
-    public string ForegroundColor
-    {
-        get => _settings.ForegroundColor;
-        set => _settings.ForegroundColor = value;
-    }
-
-    public string BackgroundColor
-    {
-        get => _settings.BackgroundColor;
-        set => _settings.BackgroundColor = value;
-    }
-
-    public string SpecialColor
-    {
-        get => _settings.SpecialColor;
-        set => _settings.SpecialColor = value;
-    }
+    
 
     public ICommand SaveCommand { get; }
 

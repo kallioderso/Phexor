@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Phexor.Commands;
+using Phexor.Config;
 
 namespace Phexor.ViewModels;
 

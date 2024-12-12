@@ -6,7 +6,9 @@ namespace Phexor.Config;
 public class ApplicationSettings : INotifyPropertyChanged
 {
     private string _foregroundColor = "#FFFFF8DC";
-    private string _backgroundColor = "#FFF0FFFF";
+    private string _backgroundColor = "#263238";
+    private string _controlBackgroundColor = "#263238";
+    private string _borderColor = "#FFFFFF";
     private string _specialColor = "#FFE6E6FA";
 
     public string ForegroundColor
@@ -25,6 +27,18 @@ public class ApplicationSettings : INotifyPropertyChanged
     {
         get => _specialColor;
         set => SetProperty(ref _specialColor, value);
+    }
+    
+    public string ControlBackgroundColor
+    {
+        get => _controlBackgroundColor;
+        set => SetProperty(ref _controlBackgroundColor, value);
+    }
+    
+    public string BorderColor
+    {
+        get => _borderColor;
+        set => SetProperty(ref _borderColor, value);
     }
 
     public event PropertyChangedEventHandler PropertyChanged;

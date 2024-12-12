@@ -21,17 +21,6 @@ namespace Phexor;
     // CW. = ColorWheel
 public partial class SettingsWindow : Window
 {
-    private bool ColorSelecting = false; //C. V. for the CW. Colorpicking
-    private static string Foreground; //C. V. for Foreground Color
-    private static string Background; //C. V. for Background Color
-    private static string Special; //C. V. for Special Color
-    private int _fields; //C. V. for Field Amount (MainWindow)
-    private int _logCount; //C. V. for Log File Amount 
-    private SolidColorBrush ForegroundBrush; //C. ColorBrush V.
-    private SolidColorBrush BackgroundBrush; //C. ColorBrush V.
-    private SolidColorBrush SpecialBrush; //C. ColorBrush V.
-    private int wheelRadius = 45; //C. V. for CW. Radius
-
     public SettingsWindow(SettingsViewModel settingsViewModel)
     {
         Logging.Log("Initialize", "SettingsWindow"); //C. Log Entry
