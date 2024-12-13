@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:rules="clr-namespace:Phexor.Rules"
         Title="Phexor" MinWidth="900" MinHeight="550" Width="900" Height="550"
-        Icon="..\Ressources\Icon.ico" x:Name="Window">
+        Icon="..\Ressources\Icon.ico" x:Name="Window"
+        DataContext="{Binding MainViewModel, Source={StaticResource ViewModelLocator}}">
 
     <Window.Resources>
         <Style TargetType="TextBox">
@@ -23,7 +24,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid Background="{Binding BackgroundColor, Source={StaticResource ApplicationSettings}}">
+    <Grid Background="{Binding App}">
         <!-- Haupt-Grid-Layout -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" /> <!-- Header (Textbox & Buttons) -->
@@ -44,7 +45,7 @@
             </Grid.ColumnDefinitions>
 
             <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                    BorderBrush="{Binding BorderColor, Source={StaticResource ApplicationSettings}}"
+                    BorderBrush="{Binding }"
                     BorderThickness="1"
                     Background="{Binding BackgroundColor, Source={StaticResource ApplicationSettings}}" />
             <!-- TextBox -->

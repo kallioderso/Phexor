@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using Phexor.Config;
 using Phexor.Scripts;
 using Phexor.ViewModels;
 using SolidColorBrush = System.Windows.Media.SolidColorBrush;
@@ -16,23 +18,22 @@ namespace Phexor.Views
     // C#c. = C# code
     public partial class MainWindow
     {
+        public ApplicationSettings ApplicationSettings { get; set; }
+        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
         /// </summary>
-        /// <param name="viewModel"></param>
-        public MainWindow(MainViewModel viewModel)
+        /// <param name="appSettings"></param>
+        public MainWindow(ApplicationSettings appSettings)
         {
-            
-            Logging.Log("Initialize", "MainWindow"); //C. Log Entry
+            Logging.Log("Initialize", "MainWindow");
             
             //Init Components
             InitializeComponent();
             
-            //Set DataContext
-            DataContext = viewModel;
-            
-            
-            InitializeComponent(); //Initialize Xc.
+            ApplicationSettings = appSettings;
+           
         }
         
         private void TextBox_KeyDown(object sender, KeyEventArgs e)

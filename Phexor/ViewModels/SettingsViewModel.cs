@@ -5,14 +5,20 @@ using Phexor.Services;
 
 namespace Phexor.ViewModels;
 
-public class SettingsViewModel
+public class SettingsViewModel : ViewModelBase
 {
-    private readonly ApplicationSettings _settings;
+    
     private readonly SettingsService _settingsService;
+    private ApplicationSettings _settings = null!;
+    public ApplicationSettings ApplicationSettings
+    {
+        get => _settings;
+        set => SetProperty(ref _settings, value);
+    }
 
     public SettingsViewModel(ApplicationSettings settings, SettingsService settingsService)
     {
-        _settings = settings;
+        ApplicationSettings = settings;
         _settingsService = settingsService;
 
         SaveCommand = new RelayCommand(SaveSettings);

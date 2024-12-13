@@ -23,7 +23,8 @@ namespace Phexor
             ConfigureServices(serviceCollection);
             ServiceProvider = serviceCollection.BuildServiceProvider();
 
-            // Zeige das MainWindow an
+            Application.Current.Resources["ViewModelLocator"] = ServiceProvider.GetRequiredService<ViewModelLocator>();
+            
             var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
             LoadSettings();
             mainWindow.Show();
@@ -34,12 +35,18 @@ namespace Phexor
             var appSettings = new ApplicationSettings();
             services.AddSingleton(appSettings);
             services.AddSingleton<SettingsService>();
+            
+            services.AddSingleton<ViewModelLocator>();
+            
             services.AddTransient<MainViewModel>();
             services.AddTransient<SettingsViewModel>();
+            
             services.AddSingleton<MainWindow>();
             services.AddTransient<SettingsWindow>();
-
-            Application.Current.Resources["ApplicationSettings"] = appSettings;
+            
+            
+            
+           
         }
 
         protected override void OnExit(ExitEventArgs e)

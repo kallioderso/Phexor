@@ -13,7 +13,7 @@ namespace Phexor.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    private readonly IServiceProvider _serviceProvider;
+    private readonly SettingsWindow _settingsWindow;
 
     private string _currentPath = string.Empty;
     private ObservableCollection<string?> _directories = new();
@@ -53,6 +53,13 @@ public class MainViewModel : ViewModelBase
         private set => SetProperty(ref _files, value);
     }
 
+    private ApplicationSettings _settings = null!;
+    public ApplicationSettings ApplicationSettings
+    {
+        get => _settings;
+        set => SetProperty(ref _settings, value);
+    }
+    
     public ICommand OpenSettingsCommand { get; }
     public ICommand UndoCommand { get; }
     public ICommand RedoCommand { get; }
@@ -60,9 +67,10 @@ public class MainViewModel : ViewModelBase
     public ICommand OpenDirectoryCommand { get; }
     public ICommand OpenFileCommand { get; }
 
-    public MainViewModel(IServiceProvider serviceProvider)
+    public MainViewModel(SettingsWindow settingsWindow, ApplicationSettings applicationSettings)
     {
-        _serviceProvider = serviceProvider;
+        ApplicationSettings = applicationSettings;
+        _settingsWindow = settingsWindow;
 
         OpenSettingsCommand = new RelayCommand(OpenSettings);
         UndoCommand = new RelayCommand(UndoPath, CanUndo);
@@ -100,8 +108,7 @@ public class MainViewModel : ViewModelBase
 
     private void OpenSettings()
     {
-        var settingsWindow = _serviceProvider.GetRequiredService<SettingsWindow>();
-        settingsWindow.ShowDialog();
+        _settingsWindow.ShowDialog();
     }
 
     private bool CanUndo() => _undoStack.Count > 1;

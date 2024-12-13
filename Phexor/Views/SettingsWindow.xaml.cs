@@ -6,6 +6,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Phexor.Config;
 using Phexor.Scripts;
 using Phexor.ViewModels;
 
@@ -21,13 +22,14 @@ namespace Phexor;
     // CW. = ColorWheel
 public partial class SettingsWindow : Window
 {
-    public SettingsWindow(SettingsViewModel settingsViewModel)
+    private readonly ApplicationSettings _applicationSettings;
+
+    public SettingsWindow(ApplicationSettings applicationSettings)
     {
+        _applicationSettings = applicationSettings;
         Logging.Log("Initialize", "SettingsWindow"); //C. Log Entry
         
         InitializeComponent();
-
-        DataContext = settingsViewModel;
         
         
         // InitializeComponent(); //Initialize Xc. Objects
