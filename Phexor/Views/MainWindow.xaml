@@ -23,7 +23,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid Background="{Binding BackgroundColor}">
+    <Grid Background="{Binding BackgroundColor, Source={StaticResource ApplicationSettings}}">
         <!-- Haupt-Grid-Layout -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" /> <!-- Header (Textbox & Buttons) -->
