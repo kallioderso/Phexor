@@ -679,6 +679,7 @@ namespace Phexor
                         var directors = Directory.GetDirectories(directoryPath); //Adding Every Directory to the directory L.
                         if (directors != null) //check if directorys are empty
                         {
+                            TextBlock1.Text = "Verzeichnise (" + directors.Length + ")"; //set the Textblock Text to the amount of Directorys
                             try //prevent crashes
                             {
                                 foreach (var directory in directors) //loop for each directory in the path
@@ -723,6 +724,7 @@ namespace Phexor
                         var files = Directory.GetFiles(directoryPath); //get every File from the Path
                         if (files != null) //check if Files L. is empty
                         {
+                            TextBlock2.Text = "Dateien (" + files.Length + ")"; //set the Textblock Text to the amount of Files
                             try //prevent Crashes
                             {
                                 foreach (var file in files) // Loop for every file 

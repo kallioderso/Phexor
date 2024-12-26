@@ -15,8 +15,8 @@
         <Border BorderBrush="Azure" BorderThickness="5" Height="380" Width="830" Margin="25,105,25,25" x:Name="Border3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Border BorderBrush="Azure" BorderThickness="5" Height="420" Width="220" Margin="25,65,25,25" x:Name="Border4" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         
-        <TextBlock Text="Verzeichnise" Height="25" Width="110" Margin="35,75,0,0"  TextAlignment="Center" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Cornsilk" x:Name="TextBlock1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBlock Text="Dateien" Height="25" Width="70" Margin="250,75,0,0"  TextAlignment="Center" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Cornsilk" x:Name="TextBlock2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Text="Verzeichnise" Height="25" Width="150" Margin="35,75,0,0"  TextAlignment="Left" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Cornsilk" x:Name="TextBlock1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Text="Dateien" Height="25" Width="120" Margin="250,75,0,0"  TextAlignment="Left" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Cornsilk" x:Name="TextBlock2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         
         <Border x:Name="SettingsButton" Height="30" Width="30" Background="Cornsilk" Margin="443,32,0,0" CornerRadius="6" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonDown="SettingsWindow" MouseRightButtonDown="SettingsWindow" HorizontalAlignment="Left" VerticalAlignment="Top"> 
             <Image Source="Grafiks/Settings.png" Height="27" Width="27" IsHitTestVisible="False" />
