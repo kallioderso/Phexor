@@ -58,7 +58,7 @@ namespace Phexor
             Logging.Log("Initialize", "MainWindow"); //C. Log Entry
             this.Icon = new BitmapImage(new Uri("pack://application:,,,/Grafiks/Icon.ico")); //Set Icon for Xc.
             InitializeComponent(); //Initialize Xc.
-            var borders = new Border[] { Border1, Border2, Border3, Border4}; //C. L. with Xc. Objects
+            // var borders = new Border[] { Border1, Border2, Border3, Border4}; //C. L. with Xc. Objects
             var textBlocks = new TextBlock[] { TextBlock1, TextBlock2}; //C. L. with Xc. Objects
             CheckForSettings(); //Start M.
             foregroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Settingsfile.ForegroundColor)!); //set V. for Xc. & C#c.
@@ -84,18 +84,18 @@ namespace Phexor
                 UndoButton.Background = foregroundBrush; //set Xc. Colors
                 RedoButton.Background = foregroundBrush; //set Xc. Colors
 
-                foreach (var border in borders) //loop for every Border in Borders
-                {
-                    border.BorderBrush = backgroundBrush; //set Xc. Colors
-                }
+                // foreach (var border in borders) //loop for every Border in Borders
+                // {
+                //     border.BorderBrush = backgroundBrush; //set Xc. Colors
+                // }
 
                 foreach (var textBlock in textBlocks) //loop for every textblock in textblocks
                 {
                     textBlock.Foreground = foregroundBrush; //set Xc. Colors
                 }
 
-                Border5.Background = backgroundBrush; //set Xc. Colors
-                Border6.Background = backgroundBrush; //set Xc. Colors
+                // Border5.Background = backgroundBrush; //set Xc. Colors
+                // Border6.Background = backgroundBrush; //set Xc. Colors
                 PathInput.Foreground = foregroundBrush; //set Xc. Colors
             }
             catch (Exception e) //used for logs
@@ -160,12 +160,12 @@ namespace Phexor
                 FileImage.VerticalAlignment = VerticalAlignment.Center; //set Xc. Aligments
                 FileImage.Name = $"FileImage{i}"; //set idendification Number
                 fileImageList.Add(FileImage); //add to L.
-                FileImages.Children.Add(FileImage); //add to Xc.
+                // FileImages.Children.Add(FileImage); //add to Xc.
 
                 Border PlaceholderFileImages = new Border(); //C. Xc. Object as Placeholder
                 PlaceholderFileImages.Height = 1; //set Height of the Xc. Placeholder
                 PlaceholderFileImages.Width = (Files.Width - 5); //set Width of the Xc. Placeholder
-                FileImages.Children.Add(PlaceholderFileImages); //Add the Xc. Placeholder to the Xc.
+                // FileImages.Children.Add(PlaceholderFileImages); //Add the Xc. Placeholder to the Xc.
             }
         }
         
@@ -365,19 +365,19 @@ namespace Phexor
                 {
                     if (ActiveMenus.Count > 0 ) //check if ActiveMenus exists
                     {
-                        Canvas.Children.Remove(ActiveMenus[0]); //Removes Active Menu from Grid
+                        Grid.Children.Remove(ActiveMenus[0]); //Removes Active Menu from Grid
                         ActiveMenus.RemoveAt(0); //removes Active Menu from the list
                         LoadAllFields(Path); //call LoadAllFields M. to remove the marked Fields mark
                     }
             
                     if (FileCreation) //if FileCreation is true
                     {
-                        Canvas.Children.Remove(InputName); //Remove InputName as Child of Grid
+                        Grid.Children.Remove(InputName); //Remove InputName as Child of Grid
                         FileCreation = false; //Set FileCreation to False
                     }
                     else if (FolderCreation) //if FolderCreation is True
                     {
-                        Canvas.Children.Remove(InputName);
+                        Grid.Children.Remove(InputName);
                         FolderCreation = false; //Set FolderCreation to False
                     } 
                 }
@@ -836,12 +836,12 @@ namespace Phexor
             }
             
             //Finish the Process
-            Point clickPosition = e.GetPosition(Canvas); //Get Position of Mouse
+            Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
             FolderMenu.Height = Directorys.Height / Settingsfile.Fields * FolderMenu.Children.Count; //Set Stackpanels Height
             FolderMenu.Width = 100; //Set Stackpanels Width
             FolderMenu.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //Set Stackpanels Position
             ActiveMenus.Add(FolderMenu); //Add Stackpanel to ActiveMenus list
-            Canvas.Children.Add(FolderMenu); //Add Stackpanel to Grid
+            Grid.Children.Add(FolderMenu); //Add Stackpanel to Grid
         }
 
         private void File_RightClick(object sender, MouseButtonEventArgs e) //M. to Create an File Option Menu
@@ -876,12 +876,12 @@ namespace Phexor
             }
             
             //Finish the Process
-            Point clickPosition = e.GetPosition(Canvas); //Get Position of Mouse
+            Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
             FileMenu.Height = Files.Height/Settingsfile.Fields * FileMenu.Children.Count; //Set Stackpanels Height
             FileMenu.Width = 100; //Set Stackpanels Width
             FileMenu.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //Set Stackpanels Position
             ActiveMenus.Add(FileMenu); //Add Stackpanel to ActiveMenus list
-            Canvas.Children.Add(FileMenu); //Add Stackpanel to Grid
+            Grid.Children.Add(FileMenu); //Add Stackpanel to Grid
         }
 
         private void AskFileName(object sender, MouseButtonEventArgs e) //M. to Ask for a File name to Create
@@ -893,8 +893,8 @@ namespace Phexor
                 {
                     InputNameText.Text = "Füge Namen Ein"; //Set InputNameTexts Text
             
-                    Point clickPosition = e.GetPosition(Canvas); //Get Position of Mouse
-                    Canvas.Children.Add(InputName); //Add InputName to the Grid
+                    Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
+                    Grid.Children.Add(InputName); //Add InputName to the Grid
                     InputName.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //set InptName to Mouse Positon
                     FileCreation = true; //Set FileCreation to True
                 }
@@ -918,8 +918,8 @@ namespace Phexor
                 {
                     InputNameText.Text = "Füge Namen Ein"; //Set InputNameTexts Text
             
-                    Point clickPosition = e.GetPosition(Canvas); //Get Position of Mouse
-                    Canvas.Children.Add(InputName); //Add InputName to the Grid
+                    Point clickPosition = e.GetPosition(Grid); //Get Position of Mouse
+                    Grid.Children.Add(InputName); //Add InputName to the Grid
                     InputName.Margin = new Thickness(clickPosition.X, clickPosition.Y, 5, 5); //set InptName to Mouse Positon
                     FolderCreation = true; //Set FolderCreation to True
                 }

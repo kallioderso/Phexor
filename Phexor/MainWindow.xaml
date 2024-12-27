@@ -1,51 +1,51 @@
 ﻿<Window x:Class="Phexor.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Closed="OnClose"
         PreviewKeyDown="ShortCuts"
         MouseDown="MouseShortCuts"
-      Title="Phexor" MinWidth="900" MinHeight="550" Width="900" Height="550" Icon="Grafiks/Icon.ico" x:Name="Window">
-    <Canvas Background="#263238" x:Name="Canvas">
-        
-        <Border BorderBrush="Azure" Background="#223238" Height="460" Width="830" Margin="25,25,25,25" BorderThickness="5" x:Name="Border1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Border BorderBrush="Azure" BorderThickness="5" Height="420" Width="830" Margin="25,65,25,25" x:Name="Border2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Border BorderBrush="Azure" BorderThickness="5" Height="380" Width="830" Margin="25,105,25,25" x:Name="Border3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Border BorderBrush="Azure" BorderThickness="5" Height="420" Width="220" Margin="25,65,25,25" x:Name="Border4" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        
-        <TextBlock Text="Verzeichnise" Height="25" Width="150" Margin="35,75,0,0"  TextAlignment="Left" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Cornsilk" x:Name="TextBlock1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBlock Text="Dateien" Height="25" Width="120" Margin="250,75,0,0"  TextAlignment="Left" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Cornsilk" x:Name="TextBlock2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        
-        <Border x:Name="SettingsButton" Height="30" Width="30" Background="Cornsilk" Margin="443,32,0,0" CornerRadius="6" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonDown="SettingsWindow" MouseRightButtonDown="SettingsWindow" HorizontalAlignment="Left" VerticalAlignment="Top"> 
-            <Image Source="Grafiks/Settings.png" Height="27" Width="27" IsHitTestVisible="False" />
-        </Border>
-        
-        <Border x:Name="UndoButton" Height="30" Width="30" Background="Cornsilk" Margin="484,32,0,0" CornerRadius="6" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseDown="UndoFunction" HorizontalAlignment="Left" VerticalAlignment="Top"> 
-            <Image Source="Grafiks/Undo.png" Height="27" Width="27" IsHitTestVisible="False"/>
-        </Border>
-        
-        <Border x:Name="RedoButton" Height="30" Width="30" Background="Cornsilk" Margin="517,32,0,0" CornerRadius="6" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseDown="RedoFunction" HorizontalAlignment="Left" VerticalAlignment="Top"> 
-            <Image Source="Grafiks/Redo.png" Height="27" Width="27" IsHitTestVisible="False"/>
-        </Border>
-        
-        <Border Height="40" Width="5" Background="Azure" Margin="435,25,0,0" x:Name="Border5" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        
-        <Border Height="40" Width="5" Background="Azure" Margin="476,25,0,0" x:Name="Border6" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        
-        <TextBox Height="28" Width="400" Background="Transparent" BorderBrush="Transparent" Margin="32,32,0,0" x:Name="PathInput" Text="Füge Pfad ein..." FontSize="15" Foreground="Cornsilk" TextAlignment="Left" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        
-        <StackPanel x:Name="Directorys" Width="200" Height="360"  Margin="34,112,0,0" MouseWheel="DirectoryScrollingWithMouse" HorizontalAlignment="Left" VerticalAlignment="Top">
-            
+        Title="Phexor" Width="900" Height="550" Icon="Grafiks/Icon.ico" x:Name="Window" Background="#263238">
+    <Grid x:Name="Grid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header Section -->
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#37474F">
+            <TextBox Width="400" Background="Transparent" BorderBrush="Transparent" Padding="10" x:Name="PathInput" Text="Füge Pfad ein..." FontSize="15" Foreground="Cornsilk" TextAlignment="Left"  HorizontalAlignment="Left" VerticalAlignment="Top" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" />
+            <Border x:Name="SettingsButton" Height="30" Width="30" BorderBrush="Cornsilk" BorderThickness="1.5" Background="Transparent" CornerRadius="6" HorizontalAlignment="Left" Margin="4,0,0,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonDown="SettingsWindow" MouseRightButtonDown="SettingsWindow"> 
+                <Image Source="Grafiks/Settings.png" IsHitTestVisible="False" Height="22" Width="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border x:Name="UndoButton" Height="30" Width="30" BorderBrush="Cornsilk" BorderThickness="1.5" Background="Transparent" CornerRadius="6" HorizontalAlignment="Left"  Margin="4,0,0,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseDown="UndoFunction"> 
+                <Image Source="Grafiks/Undo.png"  IsHitTestVisible="False" Height="22" Width="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border x:Name="RedoButton" Height="30" Width="30" BorderBrush="Cornsilk" BorderThickness="1.5" Background="Transparent" CornerRadius="6" HorizontalAlignment="Left" Margin="4,0,0,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseDown="RedoFunction"> 
+                <Image Source="Grafiks/Redo.png" IsHitTestVisible="False" Height="22" Width="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
         </StackPanel>
-        
-        <StackPanel x:Name="Files" Width="595" Height="360"  Margin="249,112,0,0" MouseWheel="FileScrollingWithMouse" HorizontalAlignment="Left" VerticalAlignment="Top">
-            
+
+        <!-- Directory Section -->
+        <StackPanel Grid.Row="1" Grid.Column="0" Background="#455A68" Width="200">
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Directorys"  Height="30"  TextAlignment="Left" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Cornsilk" x:Name="TextBlock1" VerticalAlignment="Top" Margin="10,0,0,0"/>
+            <StackPanel x:Name="Directorys" Margin="10,0,0,0" MouseWheel="DirectoryScrollingWithMouse">
+               
+            </StackPanel>
         </StackPanel>
-        
-        <StackPanel x:Name="FileImages" Width="30" Height="360"  Margin="0,112,35,25" MouseWheel="FileScrollingWithMouse" HorizontalAlignment="Right" VerticalAlignment="Top">
-            
+
+        <!-- File Section -->
+        <StackPanel Grid.Row="1" Grid.Column="1" Background="SlateGray">
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Files"  Height="30"  TextAlignment="Left" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="Cornsilk" x:Name="TextBlock2" VerticalAlignment="Top" Margin="10,0,0,0"/>
+            <StackPanel x:Name="Files" Margin="10,0,0,0" MouseWheel="FileScrollingWithMouse" >
+                
+            </StackPanel>
         </StackPanel>
-    </Canvas>
+    </Grid>
 </Window>
