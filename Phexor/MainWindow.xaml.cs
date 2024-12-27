@@ -37,7 +37,7 @@ namespace Phexor
         private SolidColorBrush Placeholders; //C. V. for Xc. & C#c.
         private List<TextBlock> DirectoryList = new List<TextBlock>(); //C. L. for LoadAllFields M.
         private List<TextBlock> fileList = new List<TextBlock>(); //C. L. for LoadAllFields M.
-        private List<Image> fileImageList = new List<Image>(); //C. L. for LoadAllFields M.
+        // private List<Image> fileImageList = new List<Image>(); //C. L. for LoadAllFields M.
         private List<Border> PlaceholderDirectoryList = new List<Border>(); //C. L. for LoadAllFields M.
         private List<Border> PlaceholderfileList = new List<Border>(); //C. L. for LoadAllFields M.
         private string Redostring; //C. V. for an Redo path string
@@ -58,7 +58,6 @@ namespace Phexor
             Logging.Log("Initialize", "MainWindow"); //C. Log Entry
             this.Icon = new BitmapImage(new Uri("pack://application:,,,/Grafiks/Icon.ico")); //Set Icon for Xc.
             InitializeComponent(); //Initialize Xc.
-            // var borders = new Border[] { Border1, Border2, Border3, Border4}; //C. L. with Xc. Objects
             var textBlocks = new TextBlock[] { TextBlock1, TextBlock2}; //C. L. with Xc. Objects
             CheckForSettings(); //Start M.
             foregroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Settingsfile.ForegroundColor)!); //set V. for Xc. & C#c.
@@ -83,19 +82,12 @@ namespace Phexor
                 SettingsButton.Background = foregroundBrush; //set Xc. Colors
                 UndoButton.Background = foregroundBrush; //set Xc. Colors
                 RedoButton.Background = foregroundBrush; //set Xc. Colors
-
-                // foreach (var border in borders) //loop for every Border in Borders
-                // {
-                //     border.BorderBrush = backgroundBrush; //set Xc. Colors
-                // }
-
+                
                 foreach (var textBlock in textBlocks) //loop for every textblock in textblocks
                 {
                     textBlock.Foreground = foregroundBrush; //set Xc. Colors
                 }
-
-                // Border5.Background = backgroundBrush; //set Xc. Colors
-                // Border6.Background = backgroundBrush; //set Xc. Colors
+                
                 PathInput.Foreground = foregroundBrush; //set Xc. Colors
             }
             catch (Exception e) //used for logs
@@ -152,14 +144,14 @@ namespace Phexor
                 Files.Children.Add(PlaceholderFile); //Add the Xc. Placeholder to the Xc.
                 
                 
-                Image FileImage = new Image(); //C. new FileImage Image Xc. Object
-                FileImage.Height = (Files.Height/Settingsfile.Fields  -1); //set Xc. Size
-                FileImage.Width = (Files.Height/Settingsfile.Fields + 2); //set Xc. Size
-                FileImage.Stretch = Stretch.Uniform; //Prevent Cuttet Images in Xc. 
-                FileImage.HorizontalAlignment = HorizontalAlignment.Right; //set Xc. Aligments
-                FileImage.VerticalAlignment = VerticalAlignment.Center; //set Xc. Aligments
-                FileImage.Name = $"FileImage{i}"; //set idendification Number
-                fileImageList.Add(FileImage); //add to L.
+                // Image FileImage = new Image(); //C. new FileImage Image Xc. Object
+                // FileImage.Height = (Files.Height/Settingsfile.Fields  -1); //set Xc. Size
+                // FileImage.Width = (Files.Height/Settingsfile.Fields + 2); //set Xc. Size
+                // FileImage.Stretch = Stretch.Uniform; //Prevent Cuttet Images in Xc. 
+                // FileImage.HorizontalAlignment = HorizontalAlignment.Right; //set Xc. Aligments
+                // FileImage.VerticalAlignment = VerticalAlignment.Center; //set Xc. Aligments
+                // FileImage.Name = $"FileImage{i}"; //set idendification Number
+                // fileImageList.Add(FileImage); //add to L.
                 // FileImages.Children.Add(FileImage); //add to Xc.
 
                 Border PlaceholderFileImages = new Border(); //C. Xc. Object as Placeholder
@@ -206,7 +198,7 @@ namespace Phexor
 
                 if (Path == "" || Path == null || Path == String.Empty) //checks for an empty path
                 {
-                    PathInput.Text = "Füge Pfad ein..."; //set the Path input Textboxs text
+                    PathInput.Text = "Enter a Path..."; //set the Path input Textboxs text
                 }
             }
             else if (e.Key == Key.P && !PathInput.IsKeyboardFocused && !FileCreation && !FolderCreation) //check if pressed Key is P (Placheolders) and PathInput is not Keyboard Focused and no File or Folder gets Created
@@ -349,7 +341,7 @@ namespace Phexor
                 
                 if (Path == "" || Path == null || Path == String.Empty) //checks for an empty path
                 {
-                    PathInput.Text = "Füge Pfad ein..."; //set the Path input Textboxs text
+                    PathInput.Text = "Enter a Path..."; //set the Path input Textboxs text
                 }
                 RemoveMenus(null, null); //call RemoveMenus M.
             }
@@ -560,7 +552,7 @@ namespace Phexor
                 {
                     if (Path == "" || Path == null) //Check for an Empty Path
                     {
-                        PathInput.Text = "Füge Pfad ein..."; //set the Path input Textboxs text
+                        PathInput.Text = "Enter a Path..."; //set the Path input Textboxs text
                     }
                 }
             }
@@ -655,7 +647,7 @@ namespace Phexor
                     DirectoryList[i].Foreground = foregroundBrush; //Reset Foregroundbrush of Directory Textblock
                     fileList[i].Text = null; //Reset text of File Textblock
                     fileList[i].Foreground = foregroundBrush; //Reset Foregroundbrush of File Textblock
-                    fileImageList[i].Source = null; //clear the fileImage Image-source
+                    // fileImageList[i].Source = null; //clear the fileImage Image-source
                     PlaceholderDirectoryList[i].Background = Brushes.Transparent; //Clear the Placeholders Visbility (with Background Color)
                     PlaceholderfileList[i].Background = Brushes.Transparent; //Clear the Placeholders Visbility (with Background Color)
                 }
@@ -679,7 +671,7 @@ namespace Phexor
                         var directors = Directory.GetDirectories(directoryPath); //Adding Every Directory to the directory L.
                         if (directors != null) //check if directorys are empty
                         {
-                            TextBlock1.Text = "Verzeichnise (" + directors.Length + ")"; //set the Textblock Text to the amount of Directorys
+                            TextBlock1.Text = "Directorys (" + directors.Length + ")"; //set the Textblock Text to the amount of Directorys
                             try //prevent crashes
                             {
                                 foreach (var directory in directors) //loop for each directory in the path
@@ -724,7 +716,7 @@ namespace Phexor
                         var files = Directory.GetFiles(directoryPath); //get every File from the Path
                         if (files != null) //check if Files L. is empty
                         {
-                            TextBlock2.Text = "Dateien (" + files.Length + ")"; //set the Textblock Text to the amount of Files
+                            TextBlock2.Text = "Files (" + files.Length + ")"; //set the Textblock Text to the amount of Files
                             try //prevent Crashes
                             {
                                 foreach (var file in files) // Loop for every file 
@@ -746,22 +738,22 @@ namespace Phexor
                                     {
                                         fileList[FilesDisplayed].Text = file.Substring(directoryPathLength); //Set the Text of the Textblocks (just the Filename, not Path)
                                         PlaceholderfileList[FilesDisplayed].Background = Placeholders; //Set the Placeholders Visibility (with background Color)
-                                        if (file.EndsWith(".txt") || file.EndsWith(".doc") || file.EndsWith(".docx") || file.EndsWith("odt") || file.EndsWith(".rtf")) //Check if file is text-file
-                                        {
-                                            fileImageList[FilesDisplayed].Source = new BitmapImage(new Uri("Grafiks/TXT.png", UriKind. Relative)); //Set matching File-Image
-                                        }
-                                        else if (file.EndsWith(".xls") || file.EndsWith(".xlsx") || file.EndsWith(".ods") || file.EndsWith(".csv")) //Check if file is an Excel-file or similiar
-                                        {
-                                            fileImageList[FilesDisplayed].Source = new BitmapImage(new Uri("Grafiks/XLS.png", UriKind. Relative)); //Set matching File-Image
-                                        }
-                                        else if (file.EndsWith(".ppt") || file.EndsWith(".pptx") || file.EndsWith(".odp")) //Check if file is an Presentation-file
-                                        {
-                                            fileImageList[FilesDisplayed].Source = new BitmapImage(new Uri("Grafiks/PPTX.png", UriKind. Relative)); //Set matching File-Image
-                                        }
-                                        else if (file.EndsWith(".pdf")) //Check if file is an PDF-file
-                                        {
-                                            fileImageList[FilesDisplayed].Source = new BitmapImage(new Uri("Grafiks/PDF.png", UriKind. Relative)); //Set matching File-Image
-                                        }
+                                        // if (file.EndsWith(".txt") || file.EndsWith(".doc") || file.EndsWith(".docx") || file.EndsWith("odt") || file.EndsWith(".rtf")) //Check if file is text-file
+                                        // {
+                                        //     fileImageList[FilesDisplayed].Source = new BitmapImage(new Uri("Grafiks/TXT.png", UriKind. Relative)); //Set matching File-Image
+                                        // }
+                                        // else if (file.EndsWith(".xls") || file.EndsWith(".xlsx") || file.EndsWith(".ods") || file.EndsWith(".csv")) //Check if file is an Excel-file or similiar
+                                        // {
+                                        //     fileImageList[FilesDisplayed].Source = new BitmapImage(new Uri("Grafiks/XLS.png", UriKind. Relative)); //Set matching File-Image
+                                        // }
+                                        // else if (file.EndsWith(".ppt") || file.EndsWith(".pptx") || file.EndsWith(".odp")) //Check if file is an Presentation-file
+                                        // {
+                                        //     fileImageList[FilesDisplayed].Source = new BitmapImage(new Uri("Grafiks/PPTX.png", UriKind. Relative)); //Set matching File-Image
+                                        // }
+                                        // else if (file.EndsWith(".pdf")) //Check if file is an PDF-file
+                                        // {
+                                        //     fileImageList[FilesDisplayed].Source = new BitmapImage(new Uri("Grafiks/PDF.png", UriKind. Relative)); //Set matching File-Image
+                                        // }
                                         FilesDisplayed++; //incrase FilesDisplayed Count
                                     }
 
