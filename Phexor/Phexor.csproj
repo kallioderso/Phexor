@@ -30,8 +30,4 @@
   <ItemGroup>
     <Resource Include="Grafiks\Icon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
-  </ItemGroup>
 </Project>
