@@ -561,7 +561,7 @@ namespace Phexor
         private void SettingsWindow(object sender, MouseButtonEventArgs e) //Open Settings Window
         {
             Logging.Log("Open Settings", "MainWindow"); //C. Log Entry
-            Phexor.SettingsWindow settings = new SettingsWindow(); //C. new Settings window
+            Phexor.Settings settings = new Settings(); //C. new Settings window
             settings.Show(); //show the Created Settings window
             NotTrueClose = true; //prevent an close of the program
             this.Close(); // close this window
