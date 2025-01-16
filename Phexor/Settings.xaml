@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Phexor"
         mc:Ignorable="d"
+        Closed="Settings_OnClosed"
         Title="Settings" Width="900" Height="550" x:Name="Window" Background="#2D2D2D">
 
     <Window.Resources>

@@ -1,12 +1,14 @@
+using System;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace Phexor;
 
-public partial class Settings : Window
+public partial class Settings
 {
-    public Settings()
+    private readonly Explorer explorerRef;
+    public Settings(Explorer explorer)
     {
+        explorerRef = explorer;
         InitializeComponent();
         SettingMenu.Content = new SettingMenus.ColorSettings();
     }
@@ -29,5 +31,10 @@ public partial class Settings : Window
     private void LoggingSettingsButton_OnClick(object sender, RoutedEventArgs e)
     {
         SettingMenu.Content = new SettingMenus.LoggingSettings();
+    }
+
+    private void Settings_OnClosed(object sender, EventArgs e)
+    {
+        explorerRef.Initialize();
     }
 }

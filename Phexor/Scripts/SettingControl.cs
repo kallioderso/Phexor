@@ -12,20 +12,29 @@ namespace Phexor.Scripts;
 // C#c. = C# code
 public class SettingsControl
 {
-    public static string Color1 = ""; //C. V. for Color1
-    public static string Color2 = ""; //C. V. for Color2
-    public static string Color3 = ""; //C. V. for Color3
-    public static string Color4 = ""; //C. V. for Color4
+    public static string Color1 = "FFFFFF"; //C. V. for Color1
+    public static string Color2 = "FFFFFF"; //C. V. for Color2
+    public static string Color3 = "FFFFFF"; //C. V. for Color3
+    public static string Color4 = "FFFFFF"; //C. V. for Color4
 
     public static string AppdataFolder = Path.Combine((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)), "Phexor"); //C. V. and get Locatin of Appdata Folder for Phexor
     public static string SettingsOrdner = Path.Combine(AppdataFolder, "Settings"); //C. V. and get Locatin of Settings in Appdata Folder for Phexor
-    public static string ColorSettingsFile = Path.Combine(AppdataFolder, SettingsOrdner + @"\ColorSettings.txt"); //C. V. and get Locatin of ColorSettingsfile in Settings in Appdata Folder for Phexor
-    public static string SymbolSettingsFile = Path.Combine(AppdataFolder, SettingsOrdner + @"\SymbolSettings.txt"); //C. V. and get Locatin of SymbolSettingsfile in Settings in Appdata Folder for Phexor
-    public static string SizeSettingsFile = Path.Combine(AppdataFolder, SettingsOrdner + @"\SizeSettings.txt"); //C. V. and get Locatin of SizeSettingsfile in Settings in Appdata Folder for Phexor
-    public static string LoggingSettingsFile = Path.Combine(AppdataFolder, SettingsOrdner + @"\LoggingSettings.txt"); //C. V. and get Locatin of LoggingSettingsfile in Settings in Appdata Folder for Phexor
+    public static string ColorSettingsFile = Path.Combine(AppdataFolder, SettingsOrdner + @"\ColorSettings.settings"); //C. V. and get Locatin of ColorSettingsfile in Settings in Appdata Folder for Phexor
+    public static string SymbolSettingsFile = Path.Combine(AppdataFolder, SettingsOrdner + @"\SymbolSettings.settings"); //C. V. and get Locatin of SymbolSettingsfile in Settings in Appdata Folder for Phexor
+    public static string SizeSettingsFile = Path.Combine(AppdataFolder, SettingsOrdner + @"\SizeSettings.settings"); //C. V. and get Locatin of SizeSettingsfile in Settings in Appdata Folder for Phexor
+    public static string LoggingSettingsFile = Path.Combine(AppdataFolder, SettingsOrdner + @"\LoggingSettings.settings"); //C. V. and get Locatin of LoggingSettingsfile in Settings in Appdata Folder for Phexor
 
     public static void GetSettings() //M. to get Saved Settings
     {
+        if (!Directory.Exists(AppdataFolder))
+        {
+            Directory.CreateDirectory(AppdataFolder); //creates Appdatafolder if not existing
+        }
+        if (!Directory.Exists(SettingsOrdner))
+        {
+            Directory.CreateDirectory(SettingsOrdner); //creates Settingsfolder if not existing
+        }
+        
         GetColorSettings();
         GetSymbolSettings();
         GetSizeSettings();
