@@ -15,7 +15,8 @@ public class PathSearcher
         this.explorerRef = explorer;
     }
     
-    public static string Path;
+    public static string Path = "";
+    public static string SavePath = "";
     public static int DirectoryRemoveCount;
     public static int FileRemoveCount;
     

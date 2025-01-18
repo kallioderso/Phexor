@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Phexor.Scripts;
+using static System.Diagnostics.Process;
 using static System.Windows.Input.Key;
 using Path = System.IO.Path;
 using SolidColorBrush = System.Windows.Media.SolidColorBrush;
@@ -27,15 +28,19 @@ namespace Phexor
         {
             Colorize();
         }
+
         private void Colorize()
         {
             SettingsControl.GetSettings();
             Headbar.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Color1)!);
-            ButtonField.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Color2)!);
-            DirectorysPanel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Color3)!);
-            FilesPanel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Color4)!);
+            ButtonField.Background =
+                new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Color2)!);
+            DirectorysPanel.Background =
+                new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Color3)!);
+            FilesPanel.Background =
+                new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Color4)!);
         }
-        
+
         private void ClearFields()
         {
             Directorys.Children.Clear();
@@ -44,20 +49,22 @@ namespace Phexor
 
         public void AddDirectory(TextBlock directory)
         {
-            directory.MouseDown += OpenPath;
+            directory.MouseLeftButtonDown += OpenPath;
             Directorys.Children.Add(directory);
         }
-        
+
         public void AddFile(TextBlock file)
         {
+            file.MouseLeftButtonDown += OpenFile;
             Files.Children.Add(file);
         }
-        
+
         private void PathInputEnter(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
                 PathSearcher.Path = PathInput.Text;
+                PathSearcher.SavePath = PathInput.Text;
                 PathSearcher.DirectoryRemoveCount = 0;
                 PathSearcher.FileRemoveCount = 0;
                 PathSearcherInitialize();
@@ -104,21 +111,59 @@ namespace Phexor
                 }
             }
         }
-        
+
         private void OpenSettings(object sender, RoutedEventArgs e)
         {
             var settings = new Settings(this);
             settings.Show();
         }
-        
+
         private void OpenPath(object sender, MouseButtonEventArgs e)
         {
-            var textBlock = (TextBlock)sender;
-            PathInput.Text = PathInput.Text + @"/" + textBlock.Text;
-            PathSearcher.Path = PathInput.Text;
-            PathSearcher.DirectoryRemoveCount = 0;
-            PathSearcher.FileRemoveCount = 0;
-            PathSearcherInitialize();
+            try
+            {
+                if (sender is TextBlock textBlock) PathFunctions.OpenPath(PathInput.Text, textBlock.Text);
+                PathSearcher.SavePath = PathSearcher.Path;
+                PathInput.Text = PathSearcher.Path;
+                PathSearcherInitialize();
+            }
+            catch (Exception exception)
+            {
+                // ignored
+            }
+        }
+
+        private void OpenFile(object sender, MouseButtonEventArgs e)
+        {
+            var textBlock = sender as TextBlock;
+            PathFunctions.OpenFile(textBlock?.Text);
+        }
+        
+        private void Undo(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(PathSearcher.Path) && PathSearcher.Path != "C:\\")
+            {
+                var newPath = PathFunctions.Undo();
+                PathSearcherInitialize();
+                PathInput.Text = newPath;
+            }
+        }
+
+        private void Redo(object sender, MouseButtonEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(PathSearcher.SavePath) && PathSearcher.SavePath != PathSearcher.Path)
+            {
+                var newPath = PathFunctions.Redo();
+
+                if (!string.IsNullOrEmpty(newPath))
+                {
+                    PathSearcher.Path = newPath;
+                    PathSearcher.DirectoryRemoveCount = 0;
+                    PathSearcher.FileRemoveCount = 0;
+                    PathSearcherInitialize();
+                    PathInput.Text = PathSearcher.Path;
+                }
+            }
         }
     }
 }

@@ -30,11 +30,11 @@
                 <Image Source="Grafiks/Settings.png" IsHitTestVisible="False" Height="22" Width="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
 
-            <Border x:Name="UndoButton" Height="30" Width="30" BorderBrush="#333" BorderThickness="1.5" Background="Transparent" CornerRadius="6" HorizontalAlignment="Left"  Margin="2,0,0,0">
+            <Border x:Name="UndoButton" Height="30" Width="30" BorderBrush="#333" BorderThickness="1.5" Background="Transparent" CornerRadius="6" HorizontalAlignment="Left"  Margin="2,0,0,0" MouseDown="Undo">
                 <Image Source="Grafiks/Undo.png"  IsHitTestVisible="False" Height="22" Width="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
 
-            <Border x:Name="RedoButton" Height="30" Width="30" BorderBrush="#333" BorderThickness="1.5" Background="Transparent" CornerRadius="6" HorizontalAlignment="Left" Margin="2,0,0,0" >
+            <Border x:Name="RedoButton" Height="30" Width="30" BorderBrush="#333" BorderThickness="1.5" Background="Transparent" CornerRadius="6" HorizontalAlignment="Left" Margin="2,0,0,0" MouseDown="Redo" >
                 <Image Source="Grafiks/Redo.png" IsHitTestVisible="False" Height="22" Width="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
         </StackPanel>
