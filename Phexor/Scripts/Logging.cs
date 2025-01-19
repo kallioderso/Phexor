@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using System.Globalization;
 using System.IO;
+using System.Reflection.Emit;
 using System.Text;
 
 namespace Phexor.Scripts;
@@ -12,58 +13,50 @@ namespace Phexor.Scripts;
 // M. = Method
 // Xc. = XAML code
 // C#c. = C# code
-public static class Logging
+public class Logging
 {
-    public static string AppdataFolder = Path.Combine((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)), "Phexor"); //C. V. and get Locatin of Appdata Folder for Phexor
-    public static string LogDirectory = Path.Combine(AppdataFolder, "Logs"); //C. V. and get Locatin of LogDirectory in Appdata Folder for Phexor
-    private static string DailyLogFileName = string.Concat(LogDirectory, @"\",DateTime.Today.ToString("d").Replace(@"/", ".")) + ".log";
-    public static int LogCount; //C. V. for RemoveOldLogFile M.
-    public static void Log(string Log, string Identifikator) //M. To Add a line to the Logs
+    private static readonly string AppdataFolder = Path.Combine((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)), "Phexor");
+    private static readonly string LogDirectory = Path.Combine(AppdataFolder, "Logs");
+    private static readonly string DailyLogFileName = string.Concat(LogDirectory, @"\",DateTime.Today.ToString("d").Replace(@"/", ".")) + ".log";
+    public Logging(string log, string identifikator, bool catchLog)
     {
-        if (!Directory.Exists(LogDirectory)) //check if Log Directory Exists
+        if (!Directory.Exists(LogDirectory))
         {
-            Directory.CreateDirectory(LogDirectory); //C. Log Directory
+            Directory.CreateDirectory(LogDirectory);
         }
 
-        using (StreamWriter writer = new StreamWriter(DailyLogFileName, true, Encoding.UTF8)) //C. or Accesses the DailyLogFile
+        if (catchLog)
         {
-            string LogText = $"{DateTime.Now:HH:mm:ss} [{Identifikator}] : {Log}"; //C. the LogText
-            writer.WriteLine(LogText); //Add new LogText to the LogFile
+            using StreamWriter writer = new StreamWriter(DailyLogFileName, true, Encoding.UTF8);
+            string logText = $"{DateTime.Now:HH:mm:ss} [{identifikator}] | Catch | : {log}";
+            writer.WriteLine(logText);
         }
-        RemoveOldLogFile(); //call M. to Remove Outdated Log Files
-    }
-    
-    public static void CatchLog(string Log, string Identifikator) //M. To Add a line to the Logs
-    {
-        if (!Directory.Exists(LogDirectory)) //check if Log Directory Exists
+        else
         {
-            Directory.CreateDirectory(LogDirectory); //C. Log Directory
+            using StreamWriter writer = new StreamWriter(DailyLogFileName, true, Encoding.UTF8);
+            string logText = $"{DateTime.Now:HH:mm:ss} [{identifikator}] : {log}";
+            writer.WriteLine(logText);
         }
-        using (StreamWriter writer = new StreamWriter(DailyLogFileName, true, Encoding.UTF8)) //C. or Accesses the DailyLogFile
-        {
-            string LogText = $"{DateTime.Now:HH:mm:ss} [{Identifikator}] | Catch | : {Log}"; //C. the LogText
-            writer.WriteLine(LogText); //Add new LogText to the LogFile
-        }
-        RemoveOldLogFile(); //call M. to Remove Outdated Log Files
+        RemoveOldLogFile();
     }
 
-    public static void RemoveOldLogFile() //M. to Remove Outdated Log Files
+    private void RemoveOldLogFile()
     {
-        if (LogCount != 0) //checks for an empty LogCount
+        if (SettingsControl.LogCount != 0)
         {
-            foreach (var Logs in Directory.GetFiles(LogDirectory)) //Loop for Every Existing Log File
+            foreach (var logs in Directory.GetFiles(LogDirectory))
             {
-                bool LogInRanche = false; //C. V. to check if file should exist
-                for (int i = 0; i < LogCount; i++) //loop to check if File is in allowed time span
+                bool logInRanche = false;
+                for (int i = 0; i < SettingsControl.LogCount; i++)
                 {
-                    if (Logs.Substring(LogDirectory.Length + 1) == DateTime.Today.AddDays(-i).ToString("d").Replace(@"/", ".") + ".log") //if Logs is in Time Span
+                    if (logs.Substring(LogDirectory.Length + 1) == DateTime.Today.AddDays(-i).ToString("d").Replace(@"/", ".") + ".log")
                     {
-                        LogInRanche = true; //set LogInRanche bool to True
+                        logInRanche = true;
                     }
                 }
-                if (!LogInRanche) //if LogInRanche bool isn´t true
+                if (!logInRanche)
                 {
-                    File.Delete((LogDirectory + @"\" + Logs.Substring(LogDirectory.Length + 1))); //Delete Momentanly File
+                    File.Delete((LogDirectory + @"\" + logs.Substring(LogDirectory.Length + 1)));
                 }
             }
         }

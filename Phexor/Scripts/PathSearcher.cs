@@ -6,15 +6,8 @@ using System.Windows.Media;
 
 namespace Phexor.Scripts;
 
-public class PathSearcher
+public class PathSearcher(Explorer explorer)
 {
-    private readonly Explorer explorerRef;
-
-    public PathSearcher(Explorer explorer)
-    {
-        this.explorerRef = explorer;
-    }
-    
     public static string Path = "";
     public static string SavePath = "";
     public static int DirectoryRemoveCount;
@@ -58,7 +51,7 @@ public class PathSearcher
                         Text = file.Substring(Path.Length),
                         VerticalAlignment = VerticalAlignment.Center
                     };
-                    explorerRef.AddFile(fileTextBlock);
+                    explorer.AddFile(fileTextBlock);
                 }
             }
         }
@@ -84,7 +77,7 @@ public class PathSearcher
                         Text = directory.Substring(Path.Length),
                         VerticalAlignment = VerticalAlignment.Center,
                     };
-                    explorerRef.AddDirectory(directoryTextBlock);
+                    explorer.AddDirectory(directoryTextBlock);
                 }
             }
         }

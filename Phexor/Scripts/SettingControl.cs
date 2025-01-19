@@ -16,6 +16,8 @@ public class SettingsControl
     public static string Color2 = "FFFFFF"; //C. V. for Color2
     public static string Color3 = "FFFFFF"; //C. V. for Color3
     public static string Color4 = "FFFFFF"; //C. V. for Color4
+    
+    public static int LogCount = 7; //C. V. for LogCount
 
     public static string AppdataFolder = Path.Combine((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)), "Phexor"); //C. V. and get Locatin of Appdata Folder for Phexor
     public static string SettingsOrdner = Path.Combine(AppdataFolder, "Settings"); //C. V. and get Locatin of Settings in Appdata Folder for Phexor
