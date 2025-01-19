@@ -64,6 +64,7 @@
         </StackPanel>
 
         <!-- Setting -->
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="" Height="30" TextAlignment="Center" FontSize="20" FontStyle="Normal" Background="Transparent" Foreground="White" x:Name="Text2" VerticalAlignment="Top"/>
         <ContentControl Grid.Row="1" Grid.Column="2" Background="#2D2D2D" x:Name="SettingMenu"/>
 
         <!-- Divider -->

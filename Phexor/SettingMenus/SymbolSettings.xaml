@@ -4,68 +4,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="500" d:DesignWidth="600">
     <Grid>
-        <StackPanel>
-            <StackPanel Orientation="Horizontal" Height="Auto">
-                <Button>
-                    <TextBlock>
-                        Test1
-                    </TextBlock>
-                </Button>
-            
-                <Button>
-                    <TextBlock>
-                        Test2
-                    </TextBlock>
-                </Button>
-            
-                <Button>
-                    <TextBlock>
-                        Test3
-                    </TextBlock>
-                </Button>
-            </StackPanel>
-            
-            <StackPanel Orientation="Horizontal" Height="Auto">
-                <Button>
-                    <TextBlock>
-                        Test4
-                    </TextBlock>
-                </Button>
-            
-                <Button>
-                    <TextBlock>
-                        Test5
-                    </TextBlock>
-                </Button>
-            
-                <Button>
-                    <TextBlock>
-                        Test6
-                    </TextBlock>
-                </Button>
-            </StackPanel>
-            
-            <StackPanel Orientation="Horizontal" Height="Auto">
-                <Button>
-                    <TextBlock>
-                        Test7
-                    </TextBlock>
-                </Button>
-            
-                <Button>
-                    <TextBlock>
-                        Test8
-                    </TextBlock>
-                </Button>
-            
-                <Button>
-                    <TextBlock>
-                        Test9
-                    </TextBlock>
-                </Button>
-            </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition/>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        
+        <Border Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Background="Black"/>
+        <Border Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Background="Black"/>
+        <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Background="Black"/>
+        <Border Grid.Column="3" Grid.Row="1" Grid.RowSpan="3" Background="Black"/>
+
+        <StackPanel Grid.Row="2" Grid.Column="2" Background="White">
+            <TextBlock>
+                Comming soon
+            </TextBlock>
         </StackPanel>
     </Grid>
 </UserControl>
