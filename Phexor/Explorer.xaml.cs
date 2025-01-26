@@ -50,12 +50,14 @@ namespace Phexor
         public void AddDirectory(TextBlock directory)
         {
             directory.MouseLeftButtonDown += OpenPath;
+            directory.MouseRightButtonDown += OpenFieldPopup;
             Directorys.Children.Add(directory);
         }
 
         public void AddFile(TextBlock file)
         {
             file.MouseLeftButtonDown += OpenFile;
+            file.MouseRightButtonDown += OpenFieldPopup;
             Files.Children.Add(file);
         }
 
@@ -164,6 +166,27 @@ namespace Phexor
                     PathInput.Text = PathSearcher.Path;
                 }
             }
+        }
+        
+        private void OpenFieldPopup(object sender, RoutedEventArgs e)
+        {
+            FieldPopup.IsOpen = true;
+            if (Directorys.Children.Contains(sender as TextBlock))
+            {
+                Scripts.PopUps.Directory directory = new Scripts.PopUps.Directory(this, sender as TextBlock);
+                directory.PopUp();
+            }
+            else if (Files.Children.Contains(sender as TextBlock))
+            {
+                Scripts.PopUps.File file = new Scripts.PopUps.File(this, sender as TextBlock);
+                file.PopUp();
+            }
+        }
+        
+        private void CloseFieldPopup(object sender, EventArgs eventArgs)
+        {
+            FieldPopup.IsOpen = false;
+            PopupStackpanel.Children.Clear();
         }
     }
 }

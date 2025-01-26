@@ -57,5 +57,14 @@
         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#333"/>
         <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Background="#333"/>
         <Border Grid.Row="4" Grid.Column="1" Background="#333"/>
+        
+        <!-- Popup -->
+        <Popup Placement="Mouse" StaysOpen="False" x:Name="FieldPopup" Closed="CloseFieldPopup">
+            <Border BorderBrush="Black" BorderThickness="1" Background="White">
+                <StackPanel x:Name="PopupStackpanel">
+                </StackPanel>
+            </Border>
+        </Popup>
+        
     </Grid>
 </Window>
