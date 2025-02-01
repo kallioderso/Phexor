@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Phexor.Scripts;
 
 namespace Phexor.SettingMenus;
@@ -20,75 +21,75 @@ public partial class LoggingSettings : UserControl
         if (setting.Content.ToString() == " ")
         {
             setting.Content = "X";
-            SaveSettings(setting, e, true);
+            SaveSettings(setting, true);
         }
         else if (setting.Content.ToString() == "X")
         {
             setting.Content = " ";
-            SaveSettings(setting, e, false);
+            SaveSettings(setting, false);
         }
     }
     
-    private void SaveSettings(object sender, RoutedEventArgs e, bool state)
+    private void SaveSettings(object sender, bool state)
     {
         if (sender == ExplorerLog)
         {
             if (state)
             {
-                SettingsControl.Log2 = "1";
+                SettingsControl.Log2 = 1;
             }
             else
             {
-                SettingsControl.Log2 = "0";
+                SettingsControl.Log2 = 0;
             }
         }
         else if (sender == SettingsLog)
         {
             if (state)
             {
-                SettingsControl.Log3 = "1";
+                SettingsControl.Log3 = 1;
             }
             else
             {
-                SettingsControl.Log3 = "0";
+                SettingsControl.Log3 = 0;
             }
         }
         else if (sender == ScriptsLog)
         {
             if (state)
             {
-                SettingsControl.Log4 = "1";
+                SettingsControl.Log4 = 1;
             }
             else
             {
-                SettingsControl.Log4 = "0";
+                SettingsControl.Log4 = 0;
             }
         }
         else if (sender == LogCountSlider)
         {
-            SettingsControl.Log1 = LogCountSlider.Value.ToString();
+            SettingsControl.Log1 = LogCountSlider.Value;
         }
         SettingsControl.SetSettings();
     }
 
-    private void LogCountChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    private void LogCountChanged(object sender, MouseEventArgs mouseEventArgs)
     {
-        SaveSettings(LogCountSlider, e, true);
+        SaveSettings(LogCountSlider, true);
     }
 
     private void GetValues()
     {
         SettingsControl.GetSettings();
-        LogCountSlider.Value = Convert.ToDouble(SettingsControl.Log1);
-        if (SettingsControl.Log2 == "1")
+        LogCountSlider.Value = SettingsControl.Log1;
+        if (SettingsControl.Log2 == 1)
         {
             ExplorerLog.Content = "X";
         }
-        if (SettingsControl.Log3 == "1")
+        if (SettingsControl.Log3 == 1)
         {
             SettingsLog.Content = "X";
         }
-        if (SettingsControl.Log4 == "1")
+        if (SettingsControl.Log4 == 1)
         {
             ScriptsLog.Content = "X";
         }        

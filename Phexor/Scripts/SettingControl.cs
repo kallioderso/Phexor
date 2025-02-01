@@ -17,10 +17,10 @@ public class SettingsControl
     public static string Color3 = "FFFFFF"; //C. V. for Color3
     public static string Color4 = "FFFFFF"; //C. V. for Color4
     
-    public static string Log1 = "7"; //C. V. for Log1
-    public static string Log2 = "0"; //C. V. for Log2
-    public static string Log3 = "0"; //C. V. for Log3
-    public static string Log4 = "0"; //C. V. for Log4
+    public static double Log1 = 0; //C. V. for Log1
+    public static int Log2 = 0; //C. V. for Log2
+    public static int Log3 = 0; //C. V. for Log3
+    public static int Log4 = 0; //C. V. for Log4
     
     public static int LogCount = 7; //C. V. for LogCount
 
@@ -112,10 +112,10 @@ public class SettingsControl
             string settings = File.ReadAllText(LoggingSettingsFile); //Read everything from the File
             string[] setting = settings.Split('@'); //Split the Readed things into multiple strings
             
-            if (setting.Length >= 1) Log1 = setting[0]; //Get Log1 Setting
-            if (setting.Length >= 2) Log2 = setting[1]; //Get Log2 Setting
-            if (setting.Length >= 3) Log3 = setting[2]; //Get Log3 Setting
-            if (setting.Length >= 4) Log4 = setting[3]; //Get Log4 Setting
+            if (setting.Length >= 1) Log1 = Convert.ToDouble(setting[0]); //Get Log1 Setting
+            if (setting.Length >= 2) Log2 = Convert.ToInt32(setting[1]); //Get Log2 Setting
+            if (setting.Length >= 3) Log3 = Convert.ToInt32(setting[2]); //Get Log3 Setting
+            if (setting.Length >= 4) Log4 = Convert.ToInt32(setting[2]); //Get Log4 Setting
         }
         else
         {
