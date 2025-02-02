@@ -96,66 +96,53 @@
 > To scroll between the files or folders, you can use your **mouse wheel** or *˅*.<br/>
 > This allows for keyboard-only use of Phexor (Dont forget to select first Files (F) or Directorys (D).<br/>
 ***
-# Logging (Next thing to come back)
+# Logging
 **Logging exists to make it easier for you to report bugs or problems by providing information from your logs, as well as allowing you to see your actions in Phexor** <br/>
 *You can find your Logs in `%AppData%\Roaming\Phexor\Logs\`*<br/>
-*You can Set how many Log Files should ben safed (SettingsWindow)*<br/>
+*You can Set how many Log Files should ben safed and the type of Logs (SettingsWindow)*<br/>
 
-***Logged Things:*** 
+***Log Types:*** 
 > *Explorer*
-> > `00:00:00 [MainWindow] : Initialize`<br/>
-> > `00:00:00 [MainWindow] : Check for Settings`<br/>
-> > `00:00:00 [MainWindow] : Create Xc. Objects`<br/>
-> > `00:00:00 [MainWindow] : Using Shortcut I`<br/>
-> > `00:00:00 [MainWindow] : Enter Input`<br/>
-> > `00:00:00 [MainWindow] : Using Shortcut P (Activate)`<br/>
-> > `00:00:00 [MainWindow] : Using Shortcut P (Deactivate)`<br/>
-> > `00:00:00 [MainWindow] : Using Shortcut LeftClick`<br/>
-> > `00:00:00 [MainWindow] : Using Shortcut Enter`<br/>
-> > `00:00:00 [MainWindow] : Using Shortcut F`<br/>
-> > `00:00:00 [MainWindow] : Using Shortcut D`<br/>
-> > `00:00:00 [MainWindow] : Using Shortcut S`<br/>
-> > `00:00:00 [MainWindow] : Using Shortcut R`<br/>
-> > `00:00:00 [MainWindow] : Using Shortcut U`<br/>
-> > `00:00:00 [MainWindow] : Using Shortcut Esc`<br/>
-> > `00:00:00 [MainWindow] : Using Shortcut ⌃`<br/>
-> > `00:00:00 [MainWindow] : Using Shortcut ⌄`<br/>
-> > `00:00:00 [MainWindow] : Directory Scrolling (+)`<br/>
-> > `00:00:00 [MainWindow] : Directory Scrolling (-)`<br/>
-> > `00:00:00 [MainWindow] : File Scrolling (+)`<br/>
-> > `00:00:00 [MainWindow] : File Scrolling (-)`<br/>
-> > `00:00:00 [MainWindow] : Select new Underfolder`<br/>
-> > `00:00:00 [MainWindow] : Open File `<br/>
-> > `00:00:00 [MainWindow] : Open Settings`<br/>
-> > `00:00:00 [MainWindow] : Undo M.`<br/>
-> > `00:00:00 [MainWindow] : Redo M.`<br/>
-> > `00:00:00 [MainWindow] : Set new Path`<br/>
-> > `00:00:00 [MainWindow] : RemoveMenus M.`<br/>
-> > `00:00:00 [MainWindow] : Delete Started`<br/>
-> > `00:00:00 [MainWindow] : Delete Folder`<br/>
-> > `00:00:00 [MainWindow] : Delete File`<br/>
-> > `00:00:00 [MainWindow] : Load new Path`<br/>
-> > `00:00:00 [MainWindow] : Open Folder-Settings-Menu`<br/>
-> > `00:00:00 [MainWindow] : Open File-Settings-Menu`<br/>
-> > `00:00:00 [MainWindow] : Create File-Name Field`<br/>
-> > `00:00:00 [MainWindow] : Create File`<br/>
-> > `00:00:00 [MainWindow] : Create Folder-Name Field`<br/>
-> > `00:00:00 [MainWindow] : Create Folder`<br/>
-> > `00:00:00 [MainWindow] : Create Button`<br/>
-> > `00:00:00 [MainWindow] : Close Started`<br/>
-> > `00:00:00 [MainWindow] | Catch | : "Catchlog"`<br/>
+> > `00:00:00 [MainWindow] : Colorize`<br/>
+> > `00:00:00 [MainWindow] : StartPathSearch`<br/>
+> > `00:00:00 [MainWindow] : DirectoryScrolling`<br/>
+> > `00:00:00 [MainWindow] : FileScrolling`<br/>
+> > `00:00:00 [MainWindow] : OpenSettings`<br/>
+> > `00:00:00 [MainWindow] : OpenDirectory`<br/>
+> > `00:00:00 [MainWindow] : OpenFile`<br/>
+> > `00:00:00 [MainWindow] : Undo`<br/>
+> > `00:00:00 [MainWindow] : Redo`<br/>
+> > `00:00:00 [MainWindow] : OpenFieldPopup`<br/>
+> > `00:00:00 [MainWindow] : CloseFieldPopup`<br/>
 >
 > *Scripts*
+> > `00:00:00 [Settingsfile] : Removed old Logfile`<br/>
+> > `00:00:00 [Settingsfile] : Undo Successful`<br/>
+> > `00:00:00 [Settingsfile] : Redo Successful`<br/>
+> > `00:00:00 [Settingsfile] : OpenFile Successful`<br/>
+> > `00:00:00 [Settingsfile] : OpenDirectory Successful`<br/>
+> > `00:00:00 [Settingsfile] : Path Modified`<br/>
+> > `00:00:00 [Settingsfile] : Search Files`<br/>
+> > `00:00:00 [Settingsfile] : Search Directorys`<br/>
 > > `00:00:00 [Settingsfile] : GetSettings`<br/>
+> > `00:00:00 [Settingsfile] : GetColorSettings`<br/>
+> > `00:00:00 [Settingsfile] : GetSymbolSettings`<br/>
+> > `00:00:00 [Settingsfile] : GetSizeSettings`<br/>
+> > `00:00:00 [Settingsfile] : GetLoggingSettings`<br/>
 > > `00:00:00 [Settingsfile] : SetSettings`<br/>
-> > `00:00:00 [Settingsfile] | Catch | : Catchlog`<br/>
+> > `00:00:00 [Settingsfile] : SetColorSettings`<br/>
+> > `00:00:00 [Settingsfile] : SetSymbolSettings`<br/>
+> > `00:00:00 [Settingsfile] : SetSizeSettings`<br/>
+> > `00:00:00 [Settingsfile] : SetLoggingSettings`<br/>
+> 
 >
 > *Settings*
-> > `00:00:00 [SettingsWindow] : Initialize`<br/>
-> > `00:00:00 [SettingsWindow] : Saving Color Settings`<br/>
-> > `00:00:00 [SettingsWindow] : Saving Logging Settings`<br/>
-> > `00:00:00 [SettingsWindow] : Close Started`<br/>
-> > `00:00:00 [SettingsWindow] : Enter Color per TextBox`<br/>
+> > `00:00:00 [SettingsWindow] : Initialized`<br/>
+> > `00:00:00 [SettingsWindow] : OpenColorSettings`<br/>
+> > `00:00:00 [SettingsWindow] : OpenSymbolSettings`<br/>
+> > `00:00:00 [SettingsWindow] : OpenSizeSettings`<br/>
+> > `00:00:00 [SettingsWindow] : OpenLoggingSettings`<br/>
+> > `00:00:00 [SettingsWindow] : ReturnToExplorer`<br/>
 ***
 # SettingsMenu (Remake in Process)
 **In the SettingsMenu you can Change Different things for Phexor** <br/>
@@ -172,7 +159,7 @@
 # File-Images (Removed)
 **File-Images are little Pictures on the right side of every File Field, they get activatet for an matching Filetype in the file field (***alpha***)**<br/>
 
-***Existing Image Types:***<br/>
+***Existed Image Types:***<br/>
 > **Text files**<br/>
 > **File Types:** *.txt, .dox, .docx, .odt, .rtf*<br/>
 

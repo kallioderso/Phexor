@@ -68,6 +68,6 @@ public class PathFunctions
         PathSearcher.Path = Path.Combine(pathInput, path);
         PathSearcher.DirectoryRemoveCount = 0;
         PathSearcher.FileRemoveCount = 0;
-        var log = new Logging("OpenPath Successful", "Scripts", false);
+        var log = new Logging("Open Directory Successful", "Scripts", false);
     }
 }
