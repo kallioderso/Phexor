@@ -29,12 +29,14 @@ public class PathSearcher(Explorer explorer)
         {
             Path = Path + setPathPart + @"\";
         }
+        var log = new Logging("Path Modified", "Scripts", false);
     }
 
     private void SearchFiles(int removeCount)
     {
         if (System.IO.Path.Exists(Path))
         {
+            var log = new Logging("Search Files", "Scripts", false);
             foreach (var file in Directory.GetFiles(Path))
             {
                 if (removeCount != 0)
@@ -61,6 +63,7 @@ public class PathSearcher(Explorer explorer)
     {
         if (System.IO.Path.Exists(Path))
         {
+            var log = new Logging("Search Directories", "Scripts", false);
             foreach (var directory in Directory.GetDirectories(Path))
             {
                 if (removeCount != 0)

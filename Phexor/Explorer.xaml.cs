@@ -31,6 +31,7 @@ namespace Phexor
 
         private void Colorize()
         {
+            var log = new Logging("Colorize", "Explorer", false);
             SettingsControl.GetSettings();
             Headbar.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Color1)!);
             ButtonField.Background =
@@ -65,6 +66,7 @@ namespace Phexor
         {
             if (e.Key == Key.Enter)
             {
+                var log = new Logging("StartPathSearch", "Explorer", false);
                 PathSearcher.Path = PathInput.Text;
                 PathSearcher.SavePath = PathInput.Text;
                 PathSearcher.DirectoryRemoveCount = 0;
@@ -82,6 +84,7 @@ namespace Phexor
 
         private void DirectoryScrollingWithMouse(object sender, MouseWheelEventArgs e)
         {
+            var log = new Logging("DirectoryScrolling", "Explorer", false);
             if (e.Delta < 0) // check in which direction got scrolled
             {
                 PathSearcher.DirectoryRemoveCount++;
@@ -99,6 +102,7 @@ namespace Phexor
 
         private void FileScrollingWithMouse(object sender, MouseWheelEventArgs e)
         {
+            var log = new Logging("FileScrolling", "Explorer", false);
             if (e.Delta < 0) // check in which direction got scrolled
             {
                 PathSearcher.FileRemoveCount++;
@@ -116,6 +120,7 @@ namespace Phexor
 
         private void OpenSettings(object sender, RoutedEventArgs e)
         {
+            var log = new Logging("OpenSettings", "Explorer", false);
             var settings = new Settings(this);
             settings.Show();
         }
@@ -124,6 +129,7 @@ namespace Phexor
         {
             try
             {
+                var log = new Logging("OpenDirectory", "Explorer", false);
                 if (sender is TextBlock textBlock) PathFunctions.OpenPath(PathInput.Text, textBlock.Text);
                 PathSearcher.SavePath = PathSearcher.Path;
                 PathInput.Text = PathSearcher.Path;
@@ -131,12 +137,13 @@ namespace Phexor
             }
             catch (Exception exception)
             {
-                // ignored
+                var log = new Logging(exception.ToString(), "Explorer", true);
             }
         }
 
         private void OpenFile(object sender, MouseButtonEventArgs e)
         {
+            var log = new Logging("OpenFile", "Explorer", false);
             var textBlock = sender as TextBlock;
             PathFunctions.OpenFile(textBlock?.Text);
         }
@@ -145,6 +152,7 @@ namespace Phexor
         {
             if (!string.IsNullOrEmpty(PathSearcher.Path) && PathSearcher.Path != "C:\\")
             {
+                var log = new Logging("Undo", "Explorer", false);
                 var newPath = PathFunctions.Undo();
                 PathSearcherInitialize();
                 PathInput.Text = newPath;
@@ -155,6 +163,7 @@ namespace Phexor
         {
             if (!string.IsNullOrEmpty(PathSearcher.SavePath) && PathSearcher.SavePath != PathSearcher.Path)
             {
+                var log = new Logging("Redo", "Explorer", false);
                 var newPath = PathFunctions.Redo();
 
                 if (!string.IsNullOrEmpty(newPath))
@@ -170,6 +179,7 @@ namespace Phexor
         
         private void OpenFieldPopup(object sender, RoutedEventArgs e)
         {
+            var log = new Logging("OpenFieldPopup", "Explorer", false);
             FieldPopup.IsOpen = true;
             if (Directorys.Children.Contains(sender as TextBlock))
             {
@@ -185,6 +195,7 @@ namespace Phexor
         
         private void CloseFieldPopup(object sender, EventArgs eventArgs)
         {
+            var log = new Logging("CloseFieldPopup", "Explorer", false);
             FieldPopup.IsOpen = false;
             PopupStackpanel.Children.Clear();
         }

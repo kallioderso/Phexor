@@ -33,6 +33,7 @@ public class SettingsControl
 
     public static void GetSettings() //M. to get Saved Settings
     {
+        var log = new Logging("GetSettings", "Scripts", false); //C. M. to Log the GetSettings Method
         if (!Directory.Exists(AppdataFolder))
         {
             Directory.CreateDirectory(AppdataFolder); //creates Appdatafolder if not existing
@@ -50,6 +51,7 @@ public class SettingsControl
 
     private static void GetColorSettings()
     {
+        var log = new Logging("GetColorSettings", "Scripts", false); //C. M. to Log the GetColorSettings Method
         if (File.Exists(ColorSettingsFile))
         {
             string settings = File.ReadAllText(ColorSettingsFile); //Read everything from the File
@@ -72,6 +74,7 @@ public class SettingsControl
 
     private static void GetSymbolSettings()
     {
+        var log = new Logging("GetSymbolSettings", "Scripts", false); //C. M. to Log the GetSymbolSettings Method
         if (File.Exists(SymbolSettingsFile))
         {
             string settings = File.ReadAllText(SymbolSettingsFile); //Read everything from the File
@@ -90,6 +93,7 @@ public class SettingsControl
 
     private static void GetSizeSettings()
     {
+        var log = new Logging("GetSizeSettings", "Scripts", false); //C. M. to Log the GetSizeSettings Method
         if (File.Exists(SizeSettingsFile))
         {
             string settings = File.ReadAllText(SizeSettingsFile); //Read everything from the File
@@ -107,6 +111,7 @@ public class SettingsControl
 
     private static void GetLoggingSettings()
     {
+        var log = new Logging("GetLoggingSettings", "Scripts", false); //C. M. to Log the GetLoggingSettings Method
         if (File.Exists(LoggingSettingsFile))
         {
             string settings = File.ReadAllText(LoggingSettingsFile); //Read everything from the File
@@ -115,7 +120,7 @@ public class SettingsControl
             if (setting.Length >= 1) Log1 = Convert.ToDouble(setting[0]); //Get Log1 Setting
             if (setting.Length >= 2) Log2 = Convert.ToInt32(setting[1]); //Get Log2 Setting
             if (setting.Length >= 3) Log3 = Convert.ToInt32(setting[2]); //Get Log3 Setting
-            if (setting.Length >= 4) Log4 = Convert.ToInt32(setting[2]); //Get Log4 Setting
+            if (setting.Length >= 4) Log4 = Convert.ToInt32(setting[3]); //Get Log4 Setting
         }
         else
         {
@@ -129,6 +134,7 @@ public class SettingsControl
 
     public static void SetSettings()
     {
+        var log = new Logging("SetSettings", "Scripts", false); //C. M. to Log the SetSettings Method
         if (!Directory.Exists(AppdataFolder)) //checks if The Appdatafolder Exists
         {
             Directory.CreateDirectory(AppdataFolder); //creates Appdatafolder if not existing
@@ -147,6 +153,7 @@ public class SettingsControl
 
     private static void SetColorSettings()
     {
+        var log = new Logging("SetColorSettings", "Scripts", false); //C. M. to Log the SetColorSettings Method
         if (File.Exists(ColorSettingsFile)) //checks if Settingfile exists
         {
             File.Delete(ColorSettingsFile); //deleate Settingsfile if not existing
@@ -161,6 +168,7 @@ public class SettingsControl
 
     private static void SetSymbolSettings()
     {
+        var log = new Logging("SetSymbolSettings", "Scripts", false); //C. M. to Log the SetSymbolSettings Method
         if (File.Exists(SymbolSettingsFile)) //checks if Settingfile exists
         {
             File.Delete(SymbolSettingsFile); //deleate Settingsfile if not existing
@@ -175,6 +183,7 @@ public class SettingsControl
 
     private static void SetSizeSettings()
     {
+        var log = new Logging("SetSizeSettings", "Scripts", false); //C. M. to Log the SetSizeSettings Method
         if (File.Exists(SizeSettingsFile)) //checks if Settingfile exists
         {
             File.Delete(SizeSettingsFile); //deleate Settingsfile if not existing
@@ -189,6 +198,7 @@ public class SettingsControl
 
     private static void SetLoggingSettings()
     {
+        var log = new Logging("SetLoggingSettings", "Scripts", false); //C. M. to Log the SetLoggingSettings Method
         if (File.Exists(LoggingSettingsFile)) //checks if Settingfile exists
         {
             File.Delete(LoggingSettingsFile); //deleate Settingsfile if not existing
