@@ -47,9 +47,9 @@ public class PathSearcher(Explorer explorer)
                 {
                     var fileTextBlock = new TextBlock
                     {
-                        Height = 30,
+                        Height = SettingsControl.Size1,
                         Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333")!),
-                        FontSize = 10,
+                        FontSize = SettingsControl.Size2,
                         Text = file.Substring(Path.Length),
                         VerticalAlignment = VerticalAlignment.Center
                     };
@@ -74,9 +74,9 @@ public class PathSearcher(Explorer explorer)
                 {
                     var directoryTextBlock = new TextBlock
                     {
-                        Height = 30,
+                        Height = SettingsControl.Size1,
                         Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333")!),
-                        FontSize = 10,
+                        FontSize = SettingsControl.Size2,
                         Text = directory.Substring(Path.Length),
                         VerticalAlignment = VerticalAlignment.Center,
                     };

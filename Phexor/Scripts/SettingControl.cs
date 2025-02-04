@@ -22,6 +22,9 @@ public class SettingsControl
     public static int Log3 = 0; //C. V. for Log3
     public static int Log4 = 0; //C. V. for Log4
     
+    public static int Size1 = 30; //C. V. for Size1
+    public static int Size2 = 10; //C. V. for Size2
+    
     public static int LogCount = 7; //C. V. for LogCount
 
     public static string AppdataFolder = Path.Combine((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)), "Phexor"); //C. V. and get Locatin of Appdata Folder for Phexor
@@ -98,12 +101,15 @@ public class SettingsControl
         {
             string settings = File.ReadAllText(SizeSettingsFile); //Read everything from the File
             string[] setting = settings.Split('@'); //Split the Readed things into multiple strings
+            
+            if (setting.Length >= 1) Size1 = Convert.ToInt32(setting[0]); //Get Size1 Setting
+            if (setting.Length >= 2) Size2 = Convert.ToInt32(setting[1]); //Get Size2 Setting
         }
         else
         {
             using (StreamWriter writer = new StreamWriter(SizeSettingsFile, false, Encoding.UTF8)) //C. and Accesses the SizeSettingsFile
             {
-                const string sizeSettingsText = ( "" + "@" + "" + "@" + "" + "@" + ""); //C. string for write into the SizeSettingsfile
+                const string sizeSettingsText = ( "30" + "@" + "10"); //C. string for write into the SizeSettingsfile
                 writer.WriteLine(sizeSettingsText); //Writes all the Settings into the SizeSettingsFile
             }
         }
@@ -191,7 +197,7 @@ public class SettingsControl
 
         using (StreamWriter writer = new StreamWriter(SizeSettingsFile, false, Encoding.UTF8)) //C. and Accesses the SizeSettingsFile
         {
-            const string sizeSettingsText = ( "" + "@" + "" + "@" + "" + "@" + ""); //C. string for write into the SizeSettingsfile
+            string sizeSettingsText = ( Size1 + "@" + Size2); //C. string for write into the SizeSettingsfile
             writer.WriteLine(sizeSettingsText); //Writes all the Settings into the SizeSettingsFile
         }
     }
