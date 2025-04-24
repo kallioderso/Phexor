@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Phexor"
         mc:Ignorable="d"
         Title="Phexor" Width="900" Height="550" Icon="Grafiks/Icon.ico" x:Name="Window" >
-    <Grid x:Name="Grid" ShowGridLines="False">
+    <Grid x:Name="Grid" ShowGridLines="False" KeyDown="KeyInput">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="2"/>
@@ -60,7 +60,7 @@
         
         <!-- Popup -->
         <Popup Placement="Mouse" StaysOpen="False" x:Name="FieldPopup" Closed="CloseFieldPopup">
-            <Border BorderBrush="Black" BorderThickness="1" Background="White">
+            <Border BorderBrush="Black" BorderThickness="1" Background="White" CornerRadius="4">
                 <StackPanel x:Name="PopupStackpanel">
                 </StackPanel>
             </Border>

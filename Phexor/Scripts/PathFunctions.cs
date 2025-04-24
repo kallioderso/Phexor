@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Phexor.Scripts;
 
-public class PathFunctions
+public static class PathFunctions
 {
     public static string Undo()
     {
@@ -20,7 +20,7 @@ public class PathFunctions
         PathSearcher.DirectoryRemoveCount = 0;
         PathSearcher.FileRemoveCount = 0;
         return newPath;
-        var log = new Logging("Undo Successful", "Scripts", false);
+        Logging.Log("Undo Successful", "Scripts", false);
     }
     public static string Redo()
     {
@@ -46,7 +46,7 @@ public class PathFunctions
             }
         }
         return newPath;
-        var log = new Logging("Redo Successful", "Scripts", false);
+        Logging.Log("Redo Successful", "Scripts", false);
     }
     
     public static void OpenFile(string fileName)
@@ -59,7 +59,7 @@ public class PathFunctions
                 UseShellExecute = true
             };
             Process.Start(processStartInfo);
-            var log = new Logging("OpenFile Successful", "Scripts", false);
+            Logging.Log("OpenFile Successful", "Scripts", false);
         }
     }
     
@@ -68,6 +68,6 @@ public class PathFunctions
         PathSearcher.Path = Path.Combine(pathInput, path);
         PathSearcher.DirectoryRemoveCount = 0;
         PathSearcher.FileRemoveCount = 0;
-        var log = new Logging("Open Directory Successful", "Scripts", false);
+        Logging.Log("Open Directory Successful", "Scripts", false);
     }
 }

@@ -13,18 +13,18 @@ namespace Phexor.Scripts;
 // M. = Method
 // Xc. = XAML code
 // C#c. = C# code
-public class Logging
+public static class Logging
 {
     private static readonly string AppdataFolder = Path.Combine((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)), "Phexor");
     private static readonly string LogDirectory = Path.Combine(AppdataFolder, "Logs");
     private static readonly string DailyLogFileName = string.Concat(LogDirectory, @"\",DateTime.Today.ToString("d").Replace(@"/", ".")) + ".log";
 
-    public Logging(string log, string identifikator, bool catchLog)
+    public static void Log(string log, string identifikator, bool catchLog)
     {
         LoggingProcess(log, identifikator, catchLog);
     }
     
-    private void LoggingProcess(string log, string identifikator, bool catchLog)
+    private static void LoggingProcess(string log, string identifikator, bool catchLog)
     {
         if (!Directory.Exists(LogDirectory))
         {
@@ -49,7 +49,7 @@ public class Logging
         RemoveOldLogFile();
     }
 
-    private void RemoveOldLogFile()
+    private static void RemoveOldLogFile()
     {
         if (SettingsControl.Log1 != 0)
         {
