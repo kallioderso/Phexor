@@ -108,6 +108,7 @@ namespace Phexor
             }
         }
 
+        public void Settings() => OpenSettings(null, null);
         private void OpenSettings(object sender, RoutedEventArgs e)
         {
             Logging.Log("OpenSettings", "Explorer", false);

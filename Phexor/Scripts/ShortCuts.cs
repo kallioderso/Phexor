@@ -16,7 +16,8 @@ public static class ShortCuts
         {
             switch (e.Key)
             {
-                case Key.Enter: LoseFocus(explorer); break;
+                case Key.Enter: PathInputEnter(explorer); break;
+                case Key.Escape: EscapeInput(explorer); break;
             }
         }
         else
@@ -26,6 +27,7 @@ public static class ShortCuts
                 case Key.U: Undo(explorer); break;
                 case Key.R: Redo(explorer); break;
                 case Key.I: Input(explorer); break;
+                case Key.S: Settings(explorer); break;
             }
         }
     }
@@ -33,5 +35,7 @@ public static class ShortCuts
     private static void Undo(Explorer e) => e.UndoPath();
     private static void Redo(Explorer e) => e.RedoPath();
     private static void Input(Explorer e) => Keyboard.Focus(e.PathInput);
-    private static void LoseFocus(Explorer e) { Keyboard.ClearFocus(); e.PathInput.Focusable = false; e.Focus(); e.PathInput.Focusable = true; e.InputFieldPath();}
+    private static void PathInputEnter(Explorer e) { Keyboard.ClearFocus(); e.PathInput.Focusable = false; e.Focus(); e.PathInput.Focusable = true; e.InputFieldPath();}
+    private static void EscapeInput(Explorer e) { Keyboard.ClearFocus(); e.PathInput.Focusable = false; e.Focus(); e.PathInput.Focusable = true;}
+    private static void Settings(Explorer e) => e.Settings();
 }
