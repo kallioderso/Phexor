@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Phexor"
         mc:Ignorable="d"
-        Title="Phexor" Width="900" Height="550" Icon="Grafiks/Icon.ico" x:Name="Window" >
-    <Grid x:Name="Grid" ShowGridLines="False" KeyDown="KeyInput">
+        Title="Phexor" Width="900" Height="550" Icon="Grafiks/Icon.ico" x:Name="Window">
+    <Grid x:Name="Grid" ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="2"/>
@@ -22,7 +22,7 @@
 
         <!-- Header Section -->
         <StackPanel Grid.Row="0" Grid.ColumnSpan="3" Orientation="Vertical" Background="White" x:Name="Headbar">
-            <TextBox Background="Transparent" BorderBrush="Transparent" Padding="4" x:Name="PathInput" Text="Enter a Path..." FontSize="17" Foreground="#1c1c1c" TextAlignment="Left"  HorizontalAlignment="Stretch" VerticalAlignment="Top" KeyDown="PathInputEnter"/>
+            <TextBox Background="Transparent" BorderBrush="Transparent" Padding="4" x:Name="PathInput" Text="Enter a Path..." FontSize="17" Foreground="#1c1c1c" TextAlignment="Left"  HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
         </StackPanel>
         <!-- Button Section -->
         <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal" Background="White" x:Name="ButtonField">

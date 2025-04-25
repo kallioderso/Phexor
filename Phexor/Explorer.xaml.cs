@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -22,6 +23,8 @@ namespace Phexor
         {
             InitializeComponent();
             Initialize();
+            
+            this.KeyDown += (sender, e) => ShortCuts.KeyPress(e, this);
         }
 
         public void Initialize()
@@ -42,11 +45,9 @@ namespace Phexor
                 new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Color4)!);
         }
 
-        private void ClearFields()
-        {
-            Directorys.Children.Clear();
-            Files.Children.Clear();
-        }
+        public void Clear() => ClearFields();
+
+        private void ClearFields() { Directorys.Children.Clear(); Files.Children.Clear(); }
 
         public void AddDirectory(TextBlock directory)
         {
@@ -61,19 +62,8 @@ namespace Phexor
             file.MouseRightButtonDown += OpenFieldPopup;
             Files.Children.Add(file);
         }
-
-        private void PathInputEnter(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                Logging.Log("StartPathSearch", "Explorer", false);
-                PathSearcher.Path = PathInput.Text;
-                PathSearcher.SavePath = PathInput.Text;
-                PathSearcher.DirectoryRemoveCount = 0;
-                PathSearcher.FileRemoveCount = 0;
-                PathSearcherInitialize();
-            }
-        }
+        public void InputFieldPath() => PathInputEnter();
+        private void PathInputEnter() { Logging.Log("StartPathSearch", "Explorer", false); PathSearcher.Path = PathInput.Text; PathSearcher.SavePath = PathInput.Text; PathSearcher.DirectoryRemoveCount = 0; PathSearcher.FileRemoveCount = 0; PathSearcherInitialize(); }
 
         private void PathSearcherInitialize()
         {
@@ -159,6 +149,8 @@ namespace Phexor
             }
         }
 
+        public void UndoPath() => Undo(null, null);
+
         private void Redo(object sender, MouseButtonEventArgs e)
         {
             if (!string.IsNullOrEmpty(PathSearcher.SavePath) && PathSearcher.SavePath != PathSearcher.Path)
@@ -176,6 +168,8 @@ namespace Phexor
                 }
             }
         }
+
+        public void RedoPath() => Redo(null, null);
         
         private void OpenFieldPopup(object sender, RoutedEventArgs e)
         {
@@ -198,11 +192,6 @@ namespace Phexor
             Logging.Log("CloseFieldPopup", "Explorer", false);
             FieldPopup.IsOpen = false;
             PopupStackpanel.Children.Clear();
-        }
-
-        private void KeyInput(object sender, KeyEventArgs e)
-        {
-
         }
     }
 }
