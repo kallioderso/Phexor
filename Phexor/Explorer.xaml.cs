@@ -45,10 +45,6 @@ namespace Phexor
                 new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Color4)!);
         }
 
-        public void Clear() => ClearFields();
-
-        private void ClearFields() { Directorys.Children.Clear(); Files.Children.Clear(); }
-
         public void AddDirectory(TextBlock directory)
         {
             directory.MouseLeftButtonDown += OpenPath;
@@ -63,14 +59,7 @@ namespace Phexor
             Files.Children.Add(file);
         }
         public void InputFieldPath() => PathInputEnter();
-        private void PathInputEnter() { Logging.Log("StartPathSearch", "Explorer", false); PathSearcher.Path = PathInput.Text; PathSearcher.SavePath = PathInput.Text; PathSearcher.DirectoryRemoveCount = 0; PathSearcher.FileRemoveCount = 0; PathSearcherInitialize(); }
-
-        private void PathSearcherInitialize()
-        {
-            ClearFields();
-            PathSearcher searcher = new PathSearcher(this);
-            searcher.SearchPath();
-        }
+        private void PathInputEnter() { Logging.Log("StartPathSearch", "Explorer", false); PathSearcher.Path = PathInput.Text; PathSearcher.SavePath = PathInput.Text; PathSearcher.DirectoryRemoveCount = 0; PathSearcher.FileRemoveCount = 0; PathSearcher.SearchPath(this); }
 
         private void DirectoryScrollingWithMouse(object sender, MouseWheelEventArgs e)
         {
@@ -78,14 +67,14 @@ namespace Phexor
             if (e.Delta < 0) // check in which direction got scrolled
             {
                 PathSearcher.DirectoryRemoveCount++;
-                PathSearcherInitialize();
+                PathSearcher.SearchPath(this);
             }
             else if (e.Delta > 0) // check if the other direction was it
             {
                 if (PathSearcher.DirectoryRemoveCount != 0)
                 {
                     PathSearcher.DirectoryRemoveCount--;
-                    PathSearcherInitialize();
+                    PathSearcher.SearchPath(this);
                 }
             }
         }
@@ -96,14 +85,14 @@ namespace Phexor
             if (e.Delta < 0) // check in which direction got scrolled
             {
                 PathSearcher.FileRemoveCount++;
-                PathSearcherInitialize();
+                PathSearcher.SearchPath(this);
             }
             else if (e.Delta > 0) // check if the other direction was it
             {
                 if (PathSearcher.FileRemoveCount != 0)
                 {
                     PathSearcher.FileRemoveCount--;
-                    PathSearcherInitialize();
+                    PathSearcher.SearchPath(this);
                 }
             }
         }
@@ -124,7 +113,7 @@ namespace Phexor
                 if (sender is TextBlock textBlock) PathFunctions.OpenPath(PathInput.Text, textBlock.Text);
                 PathSearcher.SavePath = PathSearcher.Path;
                 PathInput.Text = PathSearcher.Path;
-                PathSearcherInitialize();
+                PathSearcher.SearchPath(this);
             }
             catch (Exception exception)
             {
@@ -145,7 +134,7 @@ namespace Phexor
             {
                 Logging.Log("Undo", "Explorer", false);
                 var newPath = PathFunctions.Undo();
-                PathSearcherInitialize();
+                PathSearcher.SearchPath(this);
                 PathInput.Text = newPath;
             }
         }
@@ -164,7 +153,7 @@ namespace Phexor
                     PathSearcher.Path = newPath;
                     PathSearcher.DirectoryRemoveCount = 0;
                     PathSearcher.FileRemoveCount = 0;
-                    PathSearcherInitialize();
+                    PathSearcher.SearchPath(this);
                     PathInput.Text = PathSearcher.Path;
                 }
             }
