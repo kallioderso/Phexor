@@ -47,6 +47,7 @@ public partial class Settings
     private void Settings_OnClosed(object sender, EventArgs e)
     {
         Logging.Log("ReturnToExplorer", "Settings", false);
+        _explorerRef.Show();
         _explorerRef.Initialize();
     }
 }

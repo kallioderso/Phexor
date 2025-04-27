@@ -19,7 +19,10 @@ public static class Directory
     //-----Private Methods-----\\
     private static void CreatePopUp(Explorer explorer, TextBlock currentTextBlock) // Private method to create the pop-up
     {
-        explorer.PopupStackpanel.Children.Add(new TextBlock { Text = "Settings", Height = 30, Width = 100, TextAlignment = TextAlignment.Center, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333")!), FontSize = 14, VerticalAlignment = VerticalAlignment.Center }); // Create a TextBlock for the settings
-        explorer.PopupStackpanel.Children.Add(new Button { Content = "Open", Height = 30, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333")!), FontSize = 10, Margin = new Thickness(1), VerticalAlignment = VerticalAlignment.Center }); // Create a button to open the directory
+        explorer.PopupStackpanel.Children.Add(new TextBlock { Text = "Settings - Directory", Margin = new Thickness(5), HorizontalAlignment = HorizontalAlignment.Center, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333")!) }); // Create a TextBlock for the settings
+        explorer.PopupStackpanel.Children.Add(new TextBox { Text = currentTextBlock.Text, Margin = new Thickness(5), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333")!)}); // Create a TextBox for the directory path)
+        explorer.PopupStackpanel.Children.Add(new Button { Content = "Rename", Margin = new Thickness(5), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333")!) }); // Create a button to rename the directory
+        explorer.PopupStackpanel.Children.Add(new Button { Content = "Open", Margin = new Thickness(5), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333")!) }); // Create a button to open the directory
+        explorer.PopupStackpanel.Children.Add(new Button { Content = "Delete", Margin = new Thickness(5), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333")!) }); // Create a button to delete the directory
     }
 }

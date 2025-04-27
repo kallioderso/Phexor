@@ -36,7 +36,7 @@ public static class ShortCuts
             {
                 case Key.U: Undo(explorer); break; //U key pressed
                 case Key.R: Redo(explorer); break; //R key pressed
-                case Key.I: Input(explorer); break; //I key pressed
+                case Key.I: e.Handled = true; Input(explorer); break; //I key pressed
                 case Key.S: Settings(explorer); break; //S key pressed
             }
         }
@@ -49,6 +49,7 @@ public static class ShortCuts
     {
         Keyboard.Focus(e.PathInput); //Focus on the PathInput TextBox
         if (e.PathInput.Text != PathSearcher.Path) e.PathInput.Text = PathSearcher.Path; //Set the PathInput TextBox to the current path
+        e.PathInput.CaretIndex = e.PathInput.Text.Length; //Set the caret index to the end of the text
     }
 
     private static void PathInputEnter(Explorer e) { Keyboard.ClearFocus(); e.PathInput.Focusable = false; e.Focus(); e.PathInput.Focusable = true; e.InputFieldPath();} //Call the PathInputEnter method

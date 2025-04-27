@@ -88,7 +88,7 @@ namespace Phexor
         private void OpenSettings(object sender, RoutedEventArgs e) //M. to open the settings window
         {
             Logging.Log("OpenSettings", "Explorer", false); //log the settings method
-            var settings = new Settings(this); settings.Show(); //Create a new settings window and show it
+            var settings = new Settings(this); settings.Show(); this.Hide(); //Create a new settings window and show it
         }
         private void OpenPath(object sender, MouseButtonEventArgs e) //M. to open a path
         {
