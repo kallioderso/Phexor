@@ -34,12 +34,11 @@
 > > * Customizable GUI elements.
 > > * Simple and intuitive GUI.
 > > * Multiple methods for path input.
-> > * [Shortcuts](https://github.com/kallioderso/Phexor?tab=readme-ov-file#shortcuts). (At the moment because of the Remake, not working)
-> > * [Logging](https://github.com/kallioderso/Phexor?tab=readme-ov-file#logging). (At the moment because of the Remake, not working)
-> > * File and Folder Options. (At the moment because of the Remake, not working)
+> > * [Shortcuts](https://github.com/kallioderso/Phexor?tab=readme-ov-file#shortcuts). 
+> > * [Logging](https://github.com/kallioderso/Phexor?tab=readme-ov-file#logging). 
+> > * Settings for files and folders Appearance.
 >
 > ***Upcoming***
-> > * Settings for files and folders.
 > > * Creating menus for files and folders.
 > > * Including community ideas.
 >
@@ -50,8 +49,8 @@
 
 *This is a shortened version.*
 ***
-# Shortcuts (Coming back soon)
-> **Placeholders (P)**<br/>
+# Shortcuts 
+> **Placeholders (P)** ***(Coming back soon)***<br/>
 > Placeholders are deactivated by default, but you can activate them by pressing *P*.<br/>
 > They are useful for identifying which file image is from which file.<br/>
 
@@ -80,19 +79,19 @@
 > To exit the PathInput in keyboard-only use, you can press **Escape** Button.<br/>
 > This makes it possible to completly use phexor without mouse<br/>
 
-> **Directorys (D)**<br/>
+> **Directorys (D)** ***(Coming back soon)***<br/>
 > To Select **D**irectorys for Keyboard only use<br/>
 > After Selecting **Directorys** you can just use the *Up* or *Down* Shortcut to Scroll.<br/>
 
-> **Files (F)**<br/>
+> **Files (F)** ***(Coming back soon)***<br/>
 > To Select **F**iles for Keyboard only use<br/>
 > After Selecting **Files** you can just use the *Up* or *Down* Shortcut to Scroll.<br/>
 
-> **Up (˄)**<br/>
+> **Up (˄)** ***(Coming back soon)***<br/>
 > To scroll between the files or folders, you can use your **mouse wheel** or *˄*.<br/>
 > This allows for keyboard-only use of Phexor (Dont forget to select first Files (F) or Directorys (D).<br/>
 
-> **Down (˅)**<br/>
+> **Down (˅)** ***(Coming back soon)***<br/>
 > To scroll between the files or folders, you can use your **mouse wheel** or *˅*.<br/>
 > This allows for keyboard-only use of Phexor (Dont forget to select first Files (F) or Directorys (D).<br/>
 ***
