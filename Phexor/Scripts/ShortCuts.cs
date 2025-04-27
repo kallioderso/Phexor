@@ -17,6 +17,7 @@ public static class ShortCuts
 {
     //-----Public Methods-----\\
     public static void KeyPress(KeyEventArgs e, Explorer explorer) => Selector(e, explorer); //Public Method to call the Selector method
+    public static void Clicked(Explorer explorer) => EscapeInput(explorer); //Public Method to call the EscapeInput method
     
     //-----Private Methods-----\\
     private static void Selector(KeyEventArgs e, Explorer explorer) //Selector method to check which key was pressed
