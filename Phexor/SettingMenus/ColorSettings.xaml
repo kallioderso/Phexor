@@ -44,6 +44,7 @@
                     <TextBlock Text="Enter Color Code" Margin="5"/>
                     <TextBox x:Name="ColorCodeTextBox" Margin="5"/>
                     <Button Content="Apply" Click="ApplyColorCode_Click" Margin="5"/>
+                    <Button Content="Reset" Click="ResetColorCode_Click" Margin="5"/>
                 </StackPanel>
             </Border>
         </Popup>

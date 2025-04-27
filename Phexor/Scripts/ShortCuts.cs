@@ -45,7 +45,12 @@ public static class ShortCuts
     //-----ShortCut Methods-----\\
     private static void Undo(Explorer e) => e.UndoPath(); //Undo the last action
     private static void Redo(Explorer e) => e.RedoPath(); //Redo the last action
-    private static void Input(Explorer e) => Keyboard.Focus(e.PathInput); //Focus on the PathInput TextBox
+    private static void Input(Explorer e)
+    {
+        Keyboard.Focus(e.PathInput); //Focus on the PathInput TextBox
+        if (e.PathInput.Text != PathSearcher.Path) e.PathInput.Text = PathSearcher.Path; //Set the PathInput TextBox to the current path
+    }
+
     private static void PathInputEnter(Explorer e) { Keyboard.ClearFocus(); e.PathInput.Focusable = false; e.Focus(); e.PathInput.Focusable = true; e.InputFieldPath();} //Call the PathInputEnter method
     private static void EscapeInput(Explorer e) { Keyboard.ClearFocus(); e.PathInput.Focusable = false; e.Focus(); e.PathInput.Focusable = true;} //Clear the focus from the PathInput TextBox
     private static void Settings(Explorer e) => e.Settings(); //Open the Settings window
