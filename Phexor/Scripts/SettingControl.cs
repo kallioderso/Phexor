@@ -78,6 +78,7 @@ public static class SettingsControl
                 const string colorSettingsText = ( "#FFFFFF" + "@" + "#FFFFFF" + "@" + "#FFFFFF" + "@" + "#FFFFFF"); //C. string for write into the ColorSettingsfile
                 writer.WriteLine(colorSettingsText); //Writes all the Settings into the ColorSettingsFile
             }
+            GetColorSettings(); //Call the GetColorSettings Method again to get the default values
         }
     }
     private static void GetSymbolSettings()
@@ -95,6 +96,7 @@ public static class SettingsControl
                 const string symbolSettingsText = ( "" + "@" + "" + "@" + "" + "@" + ""); //C. string for write into the SymbolSettingsfile
                 writer.WriteLine(symbolSettingsText); //Writes all the Settings into the SymbolSettingsFile
             }
+            GetSymbolSettings(); //Call the GetSymbolSettings Method again to get the default values
         }
     }
     private static void GetSizeSettings()
@@ -114,6 +116,7 @@ public static class SettingsControl
                 const string sizeSettingsText = ( "30" + "@" + "10"); //C. string for write into the SizeSettingsfile
                 writer.WriteLine(sizeSettingsText); //Writes all the Settings into the SizeSettingsFile
             }
+            GetSizeSettings(); //Call the GetSizeSettings Method again to get the default values
         }
     }
     private static void GetLoggingSettings()
@@ -135,6 +138,7 @@ public static class SettingsControl
                 const string loggingSettingsText = ( "7" + "@" + "0" + "@" + "0" + "@" + "0"); //C. string for write into the LoggingSettingsfile
                 writer.WriteLine(loggingSettingsText); //Writes all the Settings into the LoggingSettingsFile
             }
+            GetLoggingSettings(); //Call the GetLoggingSettings Method again to get the default values
         }
     }
     
