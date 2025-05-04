@@ -4,22 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="500" d:DesignWidth="600">
+             d:DesignHeight="400" d:DesignWidth="500">
     <UserControl.Resources>
-        <Style x:Key="BlenderButtonStyle" TargetType="Button">
+        <Style x:Key="CompactButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#3C3C3C"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="#5A5A5A"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="5,2"/>
+            <Setter Property="Padding" Value="6,3"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-                                BorderBrush="{TemplateBinding BorderBrush}" 
-                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                CornerRadius="2">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -34,22 +34,48 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="CustomSliderStyle" TargetType="Slider">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Grid>
+                            <Track x:Name="PART_Track"
+                                   Value="{Binding Value, RelativeSource={RelativeSource TemplatedParent}}"
+                                   Minimum="{Binding Minimum, RelativeSource={RelativeSource TemplatedParent}}"
+                                   Maximum="{Binding Maximum, RelativeSource={RelativeSource TemplatedParent}}">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Style="{x:Null}" Background="#3C3C3C" Height="4"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Style="{x:Null}" Background="#3C3C3C" Height="4"/>
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Width="10" Height="20" Background="#5A5A5A" BorderBrush="#2C2C2C" BorderThickness="1"/>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="15"/>
             <RowDefinition Height="1"/>
             <RowDefinition/>
             <RowDefinition Height="1"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="15"/>
             <ColumnDefinition Width="1"/>
             <ColumnDefinition/>
             <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="15"/>
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Background="Black"/>
@@ -57,42 +83,82 @@
         <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Background="Black"/>
         <Border Grid.Column="3" Grid.Row="1" Grid.RowSpan="3" Background="Black"/>
 
-        <StackPanel Grid.Column="2" Grid.Row="2" Background="White">
-            <TextBlock FontSize="16" Margin="2,0,0,10">
-                Anzahl Log Files
-            </TextBlock>
-            <Slider x:Name="LogCountSlider" Minimum="1" Maximum="10" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" AutoToolTipPrecision="1" TickPlacement="BottomRight" Margin="0,0,0, 5" MouseLeave="LogCountChanged"/>
-            
-            <Border Background="Black" Height="1"  Margin="5,0,5,0"/>
-            
-            <TextBlock FontSize="16"  Margin="2,0,0,10">
-                Log Level
-            </TextBlock>
-            
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <Button x:Name="ExplorerLog" Click="SwitchContent" Width="20" Height="20" Style="{StaticResource BlenderButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,10,0" Content=" ">
-                </Button>
-                <TextBlock FontSize="16"  VerticalAlignment="Center">
-                    Explorer
-                </TextBlock>
+        <ScrollViewer Grid.Column="2" Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Background="White">
+                <StackPanel Margin="10">
+                    <TextBlock FontSize="14" Margin="2,0,0,10">
+                        Anzahl Log Files
+                    </TextBlock>
+                    <Slider x:Name="LogCountSlider" Style="{StaticResource CustomSliderStyle}" Minimum="1" Maximum="10" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight" AutoToolTipPrecision="1" TickPlacement="BottomRight" Margin="10,0,10,8"/>
+
+                    <Border Background="Black" Height="1" Margin="4,0,4,8"/>
+
+                    <TextBlock FontSize="14" Margin="2,0,0,10">
+                        Log Level
+                    </TextBlock>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button x:Name="ExplorerLog" Click="SwitchContent" Width="20" Height="20" Style="{StaticResource CompactButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,0,8,0" Content=" "/>
+                        <Expander Header="Explorer Logs">
+                            <StackPanel>
+                                <TextBlock Text="00:00:00 [MainWindow] : Colorize" Margin="5,0"/>
+                                <TextBlock Text="00:00:00 [MainWindow] : StartPathSearch" Margin="5,0"/>
+                                <TextBlock Text="00:00:00 [MainWindow] : DirectoryScrolling" Margin="5,0"/>
+                                <TextBlock Text="00:00:00 [MainWindow] : FileScrolling" Margin="5,0"/>
+                                <TextBlock Text="00:00:00 [MainWindow] : OpenSettings" Margin="5,0"/>
+                                <TextBlock Text="00:00:00 [MainWindow] : OpenDirectory" Margin="5,0"/>
+                                <TextBlock Text="00:00:00 [MainWindow] : OpenFile" Margin="5,0"/>
+                                <TextBlock Text="00:00:00 [MainWindow] : Undo" Margin="5,0"/>
+                                <TextBlock Text="00:00:00 [MainWindow] : Redo" Margin="5,0"/>
+                                <TextBlock Text="00:00:00 [MainWindow] : OpenFieldPopup" Margin="5,0"/>
+                                <TextBlock Text="00:00:00 [MainWindow] : CloseFieldPopup" Margin="5,0"/>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button x:Name="SettingsLog" Click="SwitchContent" Width="20" Height="20" Style="{StaticResource CompactButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,0,8,0" Content=" "/>
+                        <Expander Header="Settings Logs">
+                            <StackPanel>
+                                <TextBlock Text="00:00:00 [SettingsWindow] : Initialized" Margin="5,0"/>
+                                <TextBlock Text="00:00:00 [SettingsWindow] : OpenColorSettings" Margin="5,0"/>
+                                <TextBlock Text="00:00:00 [SettingsWindow] : OpenSymbolSettings" Margin="5,0"/>
+                                <TextBlock Text="00:00:00 [SettingsWindow] : OpenSizeSettings" Margin="5,0"/>
+                                <TextBlock Text="00:00:00 [SettingsWindow] : OpenLoggingSettings" Margin="5,0"/>
+                                <TextBlock Text="00:00:00 [SettingsWindow] : ReturnToExplorer" Margin="5,0"/>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button x:Name="ScriptsLog" Click="SwitchContent" Width="20" Height="20" Style="{StaticResource CompactButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,0,8,0" Content=" "/>
+                        <Expander Header="Scripts Logs">
+                            <StackPanel>
+                                <StackPanel>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : Removed old Logfile"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : Undo Successful"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : Redo Successful"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : OpenFile Successful"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : OpenDirectory Successful"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : Path Modified"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : Search Files"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : Search Directorys"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : GetSettings"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : GetColorSettings"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : GetSymbolSettings"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : GetSizeSettings"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : GetLoggingSettings"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : SetSettings"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : SetColorSettings"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : SetSymbolSettings"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : SetSizeSettings"/>
+                                    <TextBlock Margin="5,0" Text="00:00:00 [Settingsfile] : SetLoggingSettings"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <Button x:Name="SettingsLog" Click="SwitchContent" Width="20" Height="20" Style="{StaticResource BlenderButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,10,0" Content=" ">
-                </Button>
-                <TextBlock FontSize="16"  VerticalAlignment="Center">
-                    Settings
-                </TextBlock>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <Button x:Name="ScriptsLog" Click="SwitchContent" Width="20" Height="20" Style="{StaticResource BlenderButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,10,0" Content=" ">
-                </Button>
-                <TextBlock FontSize="16"  VerticalAlignment="Center">
-                    Scripts
-                </TextBlock>
-            </StackPanel>
-            <StackPanel>
-                
-            </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

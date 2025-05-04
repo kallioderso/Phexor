@@ -9,7 +9,7 @@ namespace Phexor.SettingMenus;
 
 public partial class LoggingSettings : UserControl
 {
-    public LoggingSettings() { InitializeComponent(); GetValues(); }
+    public LoggingSettings() { InitializeComponent(); GetValues(); } //M. to initialize the LoggingSettings
     private void SwitchContent(object sender, RoutedEventArgs e) //M. to switch the state of the Buttons
     {
         var setting = sender as Button; //Get the sender of the event
