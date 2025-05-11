@@ -17,7 +17,12 @@ public static class SettingsControl
     public static string Color1 = "FFFFFF"; //C. V. for Color1
     public static string Color2 = "FFFFFF"; //C. V. for Color2
     public static string Color3 = "FFFFFF"; //C. V. for Color3
-    public static string Color4 = "FFFFFF"; //C. V. for Color4
+    public static string Color4 = "FFFFFF"; //C. V. for Color4 
+    
+    //-----Public Variables for Symbol-----\\
+    public static string Symbol1 = ""; //C. V. for Symbol1
+    public static string Symbol2 = ""; //C. V. for Symbol2
+    public static string Symbol3 = ""; //C. V. for Symbol3
     
     //-----Public Variables for Sizes-----\\
     public static int Size1 = 30; //C. V. for Size1
@@ -88,12 +93,15 @@ public static class SettingsControl
         {
             string settings = File.ReadAllText(SymbolSettingsFile); //Read everything from the File
             string[] setting = settings.Split('@'); //Split the Readed things into multiple strings
+            if (setting.Length >= 1) Symbol1 = setting[0]; //Get Symbol1 Setting
+            if (setting.Length >= 2) Symbol2 = setting[1]; //Get Symbol2 Setting
+            if (setting.Length >= 3) Symbol3 = setting[2]; //Get Symbol3 Setting
         }
         else
         {
             using (StreamWriter writer = new StreamWriter(SymbolSettingsFile, false, Encoding.UTF8)) //C. and Accesses the SymbolSettingsFile
             {
-                const string symbolSettingsText = ( "" + "@" + "" + "@" + "" + "@" + ""); //C. string for write into the SymbolSettingsfile
+                const string symbolSettingsText = ( "#000000" + "@" + "#000000" + "@" + "#000000"); //C. string for write into the SymbolSettingsfile
                 writer.WriteLine(symbolSettingsText); //Writes all the Settings into the SymbolSettingsFile
             }
             GetSymbolSettings(); //Call the GetSymbolSettings Method again to get the default values
@@ -159,7 +167,7 @@ public static class SettingsControl
         if (File.Exists(SymbolSettingsFile)) { File.Delete(SymbolSettingsFile); } //deleate Settingsfile if not existing
         using (StreamWriter writer = new StreamWriter(SymbolSettingsFile, false, Encoding.UTF8)) //C. and Accesses the SymbolSettingsFile
         {
-            const string symbolSettingsText = ( "" + "@" + "" + "@" + "" + "@" + ""); //C. string for write into the SymbolSettingsfile
+            string symbolSettingsText = ( Symbol1 + "@" + Symbol2 + "@" + Symbol3); //C. string for write into the SymbolSettingsfile
             writer.WriteLine(symbolSettingsText); //Writes all the Settings into the SymbolSettingsFile
         }
     }

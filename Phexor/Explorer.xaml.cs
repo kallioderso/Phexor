@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using Phexor.Scripts;
 using static System.Diagnostics.Process;
 using static System.Windows.Input.Key;
-using Path = System.IO.Path;
+using IOPath = System.IO.Path;
 using SolidColorBrush = System.Windows.Media.SolidColorBrush;
 
 namespace Phexor
@@ -55,6 +55,9 @@ namespace Phexor
             ButtonField.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Color2)!); // set the button field color
             DirectorysPanel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Color3)!); // set the directory panel color
             FilesPanel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Color4)!); // set the file panel color
+            SettingsIcon.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Symbol1)!); // set the settings icon color
+            UndoIcon.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Symbol2)!); // set the undo icon color
+            RedoIcon.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(SettingsControl.Symbol3)!); // set the redo icon color
         }
         private void DirectoryScrollingWithMouse(object sender, MouseWheelEventArgs e) //M. to scroll through the directories
         {

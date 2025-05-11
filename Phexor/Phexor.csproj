@@ -13,21 +13,6 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
-    <Resource Include="Grafiks\Undo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Grafiks\Settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Grafiks\Redo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Grafiks\PDF.png" />
-    <Resource Include="Grafiks\PPTX.png" />
-    <Resource Include="Grafiks\TXT.png" />
-    <Resource Include="Grafiks\XLS.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Grafiks\Icon.ico" />
   </ItemGroup>
 </Project>
