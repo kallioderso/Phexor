@@ -14,5 +14,17 @@
   <PropertyGroup />
   <ItemGroup>
     <Resource Include="Grafiks\Icon.ico" />
+    <None Remove="Grafiks\SymbolSettings.png" />
+    <Resource Include="Grafiks\SymbolSettings.png" />
+    <None Remove="Grafiks\MainView.png" />
+    <Resource Include="Grafiks\MainView.png" />
+    <None Remove="Grafiks\LoggingSettings.png" />
+    <Resource Include="Grafiks\LoggingSettings.png" />
+    <None Remove="Grafiks\ColorSettings.png" />
+    <Resource Include="Grafiks\ColorSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Grafiks\SizeSettings.png" />
+    <Resource Include="Grafiks\SizeSettings.png" />
   </ItemGroup>
 </Project>
