@@ -13,7 +13,7 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
-    <Resource Include="Grafiks\Icon.ico" />
+    <Resource Include="Grafiks\phexor-file-explorer.ico" />
     <None Remove="Grafiks\SymbolSettings.png" />
     <Resource Include="Grafiks\SymbolSettings.png" />
     <None Remove="Grafiks\MainView.png" />

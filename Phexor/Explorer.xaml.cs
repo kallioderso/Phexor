@@ -44,7 +44,10 @@ namespace Phexor
         public void Settings() => OpenSettings(null, null); //M. to call the OpenSettings method
         public void UndoPath() => Undo(null, null); //M. to call the Undo method
         public void RedoPath() => Redo(null, null); //M. to call the Redo method
+        public void OpenFile(TextBlock sender) => OpenFile(sender, null);
+        public void OpenDirectory(TextBlock sender) => OpenPath(sender, null);
         public void CloseFieldPopup() => CloseFieldPopup(null, null); //M. to call the CloseFieldPopup method
+        public string currentPath() => PathInput.Text;
         
         //-----Private Methods-----\\
         private void Colorize() //M. to colorize the explorer

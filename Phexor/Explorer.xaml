@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Phexor"
         mc:Ignorable="d"
-        Title="Phexor" Width="900" Height="550" Icon="Grafiks/Icon.ico" x:Name="Window">
+        Title="Phexor" Width="900" Height="550" Icon="Grafiks/phexor-file-explorer.ico" x:Name="Window">
     <Grid x:Name="Grid" ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -169,7 +169,7 @@ c-5 1867 -7 2045 -23 2169 -51 386 -143 670 -293 902 -65 99 -239 272 -337
         <Border Grid.Row="4" Grid.Column="1" Background="#333"/>
         
         <!-- Popup -->
-        <Popup Placement="Mouse" StaysOpen="False" x:Name="FieldPopup" Closed="CloseFieldPopup">
+        <Popup Placement="MousePoint" VerticalOffset="-2" HorizontalOffset="-2" StaysOpen="False" x:Name="FieldPopup" Closed="CloseFieldPopup">
             <Border BorderBrush="Black" BorderThickness="1" Background="White" CornerRadius="1">
                 <StackPanel x:Name="PopupStackpanel" Margin="10,0,10,5" Background="Transparent">
                 </StackPanel>

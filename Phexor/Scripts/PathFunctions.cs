@@ -18,6 +18,10 @@ public static class PathFunctions
     public static string Redo() => ProcessRedo(); //M. to redo the last action
     public static void OpenFile(string fileName) => ProcessFile(fileName); //M. to open a file
     public static void OpenPath(string pathInput, string path) => ProcessPath(pathInput, path); //M. to open a path
+    public static void RemoveFile(string pathInput, string path) => FileRemovel(pathInput, path);
+    public static void RemoeDirectory(string pathInput, string path) => DirectoryRemovel(pathInput, path);
+    public static void RenameFile(string pathInput, string path, string newName) => FileRenamel(pathInput, path, newName);
+    public static void RenameDirectory(string pathInput, string path, string newName) => DirectoryRenamel(pathInput, path, newName);
     
     //-----Private Methods-----\\
     private static string ProcessRedo() //M. to redo the last action
@@ -55,4 +59,13 @@ public static class PathFunctions
         PathSearcher.Path = Path.Combine(pathInput, path); PathSearcher.DirectoryRemoveCount = 0; PathSearcher.FileRemoveCount = 0; //Reset the remove counts and set new path
         Logging.Log("Open Directory Successful", "Scripts", false); //Log the open directory action
     }
+
+    private static void DirectoryRemovel(string pathInput, string path) => Directory.Delete(Path.Combine(pathInput, path), true);
+    private static void FileRemovel(string pathInput, string path) => File.Delete(Path.Combine(pathInput, path));
+
+    private static void DirectoryRenamel(string pathInput, string path, string newName) =>
+        Directory.Move(Path.Combine(pathInput, path), Path.Combine(pathInput, newName));
+    
+    private static void FileRenamel(string pathInput, string path, string newName) =>
+        File.Move(Path.Combine(pathInput, path), Path.Combine(pathInput, newName));
 }
