@@ -34,8 +34,8 @@ public static class PathFunctions
             var partCount = pathParts.Count +1; //C. Variable to store the part count
             foreach (var savePathPart in savePathParts) { if (partCount > 0) { newPath = newPath + savePathPart + @"\"; } partCount--; } //Rebuild the path
         }
-        return newPath; //Return the new path
         Logging.Log("Redo Successful", "Scripts", false); //Log the redo action
+        return newPath; //Return the new path
     }
     private static string ProcessUndo() //M. to undo the last action
     {
@@ -43,8 +43,8 @@ public static class PathFunctions
         var pathParts = new List<string>(PathSearcher.Path.Split('\\')); pathParts.RemoveAll(s => s == ""); //Split the path into parts and ad it to a L. and remove empty parts
         for (int i = 0; i < pathParts.Count -1; i++) { newPath = newPath + pathParts[i] + @"\"; } //Rebuild the path
         PathSearcher.Path = newPath; PathSearcher.DirectoryRemoveCount = 0; PathSearcher.FileRemoveCount = 0; //Reset the remove counts and set new path
-        return newPath; //Return the new path
         Logging.Log("Undo Successful", "Scripts", false); //Log the undo action
+        return newPath; //Return the new path
     }
     private static void ProcessFile(string fileName) //M. to open a file
     {
